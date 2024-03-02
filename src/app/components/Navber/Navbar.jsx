@@ -10,6 +10,7 @@ import {useUserContext} from "@/context/AuthProvider/AuthProvider";
 
 const Navbar = () => {
     const {user, setUser, setToken} = useUserContext();
+    console.log(user);
     const handleLogout = () => {
         localStorage.removeItem("snugstuff_access_token");
         localStorage.removeItem("snugstuff_refresh_token");

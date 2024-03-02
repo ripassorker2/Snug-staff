@@ -1,12 +1,25 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Stepper, Step} from "@material-tailwind/react";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import avatar from "../../../assets/blank-profile-picture-973460_1280.png";
+import {useRouter} from "next/navigation";
+import {useUserContext} from "@/context/AuthProvider/AuthProvider";
 
-const DefaultStepper = () => {
+const HostRegister = () => {
+    const {token} = useUserContext();
+    const [loading, setLoading] = useState(false);
+    const router = useRouter();
+    console.log(loading);
+
+    useEffect(() => {
+        if (token) {
+            router.push("/");
+        }
+    }, [token]);
     const [activeStep, setActiveStep] = useState(0);
     const [isLastStep, setIsLastStep] = useState(false);
     const [isFirstStep, setIsFirstStep] = useState(false);
@@ -18,14 +31,15 @@ const DefaultStepper = () => {
     const [inputData, setInputData] = useState({
         username: "",
         company_name: "",
-        company_reg_num: "",
-        vat_num: "",
-        mobile_number: "",
-        address: "",
+        Company_house_registration_number: "",
+        Vat_number: "",
+        mobile: "",
+        address_line1: "",
         address_line_2: "",
         city: "",
-        country: "",
+        county: "",
         post_code: "",
+        full_name: "",
         email: "",
         password: "",
         confirm_password: "",
@@ -43,37 +57,65 @@ const DefaultStepper = () => {
         e.preventDefault();
 
         const requiredFields = Object.keys(inputData).filter(
-            (key) => key !== "vat_num" && !inputData[key]
+            (key) => key !== "Vat_number" && !inputData[key]
         );
 
         if (requiredFields.length > 0)
-            return toast.error("Please fill the all fields properly.");
+            return toast.error("Please fill the form properly.");
+
+        if (inputData.password !== inputData.confirm_password)
+            return toast.error("Passwords do not match.");
 
         const formData = new FormData();
         formData.append("file", file);
-        console.log(formData);
-        console.log(file);
+        setLoading(true);
 
-        // const data = {
-        //     username: inputData.username,
-        //     email: inputData.email,
-        //     password: inputData.password,
-        //     confirm_password: inputData.confirm_password,
-        //     host_profile: {
-        //         address: inputData.address,
-        //         address_line_2: inputData.address_line_2,
-        //         city: inputData.city,
-        //         country: inputData.country,
-        //         post_code: inputData.post_code,
-        //         company_name: inputData.company_name,
-        //         company_reg_num: inputData?.company_reg_num,
-        //         vat_num: inputData.vat_num,
-        //         mobile_number: inputData.mobile_number,
-        //         profile_pic: formData,
-        //     },
-        // };
+        const host_data = {
+            username: inputData.username,
+            email: inputData.email,
+            password: inputData.password,
+            confirm_password: inputData.confirm_password,
+            host_profile: {
+                full_name: inputData.full_name,
+                address_line1: inputData.address_line1,
+                address_line_2: inputData.address_line_2,
+                city: inputData.city,
+                county: inputData.county,
+                post_code: inputData.post_code,
+                company_name: inputData.company_name,
+                Company_house_registration_number:
+                    inputData?.Company_house_registration_number,
+                Vat_number: inputData.Vat_number,
+                mobile: inputData.mobile,
+                // profile_pic: formData,
+            },
+        };
 
-        // console.log(data);
+        try {
+            const response = await fetch(
+                `http://127.0.0.1:8000/host-registration/`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(host_data),
+                }
+            );
+            const data = await response.json();
+            setLoading(false);
+            if (data.role == "host") {
+                toast.success("Account created successfully.");
+                router.push("/authtentication/login");
+            } else {
+                return toast.error(
+                    data?.username || data?.email || "Something went wrong"
+                );
+            }
+        } catch (error) {
+            setLoading(false);
+            console.log(error);
+        }
     };
 
     return (
@@ -96,22 +138,21 @@ const DefaultStepper = () => {
                         <div className="fade-in md:grid md:grid-cols-2 gap-x-10 md:gap-y-3">
                             <div className="mt-2">
                                 <label className="block text-base mb-1">
-                                    Userame:
+                                    Full name
                                 </label>
                                 <input
                                     className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
-                                    id="username"
+                                    id="full_name"
                                     type="text"
-                                    name="username"
-                                    placeholder="Enter username..."
-                                    required
-                                    value={inputData.username}
+                                    name="full_name"
+                                    placeholder="Enter full_name..."
+                                    value={inputData.full_name}
                                     onChange={handleChange}
                                 />
                             </div>
                             <div className="mt-2">
                                 <label className="block text-base mb-1">
-                                    Company Name:
+                                    Company Name
                                 </label>
                                 <input
                                     className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
@@ -119,73 +160,71 @@ const DefaultStepper = () => {
                                     type="text"
                                     name="company_name"
                                     placeholder="Enter company name..."
-                                    required
                                     value={inputData.company_name}
                                     onChange={handleChange}
                                 />
                             </div>
                             <div className="mt-2">
                                 <label className="block text-base mb-1">
-                                    Company house registration number:
+                                    Company house registration number
                                 </label>
                                 <input
                                     className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
-                                    id="company_reg_num"
+                                    id="Company_house_registration_number"
                                     type="text"
-                                    name="company_reg_num"
+                                    name="Company_house_registration_number"
                                     placeholder="Enter company house registration number..."
-                                    required
-                                    value={inputData.company_reg_num}
+                                    value={
+                                        inputData.Company_house_registration_number
+                                    }
                                     onChange={handleChange}
                                 />
                             </div>
                             <div className="mt-2">
                                 <label className="block text-base mb-1">
-                                    VAT number(optional):
+                                    VAT number(optional)
                                 </label>
                                 <input
                                     className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
-                                    id="vat_num"
+                                    id="Vat_number"
                                     type="text"
-                                    name="vat_num"
+                                    name="Vat_number"
                                     placeholder="Enter VAT number(optional)..."
-                                    required
-                                    value={inputData.vat_num}
+                                    value={inputData.Vat_number}
                                     onChange={handleChange}
                                 />
                             </div>
                             <div className="mt-2">
                                 <label className="block text-base mb-1">
-                                    Mobile number:
+                                    Mobile number
                                 </label>
                                 <input
                                     className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
-                                    id="mobile_number"
+                                    id="mobile"
                                     type="text"
-                                    name="mobile_number"
+                                    name="mobile"
                                     placeholder="Enter mobile number..."
-                                    value={inputData.mobile_number}
+                                    value={inputData.mobile}
                                     onChange={handleChange}
                                 />
                             </div>
                             <div className="mt-2">
                                 <label className="block text-base mb-1">
-                                    Address:
+                                    Address line 1
                                 </label>
                                 <input
                                     className="border border-gray-500 rounded w-full py-2.5 px-3 mr-2 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
-                                    id="address"
+                                    id="address_line1"
                                     type="text"
-                                    name="address"
-                                    placeholder="Enter address "
-                                    required
-                                    value={inputData.address}
+                                    name="address_line1"
+                                    placeholder="Enter address_line1 "
+                                    value={inputData.address_line1}
                                     onChange={handleChange}
                                 />
                             </div>
                             <div className="mt-2">
                                 <label className="block text-base mb-1">
-                                    Address line 2:
+                                    Address line 2
                                 </label>
                                 <input
                                     className="border border-gray-500 rounded w-full py-2.5 px-3 mr-2 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
@@ -193,7 +232,6 @@ const DefaultStepper = () => {
                                     type="text"
                                     name="address_line_2"
                                     placeholder="Enter address line 2..."
-                                    required
                                     value={inputData.address_line_2}
                                     onChange={handleChange}
                                 />
@@ -201,7 +239,7 @@ const DefaultStepper = () => {
 
                             <div className="mt-2">
                                 <label className="block text-base mb-1">
-                                    City:
+                                    City
                                 </label>
                                 <input
                                     className="border border-gray-500 rounded w-full py-2.5 px-3 mr-2 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
@@ -209,30 +247,28 @@ const DefaultStepper = () => {
                                     type="text"
                                     name="city"
                                     placeholder="Enter city..."
-                                    required
                                     value={inputData.city}
                                     onChange={handleChange}
                                 />
                             </div>
                             <div className="mt-2">
                                 <label className="block text-base mb-1">
-                                    Country:
+                                    County
                                 </label>
                                 <input
                                     className="border border-gray-500 rounded w-full py-2.5 px-3 mr-2 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
-                                    id="country"
+                                    id="county"
                                     type="text"
-                                    name="country"
-                                    placeholder="Enter country..."
-                                    required
-                                    value={inputData.country}
+                                    name="county"
+                                    placeholder="Enter county..."
+                                    value={inputData.county}
                                     onChange={handleChange}
                                 />
                             </div>
 
                             <div className="mt-2">
                                 <label className="block text-base mb-1">
-                                    Postcode:
+                                    Postcode
                                 </label>
                                 <input
                                     className="border border-gray-500 rounded w-full py-2.5 px-3 mr-2 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
@@ -240,7 +276,6 @@ const DefaultStepper = () => {
                                     type="text"
                                     name="post_code"
                                     placeholder="Enter post code..."
-                                    required
                                     value={inputData.post_code}
                                     onChange={handleChange}
                                 />
@@ -304,6 +339,21 @@ const DefaultStepper = () => {
 
                             <div className="mt-2">
                                 <label className="block text-base mb-1">
+                                    Username
+                                </label>
+                                <input
+                                    className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                    id="username"
+                                    type="text"
+                                    name="username"
+                                    placeholder="Enter username..."
+                                    value={inputData.username}
+                                    onChange={handleChange}
+                                />
+                            </div>
+
+                            <div className="mt-2">
+                                <label className="block text-base mb-1">
                                     Email Address
                                 </label>
                                 <input
@@ -312,7 +362,6 @@ const DefaultStepper = () => {
                                     type="email"
                                     name="email"
                                     placeholder="Enter email..."
-                                    required
                                     value={inputData.email}
                                     onChange={handleChange}
                                 />
@@ -328,7 +377,6 @@ const DefaultStepper = () => {
                                     type="password"
                                     name="password"
                                     placeholder="Enter password..."
-                                    required
                                     value={inputData.password}
                                     onChange={handleChange}
                                 />
@@ -343,7 +391,6 @@ const DefaultStepper = () => {
                                     type="password"
                                     name="confirm_password"
                                     placeholder="Confirm password..."
-                                    required
                                     value={inputData.confirm_password}
                                     onChange={handleChange}
                                 />
@@ -355,24 +402,29 @@ const DefaultStepper = () => {
                     className={`mt-6  flex  ${
                         activeStep == 1 ? "justify-between" : "justify-end"
                     } `}>
-                    <button
+                    <div
                         className={`btn-primary ${
                             activeStep == 0 && "hidden btn-primary"
                         }`}
                         onClick={handlePrev}
                         disabled={isFirstStep}>
                         Prev
-                    </button>
-                    <button
+                    </div>
+                    <div
                         className={` btn-primary ${
                             activeStep == 1 && "hidden "
                         }`}
                         onClick={handleNext}
                         disabled={isLastStep}>
                         Next
-                    </button>
+                    </div>
                     {activeStep == 1 && (
-                        <button type="submit" className="btn-secondary">
+                        <button
+                            disabled={loading}
+                            type="submit"
+                            className={`btn-secondary ${
+                                loading && "bg-blue-gray-500"
+                            }`}>
                             Submit
                         </button>
                     )}
@@ -382,4 +434,4 @@ const DefaultStepper = () => {
     );
 };
 
-export default DefaultStepper;
+export default HostRegister;
