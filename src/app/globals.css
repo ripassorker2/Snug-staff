@@ -23,10 +23,10 @@ span {
         @apply text-gray-900 text-base;
     }
     .btn-primary {
-        @apply bg-primary duration-500 px-6  py-2 rounded-[6px] text-gray-100 text-base font-medium;
+        @apply bg-primary duration-500 px-6  py-2  text-gray-100 text-base font-medium;
     }
     .btn-secondary {
-        @apply bg-secondary duration-500 px-6  py-2 rounded-[6px] text-gray-100 text-base font-medium;
+        @apply bg-secondary duration-500 px-6  py-2  text-gray-100 text-base font-medium;
     }
     .heading {
         @apply md:text-5xl text-3xl text-center pb-1  font-medium text-dark;
