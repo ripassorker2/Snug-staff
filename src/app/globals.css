@@ -32,3 +32,18 @@ span {
         @apply md:text-5xl text-3xl font-semibold text-gray-900;
     }
 }
+
+::-webkit-scrollbar {
+    width: 10px;
+    display: none;
+}
+
+::-webkit-scrollbar-track {
+    background: #eae7e7;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(167, 183, 183);
+    border-radius: 6px;
+}

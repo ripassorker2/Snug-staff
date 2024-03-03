@@ -74,7 +74,7 @@ const Navbar = () => {
                                         <MenuItem className="mt-1">
                                             <Link
                                                 className="block w-full"
-                                                href={""}>
+                                                href={"/profile_page"}>
                                                 Profile
                                             </Link>
                                         </MenuItem>{" "}

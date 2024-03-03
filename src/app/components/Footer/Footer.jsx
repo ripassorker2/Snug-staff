@@ -10,7 +10,7 @@ const Footer = () => {
                 <div className="flex flex-wrap text-left md:text-left">
                     <div className="w-full md:w-6/12 ">
                         <div>
-                            <Image height={67} src={logo} alt="logo" />
+                            <Image height={66} src={logo} alt="logo" />
                         </div>
                         <h5 className="text-lg mt-0 mb-2 text-gray-900">
                             Connect with us on these platforms, and expect a
