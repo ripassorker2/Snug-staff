@@ -13,7 +13,6 @@ const HostRegister = () => {
     const {token} = useUserContext();
     const [loading, setLoading] = useState(false);
     const router = useRouter();
-    console.log(loading);
 
     useEffect(() => {
         if (token) {
@@ -135,7 +134,7 @@ const HostRegister = () => {
                 </Stepper>
                 <div>
                     {activeStep === 0 && (
-                        <div className="fade-in md:grid md:grid-cols-2 gap-x-10 md:gap-y-3">
+                        <div className=" md:grid md:grid-cols-2 gap-x-10 md:gap-y-3">
                             <div className="mt-2">
                                 <label className="block text-base mb-1">
                                     Full name
@@ -260,7 +259,7 @@ const HostRegister = () => {
                                     id="county"
                                     type="text"
                                     name="county"
-                                    placeholder="Enter county..."
+                                    placeholder="Enter county  or state..."
                                     value={inputData.county}
                                     onChange={handleChange}
                                 />
@@ -294,8 +293,6 @@ const HostRegister = () => {
                                                 src={URL.createObjectURL(file)}
                                                 className="h-28 w-28 rounded-full"
                                                 alt="profile"
-                                                width={110}
-                                                height={110}
                                             />
                                             <input
                                                 type="file"
@@ -318,8 +315,6 @@ const HostRegister = () => {
                                                 src={avatar}
                                                 className="h-24 bg-contain w-24 rounded-full"
                                                 alt="profile"
-                                                width={110}
-                                                height={110}
                                             />
 
                                             <input

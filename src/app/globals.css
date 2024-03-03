@@ -31,6 +31,9 @@ span {
     .heading {
         @apply md:text-5xl text-3xl font-semibold text-gray-900;
     }
+    .sub-head {
+        @apply md:text-3xl text-xl font-semibold text-gray-900;
+    }
 }
 
 ::-webkit-scrollbar {

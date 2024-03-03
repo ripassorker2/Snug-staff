@@ -6,19 +6,19 @@ const WhyChooseUS = () => {
                     <span> Why do</span> customers
                     <br /> prefer to <span>booking with</span> us?
                 </h1>
-                <div class="relative ">
+                <div className="relative ">
                     <div
-                        class="border-r-4 border-primary absolute h-full top-0"
+                        className="border-r-4 border-primary absolute h-full top-0"
                         style={{left: "9px"}}></div>
-                    <ul class="list-none m-0 p-0">
-                        <li class="mb-5  ">
-                            <div class="flex group items-center text-gray-900 ">
-                                <div class="bg-purple-500 duration-300 group-hover:bg-pink-500 z-10 rounded-full border-4 border-primary  h-5 w-5">
-                                    <div class="bg-primary h-1 w-6 items-center  ml-4 mt-1"></div>
+                    <ul className="list-none m-0 p-0">
+                        <li className="mb-5  ">
+                            <div className="flex group items-center text-gray-900 ">
+                                <div className="bg-secondary duration-300 group-hover:bg-pink-500 z-10 rounded-full border-4 border-primary  h-5 w-5">
+                                    <div className="bg-primary h-1 w-6 items-center  ml-4 mt-1"></div>
                                 </div>
-                                <div class="flex-1 ml-4 z-10 ">
-                                    <div class="order-1 space-y-2 bg-blue-gray-50 group-hover:bg-secondary duration-300 rounded-lg  transition-ease  px-6 py-4">
-                                        <h3 class="mb-2 font-semibold  md:text-2xl text-xl group-hover:text-gray-300 duration-300 ">
+                                <div className="flex-1 ml-4 z-10 ">
+                                    <div className="order-1 space-y-2 bg-blue-gray-50 group-hover:bg-secondary duration-300 rounded-lg  transition-ease  px-6 py-4">
+                                        <h3 className="mb-2 font-semibold  md:text-2xl text-xl group-hover:text-gray-300 duration-300 ">
                                             1. Wide Selection of Properties.
                                         </h3>
                                         <p className="desc group-hover:text-gray-100 duration-300">
@@ -36,14 +36,14 @@ const WhyChooseUS = () => {
                                 </div>
                             </div>
                         </li>
-                        <li class="mb-5  ">
-                            <div class="flex group items-center ">
-                                <div class="bg-purple-500 duration-300 group-hover:bg-pink-500 z-10 rounded-full border-4 border-primary  h-5 w-5">
-                                    <div class="bg-primary h-1 w-6 items-center  ml-4 mt-1"></div>
+                        <li className="mb-5  ">
+                            <div className="flex group items-center ">
+                                <div className="bg-secondary duration-300 group-hover:bg-pink-500 z-10 rounded-full border-4 border-primary  h-5 w-5">
+                                    <div className="bg-primary h-1 w-6 items-center  ml-4 mt-1"></div>
                                 </div>
-                                <div class="flex-1 ml-4 z-10 ">
-                                    <div class="order-1 space-y-2 bg-blue-gray-50 rounded-lg  transition-ease group-hover:bg-secondary duration-300  px-6 py-4">
-                                        <h3 class="mb-2 font-semibold  md:text-2xl text-xl group-hover:text-gray-300 duration-300">
+                                <div className="flex-1 ml-4 z-10 ">
+                                    <div className="order-1 space-y-2 bg-blue-gray-50 rounded-lg  transition-ease group-hover:bg-secondary duration-300  px-6 py-4">
+                                        <h3 className="mb-2 font-semibold  md:text-2xl text-xl group-hover:text-gray-300 duration-300">
                                             2. User-friendly Interface.
                                         </h3>
                                         <p className="desc group-hover:text-gray-100 duration-300">
@@ -60,14 +60,14 @@ const WhyChooseUS = () => {
                                 </div>
                             </div>
                         </li>
-                        <li class="mb-5  ">
-                            <div class="flex group items-center ">
-                                <div class="bg-purple-500 duration-300 group-hover:bg-pink-500 z-10 rounded-full border-4 border-primary  h-5 w-5">
-                                    <div class="bg-primary h-1 w-6 items-center  ml-4 mt-1"></div>
+                        <li className="mb-5  ">
+                            <div className="flex group items-center ">
+                                <div className="bg-secondary duration-300 group-hover:bg-pink-500 z-10 rounded-full border-4 border-primary  h-5 w-5">
+                                    <div className="bg-primary h-1 w-6 items-center  ml-4 mt-1"></div>
                                 </div>
-                                <div class="flex-1 ml-4 z-10 ">
-                                    <div class="order-1 space-y-2 bg-blue-gray-50 rounded-lg  transition-ease group-hover:bg-secondary duration-300  px-6 py-4">
-                                        <h3 class="mb-2 font-semibold  md:text-2xl text-xl group-hover:text-gray-300 duration-300">
+                                <div className="flex-1 ml-4 z-10 ">
+                                    <div className="order-1 space-y-2 bg-blue-gray-50 rounded-lg  transition-ease group-hover:bg-secondary duration-300  px-6 py-4">
+                                        <h3 className="mb-2 font-semibold  md:text-2xl text-xl group-hover:text-gray-300 duration-300">
                                             3. Transparent Pricing and Policies.
                                         </h3>
                                         <p className="desc group-hover:text-gray-100 duration-300">
@@ -86,14 +86,14 @@ const WhyChooseUS = () => {
                                 </div>
                             </div>
                         </li>
-                        <li class="mb-5  ">
-                            <div class="flex group items-center ">
-                                <div class="bg-purple-500 duration-300 group-hover:bg-pink-500 z-10 rounded-full border-4 border-primary  h-5 w-5">
-                                    <div class="bg-primary h-1 w-6 items-center  ml-4 mt-1"></div>
+                        <li className="mb-5  ">
+                            <div className="flex group items-center ">
+                                <div className="bg-secondary duration-300 group-hover:bg-pink-500 z-10 rounded-full border-4 border-primary  h-5 w-5">
+                                    <div className="bg-primary h-1 w-6 items-center  ml-4 mt-1"></div>
                                 </div>
-                                <div class="flex-1 ml-4 z-10 ">
-                                    <div class="order-1 space-y-2 bg-blue-gray-50 rounded-lg  transition-ease group-hover:bg-secondary duration-300  px-6 py-4">
-                                        <h3 class="mb-2 font-semibold  md:text-2xl text-xl group-hover:text-gray-300 duration-300">
+                                <div className="flex-1 ml-4 z-10 ">
+                                    <div className="order-1 space-y-2 bg-blue-gray-50 rounded-lg  transition-ease group-hover:bg-secondary duration-300  px-6 py-4">
+                                        <h3 className="mb-2 font-semibold  md:text-2xl text-xl group-hover:text-gray-300 duration-300">
                                             4. Exceptional Customer Support.
                                         </h3>
                                         <p className="desc group-hover:text-gray-100 duration-300">

@@ -4,6 +4,7 @@ import Navbar from "./components/Navber/Navbar";
 import Footer from "./components/Footer/Footer";
 import {Toaster} from "react-hot-toast";
 import {AuthProvider} from "@/context/AuthProvider/AuthProvider";
+import {ReduxProvider} from "@/provider/ReduxProvider";
 
 const inter = Poppins({subsets: ["latin"], weight: "400"});
 
@@ -16,12 +17,14 @@ export default function RootLayout({children}) {
     return (
         <html lang="en">
             <body className={inter.className}>
-                <AuthProvider>
-                    <Toaster position="top-right" />
-                    <Navbar />
-                    {children}
-                    <Footer />
-                </AuthProvider>
+                <Toaster position="top-right" />
+                <ReduxProvider>
+                    <AuthProvider>
+                        <Navbar />
+                        {children}
+                        <Footer />
+                    </AuthProvider>
+                </ReduxProvider>
             </body>
         </html>
     );

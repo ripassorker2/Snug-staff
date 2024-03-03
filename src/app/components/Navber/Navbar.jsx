@@ -71,13 +71,27 @@ const Navbar = () => {
                                     </>
                                 ) : (
                                     <>
-                                        <MenuItem className="mt-1">
-                                            <Link
-                                                className="block w-full"
-                                                href={"/profile_page"}>
-                                                Profile
-                                            </Link>
-                                        </MenuItem>{" "}
+                                        {user?.role == "host" ? (
+                                            <MenuItem className="mt-1">
+                                                <Link
+                                                    className="block w-full"
+                                                    href={
+                                                        "/profile_page/host_profile"
+                                                    }>
+                                                    Profile
+                                                </Link>
+                                            </MenuItem>
+                                        ) : (
+                                            <MenuItem className="mt-1">
+                                                <Link
+                                                    className="block w-full"
+                                                    href={
+                                                        "/profile_page/user_profile"
+                                                    }>
+                                                    Profile
+                                                </Link>
+                                            </MenuItem>
+                                        )}
                                         <MenuItem>
                                             <button
                                                 onClick={handleLogout}
