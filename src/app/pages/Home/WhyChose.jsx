@@ -1,7 +1,7 @@
 const WhyChooseUS = () => {
     return (
         <div className="container">
-            <div className="md:mt-32 mt-20 md:w-[80%]  mx-auto">
+            <div className="md:mt-24 mt-16 md:w-[80%]  mx-auto">
                 <h1 className="heading mb-6 text-center">
                     <span> Why do</span> customers
                     <br /> prefer to <span>booking with</span> us?
@@ -21,7 +21,7 @@ const WhyChooseUS = () => {
                                         <h3 className="mb-2 font-semibold  md:text-2xl text-xl group-hover:text-gray-300 duration-300 ">
                                             1. Wide Selection of Properties.
                                         </h3>
-                                        <p className="desc group-hover:text-gray-100 duration-300">
+                                        <p className="desc group-hover:text-gray-100 text-gray-900 duration-300">
                                             Unlike other platforms, Snugstaff
                                             keeps costs low for our hosts which
                                             in turn encourages them to list with
@@ -46,7 +46,7 @@ const WhyChooseUS = () => {
                                         <h3 className="mb-2 font-semibold  md:text-2xl text-xl group-hover:text-gray-300 duration-300">
                                             2. User-friendly Interface.
                                         </h3>
-                                        <p className="desc group-hover:text-gray-100 duration-300">
+                                        <p className="desc group-hover:text-gray-100 duration-300 text-gray-900">
                                             Our platform provides and intuitive
                                             and user-friendly interface making
                                             it easy for customers to search,
@@ -70,7 +70,7 @@ const WhyChooseUS = () => {
                                         <h3 className="mb-2 font-semibold  md:text-2xl text-xl group-hover:text-gray-300 duration-300">
                                             3. Transparent Pricing and Policies.
                                         </h3>
-                                        <p className="desc group-hover:text-gray-100 duration-300">
+                                        <p className="desc group-hover:text-gray-100 duration-300 text-gray-900">
                                             We prioritise transparency in
                                             pricing and policies, ensuring our
                                             customers have a clear understanding
@@ -96,7 +96,7 @@ const WhyChooseUS = () => {
                                         <h3 className="mb-2 font-semibold  md:text-2xl text-xl group-hover:text-gray-300 duration-300">
                                             4. Exceptional Customer Support.
                                         </h3>
-                                        <p className="desc group-hover:text-gray-100 duration-300">
+                                        <p className="desc group-hover:text-gray-100 duration-300 text-gray-900">
                                             Our dedicated customer support team
                                             is available to assist customers at
                                             every step of their booking journey.

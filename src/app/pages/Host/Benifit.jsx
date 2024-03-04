@@ -11,7 +11,7 @@ const Benifit = () => {
             <div className="container">
                 <div className="text-center">
                     <h2 className="heading">
-                        <span>Benefits of Host on Snugstaff</span>
+                        <span>Benefits of host</span>
                     </h2>
                     <p className="desc pt-3 max-w-4xl mx-auto">
                         Snugstaff offers an array of benefits to elevate your
@@ -19,39 +19,30 @@ const Benifit = () => {
                     </p>
                 </div>
                 <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-x-10 gap-y-5 text-gray-200 mt-6 text-center">
-                    <div className="bg-primary px-5 py-8 relative flex flex-col items-center justify-center">
+                    <div className="bg-primary hover:bg-secondary duration-300 px-5 py-8 relative overflow-hidden flex flex-col items-center justify-center rounded">
                         <MdPriceChange size={43} />
                         <h2 className="text-xl mt-1">
-                            {" "}
                             Flexible Pricing Models
                         </h2>
-                        <p className="absolute top-[3px] left-[3px] w-6 h-6 font-semibold bg-brown-50 text-gray-800 text-center text-lg">
-                            1
-                        </p>
+                        <p className="bedge">1</p>
                     </div>
-                    <div className="bg-primary px-5 py-8 relative flex flex-col items-center justify-center">
+                    <div className="bg-primary hover:bg-secondary duration-300 px-5 py-8 relative overflow-hidden flex flex-col items-center justify-center rounded">
                         <GiTargeted size={43} />
                         <h2 className="text-xl mt-1"> Targeted Market</h2>
-                        <p className="absolute top-[3px] left-[3px] w-6 h-6 font-semibold bg-brown-50 text-gray-800 text-center text-lg">
-                            2
-                        </p>
+                        <p className="bedge">2</p>
                     </div>
-                    <div className="bg-primary px-5 py-8 relative flex flex-col items-center justify-center">
+                    <div className="bg-primary hover:bg-secondary duration-300 px-5 py-8 relative overflow-hidden flex flex-col items-center justify-center rounded">
                         <TbBrandBooking size={43} />
                         <h2 className="text-xl mt-1">
                             {" "}
                             Streamlined Booking Process
                         </h2>
-                        <p className="absolute top-[3px] left-[3px] w-6 h-6 font-semibold bg-brown-50 text-gray-800 text-center text-lg">
-                            3
-                        </p>
+                        <p className="bedge">3</p>
                     </div>
-                    <div className="bg-primary px-5 py-8 relative flex flex-col items-center justify-center">
+                    <div className="bg-primary hover:bg-secondary duration-300 px-5 py-8 relative overflow-hidden flex flex-col items-center justify-center rounded">
                         <BiSupport size={43} />
                         <h2 className="text-xl mt-1"> Dedicated Support</h2>
-                        <p className="absolute top-[3px] left-[3px] w-6 h-6 font-semibold bg-brown-50 text-gray-800 text-center text-lg">
-                            4
-                        </p>
+                        <p className="bedge">4</p>
                     </div>
                 </div>
                 <div className="md:flex justify-end">

@@ -4,7 +4,7 @@ const Subscribe = () => {
     return (
         <div className=" mt-24 mb-8 bg-secondary  ">
             <div className="relative container isolate overflow-hidden">
-                <div className=" md:py-24 py-16">
+                <div className=" md:py-20 py-16">
                     <div className=" md:flex md:items-center">
                         <div className="xl:w-0 md:flex-1">
                             <h2 className="text-2xl leading-8 font-semibold tracking-tight text-gray-300 sm:text-3xl sm:leading-9">

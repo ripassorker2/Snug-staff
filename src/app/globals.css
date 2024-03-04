@@ -36,6 +36,12 @@ span {
     }
 }
 
+@layer components {
+    .bedge {
+        @apply absolute -top-[5px] -left-[5px] w-9 h-9 border  p-1 rounded-b-md font-semibold bg-brown-50 text-gray-800 text-center text-lg ring ring-white;
+    }
+}
+
 ::-webkit-scrollbar {
     width: 10px;
     display: none;
