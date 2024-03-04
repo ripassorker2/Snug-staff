@@ -40,28 +40,28 @@ const Navbar = () => {
                                     />
                                 </div>
                             </MenuHandler>
-                            <MenuList className="w-[230px] text-gray-900 font-medium text-base">
+                            <MenuList className="w-[230px] text-gray-900 font-medium  text-base">
                                 {!user?.id ? (
                                     <>
                                         <MenuItem className="mt-1">
                                             <Link
-                                                className="block w-full"
+                                                className="block  w-full text-center"
                                                 href={"/authtentication/login"}>
                                                 Sign In
                                             </Link>
                                         </MenuItem>
-                                        <MenuItem>
+                                        <MenuItem className="mt-1">
                                             <Link
-                                                className="block w-full"
+                                                className="block w-full text-center"
                                                 href={
                                                     "/authtentication/register"
                                                 }>
                                                 Sign Up
                                             </Link>
                                         </MenuItem>
-                                        <MenuItem>
+                                        <MenuItem className="mt-1">
                                             <Link
-                                                className="block w-full"
+                                                className="block w-full text-center"
                                                 href={
                                                     "/authtentication/become-a-host"
                                                 }>
@@ -74,7 +74,7 @@ const Navbar = () => {
                                         {user?.role == "host" ? (
                                             <MenuItem className="mt-1">
                                                 <Link
-                                                    className="block w-full"
+                                                    className="block w-full text-center"
                                                     href={
                                                         "/profile_page/host_profile"
                                                     }>
@@ -84,7 +84,7 @@ const Navbar = () => {
                                         ) : (
                                             <MenuItem className="mt-1">
                                                 <Link
-                                                    className="block w-full"
+                                                    className="block w-full text-center"
                                                     href={
                                                         "/profile_page/user_profile"
                                                     }>
@@ -92,10 +92,10 @@ const Navbar = () => {
                                                 </Link>
                                             </MenuItem>
                                         )}
-                                        <MenuItem>
+                                        <MenuItem className="mt-1">
                                             <button
                                                 onClick={handleLogout}
-                                                className="block text-start w-full">
+                                                className="block  w-full text-center">
                                                 Logout
                                             </button>
                                         </MenuItem>

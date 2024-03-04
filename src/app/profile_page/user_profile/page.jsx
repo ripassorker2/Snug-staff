@@ -6,17 +6,13 @@ import {useUserContext} from "@/context/AuthProvider/AuthProvider";
 import {MdEdit} from "react-icons/md";
 import ProfileUpdateModal from "@/app/components/ProfileUpdateModal/ProfileUpdateModal";
 
-const ProfilePage = () => {
+const UserProfilePage = () => {
     const {user} = useUserContext();
     const [openModal, setOpenModal] = useState(false);
+
     return (
         <div className="">
             <div className="mb-6">
-                <div>
-                    <h2 className="sub-head">
-                        <span>Personal information</span>
-                    </h2>
-                </div>
                 <div className="flex flex-col justify-center items-center mt-4">
                     {user?.profile_pic ? (
                         <Image
@@ -35,7 +31,12 @@ const ProfilePage = () => {
                     <h2 className="text-lg font-semibold">ripassorkerrifat</h2>
                     <p>example@gmail.com</p>
                 </div>
-                <div className="grid md:grid-cols-2 gap-x-10 gap-y-4 mt-6">
+                <div className="mt-6">
+                    <h2 className="sub-head">
+                        <span>Personal information</span>
+                    </h2>
+                </div>
+                <div className="grid md:grid-cols-2 gap-x-10 gap-y-4 mt-2">
                     <div>
                         <h2 className="text-base">Address line 1</h2>
                         <div
@@ -114,4 +115,4 @@ const ProfilePage = () => {
     );
 };
 
-export default ProfilePage;
+export default UserProfilePage;

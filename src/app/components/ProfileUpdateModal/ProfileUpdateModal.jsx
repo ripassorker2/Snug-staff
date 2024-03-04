@@ -35,10 +35,6 @@ const ProfileUpdateModal = ({openModal, setOpenModal}) => {
         if (user?.role == "host") {
             const data = {
                 full_name: form.full_name.value,
-                company_name: form.company_name.value,
-                Company_house_registration_number:
-                    form.Company_house_registration_number.value,
-                Vat_number: form.Vat_number.value,
                 mobile: form.mobile.value,
                 address_line1: form.address_line1.value,
                 address_line_2: form.address_line_2.value,
@@ -50,7 +46,7 @@ const ProfileUpdateModal = ({openModal, setOpenModal}) => {
             updateProfile({data, id: user?.id, token});
         } else if (user?.role == "user") {
             const data = {
-                mobile: form.mobile.value,
+                phone: form.mobile.value,
                 address_line1: form.address_line1.value,
                 address_line_2: form.address_line_2.value,
                 city: form.city.value,
@@ -138,67 +134,40 @@ const ProfileUpdateModal = ({openModal, setOpenModal}) => {
                                             placeholder="Enter full_name..."
                                             defaultValue={user.full_name}
                                         />
-                                    </div>
+                                    </div>{" "}
                                     <div className="mt-2">
                                         <label className="block text-base mb-1">
-                                            Company Name
+                                            Mobile number
                                         </label>
                                         <input
                                             className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
-                                            id="company_name"
+                                            id="mobile"
                                             type="text"
-                                            name="company_name"
+                                            name="mobile"
                                             required
-                                            placeholder="Enter company name..."
-                                            defaultValue={user?.company_name}
-                                        />
-                                    </div>
-                                    <div className="mt-2">
-                                        <label className="block text-base mb-1">
-                                            Company house registration number
-                                        </label>
-                                        <input
-                                            className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
-                                            id="Company_house_registration_number"
-                                            type="text"
-                                            name="Company_house_registration_number"
-                                            required
-                                            placeholder="Enter company house registration number..."
-                                            defaultValue={
-                                                user?.Company_house_registration_number
-                                            }
-                                        />
-                                    </div>
-                                    <div className="mt-2">
-                                        <label className="block text-base mb-1">
-                                            VAT number(optional)
-                                        </label>
-                                        <input
-                                            className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
-                                            id="Vat_number"
-                                            type="text"
-                                            name="Vat_number"
-                                            placeholder="Enter VAT number(optional)..."
-                                            defaultValue={user?.Vat_number}
+                                            placeholder="Enter mobile number..."
+                                            defaultValue={user?.mobile}
                                         />
                                     </div>
                                 </>
                             )}
+                            {user?.role == "user" && (
+                                <div className="mt-2">
+                                    <label className="block text-base mb-1">
+                                        Mobile number
+                                    </label>
+                                    <input
+                                        className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                        id="phone"
+                                        type="text"
+                                        name="phone"
+                                        required
+                                        placeholder="Enter mobile number..."
+                                        defaultValue={user?.phone}
+                                    />
+                                </div>
+                            )}
 
-                            <div className="mt-2">
-                                <label className="block text-base mb-1">
-                                    Mobile number
-                                </label>
-                                <input
-                                    className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
-                                    id="mobile"
-                                    type="text"
-                                    name="mobile"
-                                    required
-                                    placeholder="Enter mobile number..."
-                                    defaultValue={user?.mobile}
-                                />
-                            </div>
                             <div className="mt-2">
                                 <label className="block text-base mb-1">
                                     Address line 1
