@@ -1,7 +1,6 @@
 import Link from "next/link";
 import {FaArrowRight} from "react-icons/fa";
 import {LuTableProperties} from "react-icons/lu";
-import {RiMoneyPoundCircleLine} from "react-icons/ri";
 import {IoLocation} from "react-icons/io5";
 import {CgCalendarDates} from "react-icons/cg";
 import {MdQueryStats} from "react-icons/md";
