@@ -49,7 +49,7 @@ const RegisterPage = () => {
                         }
                     );
                     const data = await response.json();
-                    if (data.success) {
+                    if (data.role == "user") {
                         toast.success("Account created successfully.");
                         action.resetForm();
                         router.push("/authtentication/login");

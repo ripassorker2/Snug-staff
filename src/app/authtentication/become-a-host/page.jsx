@@ -8,14 +8,14 @@ import React from "react";
 
 const HostRegister = () => {
     return (
-        <div className="">
+        <>
             <Banner />
             <Benifit />
             <Pricing />
             <BecomeHost />
             <Subscribe />
             <Faq />
-        </div>
+        </>
     );
 };
 

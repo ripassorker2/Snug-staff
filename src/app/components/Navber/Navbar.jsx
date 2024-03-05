@@ -47,7 +47,7 @@ const Navbar = () => {
                                             <Link
                                                 className="block  w-full text-center"
                                                 href={"/authtentication/login"}>
-                                                Sign In
+                                                Sign in
                                             </Link>
                                         </MenuItem>
                                         <MenuItem className="mt-1">
@@ -56,7 +56,7 @@ const Navbar = () => {
                                                 href={
                                                     "/authtentication/register"
                                                 }>
-                                                Sign Up
+                                                Sign up
                                             </Link>
                                         </MenuItem>
                                         <MenuItem className="mt-1">
@@ -93,11 +93,11 @@ const Navbar = () => {
                                             </MenuItem>
                                         )}
                                         <MenuItem className="mt-1">
-                                            <button
+                                            <div
                                                 onClick={handleLogout}
                                                 className="block  w-full text-center">
                                                 Logout
-                                            </button>
+                                            </div>
                                         </MenuItem>
                                     </>
                                 )}

@@ -11,7 +11,7 @@ const FindAccomodation = () => {
             <div className="md:grid md:grid-cols-2 gap-10 mt-20">
                 <div className="flex flex-col justify-center">
                     <h2 className="heading">
-                        <span>How to Find Accommodation ?</span>
+                        <span>How to find accommodation?</span>
                     </h2>
                     <p className="desc pt-3">
                         A simple and effortless way to find and book the best

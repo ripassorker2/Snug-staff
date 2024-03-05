@@ -1,7 +1,7 @@
 const WhyChooseUS = () => {
     return (
         <div className="container">
-            <div className="md:mt-24 mt-16 md:w-[80%]  mx-auto">
+            <div className="md:mt-24 mt-16   mx-auto">
                 <h1 className="heading mb-6 text-center">
                     <span> Why do</span> customers
                     <br /> prefer to <span>booking with</span> us?

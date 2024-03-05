@@ -5,12 +5,13 @@ import userLogo from "../../../assets/profile-circle.1023x1024.png";
 import {useUserContext} from "@/context/AuthProvider/AuthProvider";
 import {MdEdit} from "react-icons/md";
 import ProfileUpdateModal from "@/app/components/ProfileUpdateModal/ProfileUpdateModal";
+import HostProtected from "@/protect_route/HostProtect";
 
 const HostProfilePage = () => {
     const {user} = useUserContext();
     const [openModal, setOpenModal] = useState(false);
     return (
-        <div className="">
+        <HostProtected>
             <div className="mb-6">
                 <div className="flex flex-col justify-center items-center mt-4">
                     {user?.profile_pic ? (
@@ -131,7 +132,7 @@ const HostProfilePage = () => {
                     setOpenModal={setOpenModal}
                 />
             )}
-        </div>
+        </HostProtected>
     );
 };
 

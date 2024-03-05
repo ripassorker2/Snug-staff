@@ -46,7 +46,7 @@ const ProfileUpdateModal = ({openModal, setOpenModal}) => {
             updateProfile({data, id: user?.id, token});
         } else if (user?.role == "user") {
             const data = {
-                phone: form.mobile.value,
+                phone: form.phone.value,
                 address_line1: form.address_line1.value,
                 address_line_2: form.address_line_2.value,
                 city: form.city.value,

@@ -5,13 +5,14 @@ import userLogo from "../../../assets/profile-circle.1023x1024.png";
 import {useUserContext} from "@/context/AuthProvider/AuthProvider";
 import {MdEdit} from "react-icons/md";
 import ProfileUpdateModal from "@/app/components/ProfileUpdateModal/ProfileUpdateModal";
+import UserProtected from "@/protect_route/UserProtect";
 
 const UserProfilePage = () => {
     const {user} = useUserContext();
     const [openModal, setOpenModal] = useState(false);
 
     return (
-        <div className="">
+        <UserProtected>
             <div className="mb-6">
                 <div className="flex flex-col justify-center items-center mt-4">
                     {user?.profile_pic ? (
@@ -89,7 +90,7 @@ const UserProfilePage = () => {
                     </div>
 
                     <div>
-                        <h2 className="text-base">Country</h2>
+                        <h2 className="text-base">County</h2>
                         <div
                             className="bg-blue-gray-50 text-base rounded-md text-gray-900 px-4
                     py-3">
@@ -111,7 +112,7 @@ const UserProfilePage = () => {
                     setOpenModal={setOpenModal}
                 />
             )}
-        </div>
+        </UserProtected>
     );
 };
 
