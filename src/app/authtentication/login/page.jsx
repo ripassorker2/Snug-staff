@@ -2,6 +2,7 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 import {useUserContext} from "@/context/AuthProvider/AuthProvider";
+import {config} from "@/envConfig/envConfig";
 import {loginSchema} from "@/schemas";
 import {useFormik} from "formik";
 import Link from "next/link";
@@ -33,7 +34,7 @@ const LoginPage = () => {
                 const {email, password} = values;
                 try {
                     const response = await fetch(
-                        `http://127.0.0.1:8000/api/token`,
+                        `${config.base_url}/api/token`,
                         {
                             method: "POST",
                             headers: {

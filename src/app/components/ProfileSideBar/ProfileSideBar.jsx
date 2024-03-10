@@ -49,7 +49,7 @@ const ProfileSideBar = ({childrens}) => {
                                                         size={20}
                                                         className="mr-2"
                                                     />{" "}
-                                                    My lists
+                                                    Add property
                                                 </Link>
                                             </>
                                         )}

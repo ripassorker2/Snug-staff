@@ -7,6 +7,7 @@ import Image from "next/image";
 import avatar from "../../../../assets/blank-profile-picture-973460_1280.png";
 import {useRouter} from "next/navigation";
 import {useUserContext} from "@/context/AuthProvider/AuthProvider";
+import {config} from "@/envConfig/envConfig";
 
 const HostRegister = () => {
     const {token} = useUserContext();
@@ -91,7 +92,7 @@ const HostRegister = () => {
 
         try {
             const response = await fetch(
-                `http://127.0.0.1:8000/host-registration/`,
+                `${config.base_url}/host-registration/`,
                 {
                     method: "POST",
                     headers: {

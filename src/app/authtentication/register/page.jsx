@@ -2,6 +2,7 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 import {useUserContext} from "@/context/AuthProvider/AuthProvider";
+import {config} from "@/envConfig/envConfig";
 import {resistationSchema} from "@/schemas";
 import {useFormik} from "formik";
 import Link from "next/link";
@@ -33,21 +34,18 @@ const RegisterPage = () => {
             onSubmit: async (values, action) => {
                 const {username, email, password, confirm_password} = values;
                 try {
-                    const response = await fetch(
-                        `http://127.0.0.1:8000/sign-up`,
-                        {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify({
-                                username,
-                                email,
-                                password,
-                                confirm_password,
-                            }),
-                        }
-                    );
+                    const response = await fetch(`${config.base_url}/sign-up`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            username,
+                            email,
+                            password,
+                            confirm_password,
+                        }),
+                    });
                     const data = await response.json();
                     if (data.role == "user") {
                         toast.success("Account created successfully.");

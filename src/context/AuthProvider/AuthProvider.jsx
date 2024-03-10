@@ -1,4 +1,5 @@
 "use client";
+import {config} from "@/envConfig/envConfig";
 import React, {createContext, useContext, useEffect, useState} from "react";
 
 export const UserContext = createContext();
@@ -12,7 +13,7 @@ export const AuthProvider = ({children}) => {
     useEffect(() => {
         setToken(localStorage.getItem("snugstuff_access_token") || "");
         if (token) {
-            fetch(`http://127.0.0.1:8000/user-profile`, {
+            fetch(`${config.base_url}/user-profile`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

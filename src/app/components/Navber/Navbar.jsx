@@ -22,7 +22,7 @@ const Navbar = () => {
             <div className="container">
                 <div className="flex justify-between items-center">
                     <Link href={"/"}>
-                        <Image height={66} src={logo} alt="Brand logo" />
+                        <Image height={68} src={logo} alt="Brand logo" />
                     </Link>
                     <div className="flex items-center space-x-2 ">
                         <div className="hover:underline">Snug your home</div>
@@ -65,7 +65,7 @@ const Navbar = () => {
                                                 href={
                                                     "/authtentication/become-a-host"
                                                 }>
-                                                Become a snug host
+                                                Become a host
                                             </Link>
                                         </MenuItem>
                                     </>
