@@ -5,7 +5,8 @@
     "jsx-a11y/label-has-for": "off",
     "no-unused-vars": "error",
     "import/no-unused-modules": "error",
-    "react-hooks/rules-of-hooks": "error"
- 
+    "react-hooks/rules-of-hooks": "error",
+    "no-undef":"error"
+
   }
 }

@@ -103,7 +103,7 @@ const HostRegister = () => {
             );
             const data = await response.json();
             setLoading(false);
-            if (data.role == "host") {
+            if (data.success) {
                 toast.success("Account created successfully.");
                 router.push("/authtentication/login");
             } else {
@@ -121,9 +121,7 @@ const HostRegister = () => {
         <div className="container">
             <form
                 onSubmit={handleSubmit}
-                className={`bg-blue-gray-50 mx-auto rounded-md md:p-8 p-5 md:mt-10 mt-8 ${
-                    activeStep == 0 ? "md:max-w-4xl" : "md:max-w-xl"
-                }`}>
+                className={`bg-blue-gray-50 mx-auto rounded-md md:p-8 p-5 md:mt-10 mt-8 md:max-w-4xl`}>
                 <Stepper
                     className="mb-3"
                     activeStep={activeStep}
@@ -291,7 +289,9 @@ const HostRegister = () => {
                                             className="relative">
                                             <Image
                                                 src={URL.createObjectURL(file)}
-                                                className="h-28 w-28 rounded-full"
+                                                className="h-32 w-32 rounded-full"
+                                                width={110}
+                                                height={110}
                                                 alt="profile"
                                             />
                                             <input
@@ -313,7 +313,7 @@ const HostRegister = () => {
                                             className="relative">
                                             <Image
                                                 src={avatar}
-                                                className="h-24 bg-contain w-24 rounded-full"
+                                                className="h-32 bg-contain w-32 rounded-full"
                                                 alt="profile"
                                             />
 
@@ -331,64 +331,65 @@ const HostRegister = () => {
                                     </div>
                                 )}
                             </div>
+                            <div className="md:grid md:grid-cols-2 gap-x-10 md:gap-y-3">
+                                <div className="mt-2">
+                                    <label className="block text-base mb-1">
+                                        Username
+                                    </label>
+                                    <input
+                                        className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                        id="username"
+                                        type="text"
+                                        name="username"
+                                        placeholder="Enter username..."
+                                        value={inputData.username}
+                                        onChange={handleChange}
+                                    />
+                                </div>
 
-                            <div className="mt-2">
-                                <label className="block text-base mb-1">
-                                    Username
-                                </label>
-                                <input
-                                    className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
-                                    id="username"
-                                    type="text"
-                                    name="username"
-                                    placeholder="Enter username..."
-                                    value={inputData.username}
-                                    onChange={handleChange}
-                                />
-                            </div>
+                                <div className="mt-2">
+                                    <label className="block text-base mb-1">
+                                        Email Address
+                                    </label>
+                                    <input
+                                        className="border border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                        id="email"
+                                        type="email"
+                                        name="email"
+                                        placeholder="Enter email..."
+                                        value={inputData.email}
+                                        onChange={handleChange}
+                                    />
+                                </div>
 
-                            <div className="mt-2">
-                                <label className="block text-base mb-1">
-                                    Email Address
-                                </label>
-                                <input
-                                    className="border border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
-                                    id="email"
-                                    type="email"
-                                    name="email"
-                                    placeholder="Enter email..."
-                                    value={inputData.email}
-                                    onChange={handleChange}
-                                />
-                            </div>
-
-                            <div className="mt-2">
-                                <label className="block text-base mb-1">
-                                    Password
-                                </label>
-                                <input
-                                    className="border border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
-                                    id="password"
-                                    type="password"
-                                    name="password"
-                                    placeholder="Enter password..."
-                                    value={inputData.password}
-                                    onChange={handleChange}
-                                />
-                            </div>
-                            <div className="mt-2">
-                                <label className="block text-base mb-1">
-                                    Confirm password
-                                </label>
-                                <input
-                                    className="border border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
-                                    id="confirm_password"
-                                    type="password"
-                                    name="confirm_password"
-                                    placeholder="Confirm password..."
-                                    value={inputData.confirm_password}
-                                    onChange={handleChange}
-                                />
+                                <div className="mt-2">
+                                    <label className="block text-base mb-1">
+                                        Password
+                                    </label>
+                                    <input
+                                        className="border border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                        id="password"
+                                        type="password"
+                                        name="password"
+                                        placeholder="Enter password..."
+                                        value={inputData.password}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                <div className="mt-2">
+                                    <label className="block text-base mb-1">
+                                        Confirm password
+                                    </label>
+                                    <input
+                                        className="border border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                        id="confirm_password"
+                                        type="password"
+                                        name="confirm_password"
+                                        placeholder="Confirm password..."
+                                        value={inputData.confirm_password}
+                                        onChange={handleChange}
+                                    />
+                                </div>
                             </div>
                         </div>
                     )}

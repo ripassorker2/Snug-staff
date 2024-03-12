@@ -6,13 +6,13 @@ import WhyChooseUS from "./pages/Home/WhyChose";
 
 const HomePage = () => {
     return (
-        <div>
+        <>
             <Banner />
             <FindAccomodation />
             <Accomodation />
             <Subscribe />
             <WhyChooseUS />
-        </div>
+        </>
     );
 };
 

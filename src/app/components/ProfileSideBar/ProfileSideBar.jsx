@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import {CgProfile} from "react-icons/cg";
+import {CgAdd, CgProfile} from "react-icons/cg";
 import {usePathname} from "next/navigation";
 import {FcList} from "react-icons/fc";
 import {useUserContext} from "@/context/AuthProvider/AuthProvider";
@@ -46,6 +46,21 @@ const ProfileSideBar = ({childrens}) => {
                                                         "bg-gray-400"
                                                     }`}>
                                                     <FcList
+                                                        size={20}
+                                                        className="mr-2"
+                                                    />{" "}
+                                                    My properties
+                                                </Link>
+                                                <Link
+                                                    href={
+                                                        "/profile_page/host_profile/add_list"
+                                                    }
+                                                    className={`text-center w-full mt-3 inline-flex items-center px-3 py-2 hover:bg-gray-400 rounded ${
+                                                        path ==
+                                                            "/profile_page/host_profile/add_list" &&
+                                                        "bg-gray-400"
+                                                    }`}>
+                                                    <CgAdd
                                                         size={20}
                                                         className="mr-2"
                                                     />{" "}

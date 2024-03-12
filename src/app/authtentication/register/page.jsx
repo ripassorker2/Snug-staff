@@ -47,7 +47,7 @@ const RegisterPage = () => {
                         }),
                     });
                     const data = await response.json();
-                    if (data.role == "user") {
+                    if (data.success) {
                         toast.success("Account created successfully.");
                         action.resetForm();
                         router.push("/authtentication/login");
