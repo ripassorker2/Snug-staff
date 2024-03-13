@@ -9,8 +9,8 @@ export const AuthProvider = ({children}) => {
     const [loading, setLoading] = useState(true);
     const [refetch, setRefetch] = useState(false);
     const [token, setToken] = useState("");
-
     useEffect(() => {
+        setLoading(true);
         setToken(localStorage.getItem("snugstuff_access_token") || "");
         if (token) {
             fetch(`${config.base_url}/user-profile`, {
@@ -21,9 +21,19 @@ export const AuthProvider = ({children}) => {
                 },
             })
                 .then((res) => res.json())
-                .then((data) => setUser(data[0]));
+                .then((data) => {
+                    if (data.code) {
+                        localStorage.removeItem("snugstuff_access_token");
+                        localStorage.removeItem("snugstuff_refresh_token");
+                        setUser(null);
+                    } else {
+                        setUser(data[0]);
+                    }
+                    setLoading(false);
+                });
         } else {
             setUser(null);
+            setLoading(false);
         }
     }, [token, refetch]);
 

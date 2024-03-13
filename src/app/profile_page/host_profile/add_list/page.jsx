@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 "use client";
 import {
     useGetPropertiesAminityQuery,
@@ -9,7 +10,6 @@ import {useState} from "react";
 import {MdOutlineCancel} from "react-icons/md";
 import {IoCloudUploadOutline} from "react-icons/io5";
 import {useUserContext} from "@/context/AuthProvider/AuthProvider";
-import {useUpdateProfileMutation} from "@/redux/api/utilsApiSlice";
 
 const AddListPage = () => {
     const [activeStep, setActiveStep] = useState(0);
@@ -22,7 +22,9 @@ const AddListPage = () => {
 
     const {data: categories} = useGetPropertiesCategoryQuery();
     const {data: aminites} = useGetPropertiesAminityQuery();
-    const [uploadProperty, {}] = useUpdateProfileMutation();
+    // const [uploadProperty, {}] = useUpdateProfileMutation();\
+
+    console.log(aminites);
 
     const [images, setImages] = useState([]);
     const [documents, setDocuments] = useState([]);
@@ -86,7 +88,7 @@ const AddListPage = () => {
         setter((prevValue) => prevValue + 1);
     };
 
-    const [parking, setParking] = useState(false);
+    const [parking, setParking] = useState(true);
 
     const handleParkingChange = (e) => {
         setParking(e.target.value === "true");
@@ -149,7 +151,7 @@ const AddListPage = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="mt-6">
+        <form onSubmit={handleSubmit} className="mt-6 md:mb-10">
             <Stepper
                 activeStep={activeStep}
                 isLastStep={(value) => setIsLastStep(value)}
@@ -159,29 +161,26 @@ const AddListPage = () => {
                 <Step onClick={() => setActiveStep(2)}>3</Step>
             </Stepper>
             <div className="mt-5">
-                <div className="sub-head mb-3">
-                    <span>Add property</span>
-                </div>
                 {activeStep === 0 && (
-                    <div className="lg:grid lg:grid-cols-2 gap-x-10 md:gap-y-3">
-                        <div className="col-span-2">
+                    <div className="grid lg:grid-cols-2 gap-x-10 gap-y-3">
+                        <div className="lg:col-span-2">
                             <h2 className="my-2">Property images</h2>
-                            <div className="grid lg:grid-cols-3 gap-3 grid-cols-2">
+                            <div className="grid md:grid-cols-3 gap-3 grid-cols-2 ">
                                 {images.map((image, index) => (
                                     <div
                                         key={index}
                                         className={`relative ${
-                                            index == 0 && " col-span-3"
+                                            index == 0 ? "md:col-span-3" : ""
                                         }`}>
                                         <Image
                                             src={image.preview}
                                             alt={`Preview ${index}`}
                                             height={200}
                                             width={200}
-                                            className={`rounded-md object-cover  object-center w-full ${
+                                            className={`rounded-md h-[130px] object-cover object-center w-full ${
                                                 index == 0
-                                                    ? "h-[350px]  "
-                                                    : "h-[160px]"
+                                                    ? "md:h-[350px] "
+                                                    : "md:h-[160px]"
                                             }`}
                                         />
                                         <MdOutlineCancel
@@ -189,19 +188,24 @@ const AddListPage = () => {
                                             onClick={() =>
                                                 handleRemoveImage(index)
                                             }
-                                            className="absolute top-2 right-2 rounded-full text-gray-900 cursor-pointer"
+                                            className="absolute top-2 right-2 rounded-full text-primary cursor-pointer"
                                         />
                                     </div>
                                 ))}
                                 <div>
                                     <label
                                         htmlFor="image-file"
-                                        className="cursor-pointer border border-gray-400 p-10 flex flex-col rounded-md items-center text-center col-span-1">
+                                        className="cursor-pointer border border-gray-400 md:p-10 p-5 flex flex-col rounded-md items-center text-center col-span-1 md:h-[160px]">
                                         <IoCloudUploadOutline
                                             size={25}
                                             className="mr-1 font-semibold text-primary"
                                         />
-                                        <span>Upload images</span>
+                                        <span>
+                                            Upload{" "}
+                                            <span className="hidden md:block">
+                                                property images
+                                            </span>{" "}
+                                        </span>
                                         <input
                                             type="file"
                                             id="image-file"
@@ -213,21 +217,21 @@ const AddListPage = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="mt-2">
+                        <div className="mt-2 lg:col-span-2">
                             <label
                                 htmlFor="category"
                                 className="block text-base mb-1">
-                                Category name
+                                Property category
                             </label>
                             <select
-                                className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                className="border-2 border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-600 text-gray-800"
                                 id="category"
                                 name="category"
                                 value={formData.category}
                                 onChange={handleInputChange}
                                 required>
                                 <option value="" disabled>
-                                    Select category ...
+                                    Select one category ...
                                 </option>
                                 {categories?.map((category, index) => (
                                     <option key={index} value={category.title}>
@@ -246,8 +250,8 @@ const AddListPage = () => {
                                 type="text"
                                 id="title"
                                 name="title"
-                                className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
-                                placeholder="Enter title ..."
+                                className="border-2 border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-600 text-gray-800"
+                                placeholder="Enter property title ..."
                                 value={formData.title}
                                 onChange={handleInputChange}
                                 required
@@ -257,48 +261,73 @@ const AddListPage = () => {
                             <label
                                 htmlFor="area"
                                 className="block text-base mb-1">
-                                Property area
+                                Property total area
                             </label>
                             <input
                                 type="number"
                                 id="area"
                                 name="area"
-                                className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
-                                placeholder="Enter area..."
+                                className="border-2 border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-600 text-gray-800"
+                                placeholder="Enter total property area..."
                                 value={formData.area}
                                 onChange={handleInputChange}
                                 required
                             />
                         </div>
-                        <div className="mt-2">
+                        <div className="mt-2 lg:col-span-2">
                             <label
                                 htmlFor="price"
                                 className="block text-base mb-1">
-                                Price
+                                Property price
                             </label>
                             <input
                                 type="number"
                                 id="price"
                                 name="price"
-                                className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
-                                placeholder="Enter price..."
+                                className="border-2 border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-600 text-gray-800"
+                                placeholder="Enter property price..."
                                 value={formData.price}
                                 onChange={handleInputChange}
                                 required
                             />
                         </div>
+                        <div className="mt-2 col-span-2">
+                            <h2 className="mb-2 text-base">Parking area</h2>
+                            <div className="flex space-x-6 mt-2">
+                                <label className="flex items-center space-x-2 text-gray-700">
+                                    <input
+                                        type="radio"
+                                        name="parking"
+                                        value={true}
+                                        checked={parking === true}
+                                        onChange={handleParkingChange}
+                                    />
+                                    <p>Yes</p>
+                                </label>
+                                <label className="flex items-center space-x-2 text-gray-700">
+                                    <input
+                                        type="radio"
+                                        name="parking"
+                                        value={false}
+                                        checked={parking === false}
+                                        onChange={handleParkingChange}
+                                    />
+                                    <p>No</p>
+                                </label>
+                            </div>
+                        </div>
                         <div className="mt-2">
                             <label
                                 htmlFor="location"
                                 className="block text-base mb-1">
-                                Location
+                                Property location
                             </label>
                             <input
                                 type="text"
                                 id="location"
                                 name="location"
-                                className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
-                                placeholder="Enter location..."
+                                className="border-2 border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-600 text-gray-800"
+                                placeholder="Enter property location..."
                                 value={formData.location}
                                 onChange={handleInputChange}
                                 required
@@ -308,30 +337,30 @@ const AddListPage = () => {
                             <label
                                 htmlFor="short_description"
                                 className="block text-base mb-1">
-                                Short description
+                                Property short description
                             </label>
-                            <input
+                            <textarea
                                 type="text"
                                 id="short_description"
                                 name="short_description"
-                                className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
-                                placeholder="Enter short description..."
+                                className="border-2 border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-600 text-gray-800 resize-none h-11"
+                                placeholder="Enter property short description..."
                                 value={formData.short_description}
                                 onChange={handleInputChange}
                                 required
                             />
                         </div>
-                        <div className="mt-2">
+                        <div className="mt-2 lg:col-span-2">
                             <label
                                 htmlFor="description"
                                 className="block text-base mb-1">
-                                Description
+                                Property description
                             </label>
                             <textarea
                                 id="description"
                                 name="description"
-                                className="border border-gray-500 rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700 resize-none"
-                                placeholder="Enter description..."
+                                className="border-2 border-gray-500 rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-600 text-gray-800 resize-none"
+                                placeholder="Enter property description..."
                                 value={formData.description}
                                 onChange={handleInputChange}
                                 required></textarea>
@@ -340,7 +369,7 @@ const AddListPage = () => {
                 )}
                 {activeStep === 1 && (
                     <div className="lg:grid lg:grid-cols-2 gap-x-10 lg:gap-y-3">
-                        <div className="mt-2 col-span-2">
+                        <div className="mt-2 lg:col-span-2">
                             <label className="block text-base mb-1">
                                 Property aminites
                             </label>
@@ -362,32 +391,8 @@ const AddListPage = () => {
                                 ))}
                             </div>
                         </div>
+                        {/* parking , bedroom , bathrooms , guest */}
                         <div>
-                            <div className="mt-2">
-                                <h2 className="mb-2 text-base">Parking area</h2>
-                                <div className="flex space-x-6 mt-2">
-                                    <label className="flex items-center space-x-2 text-gray-700">
-                                        <input
-                                            type="radio"
-                                            name="parking"
-                                            value={true}
-                                            checked={parking === true}
-                                            onChange={handleParkingChange}
-                                        />
-                                        <p>Yes</p>
-                                    </label>
-                                    <label className="flex items-center space-x-2 text-gray-700">
-                                        <input
-                                            type="radio"
-                                            name="parking"
-                                            value={false}
-                                            checked={parking === false}
-                                            onChange={handleParkingChange}
-                                        />
-                                        <p>No</p>
-                                    </label>
-                                </div>
-                            </div>
                             <div className="mt-4">
                                 <h2>Bedroom</h2>
                                 <div className="mt-1 flex justify-between text-gray-800">
@@ -569,13 +574,158 @@ const AddListPage = () => {
                     </div>
                 )}
                 {activeStep === 2 && (
-                    <div className="md:grid md:grid-cols-2 gap-x-10 md:gap-y-3">
-                        hi 3
+                    <div className="text-gray-800 text-base">
+                        <h2 className="md:text-xl text-lg pb-3">
+                            <span>Preview of property</span>
+                        </h2>
+                        <div className="mb-5">
+                            <h2 className="text-base pb-2">Property images</h2>
+                            {images.length > 0 ? (
+                                <div className="grid md:grid-cols-3 grid-cols-2 gap-6 ">
+                                    {images?.map((img, i) => (
+                                        <Image
+                                            key={i}
+                                            src={img.preview}
+                                            className={`w-full rounded-md object-center object-cover ${
+                                                i === 0
+                                                    ? "md:col-span-3 col-span-2 max-h-[350px]"
+                                                    : "md:h-[200px] h-[110px]"
+                                            }`}
+                                            height={200}
+                                            width={200}
+                                            alt={"proterty image"}
+                                        />
+                                    ))}
+                                </div>
+                            ) : (
+                                <p className="text-red-500">
+                                    No images. Please select some image.
+                                </p>
+                            )}
+                        </div>
+
+                        <div>
+                            <h2 className=" mb-4">
+                                Property category : {formData.category}
+                            </h2>
+                            <h2 className="md:text-2xl text-xl mb-2">
+                                Property title : {formData.title}
+                            </h2>
+                            <div className="flex space-x-3 space-y-3 flex-wrap items-center mb-2">
+                                <button className="bg-gray-300  rounded-lg px-2 py-1">
+                                    {bedrooms} bedrooms
+                                </button>
+                                <button className="bg-gray-300  rounded-lg px-2 py-1">
+                                    {bathrooms} bathrooms
+                                </button>
+                                <button className="bg-gray-300  rounded-lg px-2 py-1">
+                                    {guests} guests
+                                </button>
+                            </div>
+                            <div className="md:flex md:space-x-8 flex-wrap mb-2">
+                                <h2 className=" my-3 font-semibold ">
+                                    Property price : ${formData.price || 0}
+                                </h2>
+                                <h2 className=" my-3">
+                                    <b>Property area</b> : {formData.area || 0}
+                                </h2>
+                            </div>
+                            <h2 className="my-3">
+                                <b> Parking area : </b>
+                                {parking ? "Available" : "Not available"}
+                            </h2>
+                            <h2 className="my-3">
+                                <b>Location : </b>
+                                {formData.location || (
+                                    <button className="text-red-500 ">
+                                        Please provide property location.
+                                    </button>
+                                )}
+                            </h2>
+
+                            <div className="my-3">
+                                <b>Short description</b>
+                                {formData.short_description ? (
+                                    <>
+                                        {formData.short_description
+                                            ?.split("\n")
+                                            ?.map((line, index) => (
+                                                <p key={index}>{line}</p>
+                                            ))}
+                                    </>
+                                ) : (
+                                    <>
+                                        <p className="text-red-500 ">
+                                            Please provide short description.
+                                        </p>
+                                    </>
+                                )}
+                            </div>
+                            <div className="my-3">
+                                <b> Description </b>
+                                {formData.description ? (
+                                    <>
+                                        {formData.description
+                                            ?.split("\n")
+                                            ?.map((line, index) => (
+                                                <p key={index}>{line}</p>
+                                            ))}
+                                    </>
+                                ) : (
+                                    <>
+                                        <p className="text-red-500 ">
+                                            Please provide description.
+                                        </p>
+                                    </>
+                                )}
+                            </div>
+
+                            <div className="my-3">
+                                <b> What this place offers</b>
+                                {aminites.length ? (
+                                    <div className="flex space-x-3 space-y-3 flex-wrap items-center">
+                                        {aminites.map((aminite) => (
+                                            <>
+                                                <button className="bg-gray-300  rounded-lg px-2 py-1">
+                                                    {aminite.name}
+                                                </button>
+                                            </>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <button className="bg-gray-300  rounded-lg px-2 py-1">
+                                        Nothing
+                                    </button>
+                                )}
+                            </div>
+
+                            <div className="mb-3">
+                                <b>Property documents</b>
+                                {documents.length > 0 ? (
+                                    <div className="grid md:grid-cols-2 gap-6 pt-2">
+                                        {documents?.map((docs, i) => (
+                                            <Image
+                                                key={i}
+                                                src={docs.preview}
+                                                className={`w-full rounded-md object-center object-contain `}
+                                                height={200}
+                                                width={200}
+                                                alt={"proterty image"}
+                                            />
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <p className="text-red-500">
+                                        No documents. Please select some image.
+                                    </p>
+                                )}
+                            </div>
+                        </div>
                     </div>
                 )}
             </div>
             <div
-                className={`mt-6 flex  ${
+                className={`mt-7 flex ${activeStep != 0 && "space-x-3"}  ${
                     activeStep === 1 || 2 ? "justify-between" : "justify-end"
                 }`}>
                 <div

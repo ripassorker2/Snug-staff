@@ -1,18 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unescaped-entities */
 "use client";
+import SmallLoader from "@/app/components/SmallLoader/SmallLoader";
 import {useUserContext} from "@/context/AuthProvider/AuthProvider";
 import {config} from "@/envConfig/envConfig";
 import {loginSchema} from "@/schemas";
 import {useFormik} from "formik";
 import Link from "next/link";
 import {useRouter} from "next/navigation";
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import toast from "react-hot-toast";
 import {FcGoogle} from "react-icons/fc";
 
 const LoginPage = () => {
     const {token, setToken} = useUserContext();
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
@@ -31,6 +33,7 @@ const LoginPage = () => {
             initialValues: initialLoginValues,
             validationSchema: loginSchema,
             onSubmit: async (values, action) => {
+                setLoading(true);
                 const {email, password} = values;
                 try {
                     const response = await fetch(
@@ -58,13 +61,17 @@ const LoginPage = () => {
                             data.refresh
                         );
                         action.resetForm();
+                        setLoading(false);
                         toast.success("Login successfully.");
                         router.push("/");
                     } else {
                         toast.error(data.detail);
+                        setLoading(false);
                     }
                 } catch (error) {
                     console.log(error);
+                    setLoading(false);
+                    toast.error("Something went wrong");
                 }
             },
         });
@@ -86,7 +93,7 @@ const LoginPage = () => {
                                 Email Address
                             </label>
                             <input
-                                className=" border border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                className=" border-2 border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
                                 id="email"
                                 type="email"
                                 placeholder="Enter email..."
@@ -103,7 +110,7 @@ const LoginPage = () => {
                                 Password
                             </label>
                             <input
-                                className=" border border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                className=" border-2 border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
                                 id="password"
                                 type="password"
                                 placeholder="Enter password..."
@@ -117,8 +124,10 @@ const LoginPage = () => {
                                 </p>
                             )}
                             <div className="mt-3">
-                                <button className="btn-primary py-3 font-semibold  w-full">
-                                    Sign In
+                                <button
+                                    disabled={loading}
+                                    className="btn-primary py-3 font-semibold  w-full">
+                                    {loading ? <SmallLoader /> : "Sign In"}
                                 </button>
                             </div>
                             <div className=" mt-2 flex justify-center">

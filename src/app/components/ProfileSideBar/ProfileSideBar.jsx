@@ -4,10 +4,12 @@ import {CgAdd, CgProfile} from "react-icons/cg";
 import {usePathname} from "next/navigation";
 import {FcList} from "react-icons/fc";
 import {useUserContext} from "@/context/AuthProvider/AuthProvider";
+import Loader from "@/app/loading";
 
 const ProfileSideBar = ({childrens}) => {
-    const {user} = useUserContext();
+    const {user, loading} = useUserContext();
     const path = usePathname();
+    if (loading) return <Loader />;
 
     return (
         <>
@@ -78,15 +80,17 @@ const ProfileSideBar = ({childrens}) => {
                     </div>
                 </>
             ) : (
-                <div className="text-center mt-20 text-lg">
-                    For access this page? You have to{" "}
-                    <Link
-                        href={"/authtentication/login"}
-                        className="hover:underline">
-                        <span> Sign In</span>
-                    </Link>{" "}
-                    frist.
-                </div>
+                <>
+                    <div className="text-center mt-32 h-[50vh] text-lg ">
+                        For access this page? You have to{" "}
+                        <Link
+                            href={"/authtentication/login"}
+                            className="hover:underline">
+                            <span> Sign In</span>
+                        </Link>{" "}
+                        frist.
+                    </div>
+                </>
             )}
         </>
     );

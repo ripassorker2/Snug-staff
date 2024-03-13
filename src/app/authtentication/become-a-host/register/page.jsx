@@ -8,6 +8,7 @@ import avatar from "../../../../assets/blank-profile-picture-973460_1280.png";
 import {useRouter} from "next/navigation";
 import {useUserContext} from "@/context/AuthProvider/AuthProvider";
 import {config} from "@/envConfig/envConfig";
+import SmallLoader from "@/app/components/SmallLoader/SmallLoader";
 
 const HostRegister = () => {
     const {token} = useUserContext();
@@ -65,9 +66,11 @@ const HostRegister = () => {
         if (inputData.password !== inputData.confirm_password)
             return toast.error("Passwords do not match.");
 
+        setLoading(true);
         const formData = new FormData();
         formData.append("file", file);
-        setLoading(true);
+
+        console.log(formData?.get("file"));
 
         const host_data = {
             username: inputData.username,
@@ -86,10 +89,10 @@ const HostRegister = () => {
                     inputData?.Company_house_registration_number,
                 Vat_number: inputData.Vat_number,
                 mobile: inputData.mobile,
-                // profile_pic: formData,
+                // profile_pic: formData?.get("file"),
             },
         };
-
+        // console.log(host_data);
         try {
             const response = await fetch(
                 `${config.base_url}/host-registration/`,
@@ -102,18 +105,20 @@ const HostRegister = () => {
                 }
             );
             const data = await response.json();
+            console.log(data);
             setLoading(false);
             if (data.success) {
                 toast.success("Account created successfully.");
                 router.push("/authtentication/login");
             } else {
-                return toast.error(
+                toast.error(
                     data?.username || data?.email || "Something went wrong"
                 );
             }
         } catch (error) {
             setLoading(false);
             console.log(error);
+            toast.error("Something went wrong");
         }
     };
 
@@ -138,7 +143,7 @@ const HostRegister = () => {
                                     Full name
                                 </label>
                                 <input
-                                    className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                    className="border-2 border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
                                     id="full_name"
                                     type="text"
                                     name="full_name"
@@ -152,7 +157,7 @@ const HostRegister = () => {
                                     Company Name
                                 </label>
                                 <input
-                                    className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                    className="border-2 border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
                                     id="company_name"
                                     type="text"
                                     name="company_name"
@@ -166,7 +171,7 @@ const HostRegister = () => {
                                     Company house registration number
                                 </label>
                                 <input
-                                    className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                    className="border-2 border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
                                     id="Company_house_registration_number"
                                     type="text"
                                     name="Company_house_registration_number"
@@ -182,7 +187,7 @@ const HostRegister = () => {
                                     VAT number(optional)
                                 </label>
                                 <input
-                                    className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                    className="border-2 border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
                                     id="Vat_number"
                                     type="text"
                                     name="Vat_number"
@@ -196,7 +201,7 @@ const HostRegister = () => {
                                     Mobile number
                                 </label>
                                 <input
-                                    className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                    className="border-2 border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
                                     id="mobile"
                                     type="text"
                                     name="mobile"
@@ -210,7 +215,7 @@ const HostRegister = () => {
                                     Address line 1
                                 </label>
                                 <input
-                                    className="border border-gray-500 rounded w-full py-2.5 px-3 mr-2 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                    className="border-2 border-gray-500 rounded w-full py-2.5 px-3 mr-2 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
                                     id="address_line1"
                                     type="text"
                                     name="address_line1"
@@ -224,7 +229,7 @@ const HostRegister = () => {
                                     Address line 2
                                 </label>
                                 <input
-                                    className="border border-gray-500 rounded w-full py-2.5 px-3 mr-2 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                    className="border-2 border-gray-500 rounded w-full py-2.5 px-3 mr-2 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
                                     id="address_line_2"
                                     type="text"
                                     name="address_line_2"
@@ -239,7 +244,7 @@ const HostRegister = () => {
                                     City
                                 </label>
                                 <input
-                                    className="border border-gray-500 rounded w-full py-2.5 px-3 mr-2 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                    className="border-2 border-gray-500 rounded w-full py-2.5 px-3 mr-2 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
                                     id="city"
                                     type="text"
                                     name="city"
@@ -253,7 +258,7 @@ const HostRegister = () => {
                                     County
                                 </label>
                                 <input
-                                    className="border border-gray-500 rounded w-full py-2.5 px-3 mr-2 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                    className="border-2 border-gray-500 rounded w-full py-2.5 px-3 mr-2 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
                                     id="county"
                                     type="text"
                                     name="county"
@@ -268,7 +273,7 @@ const HostRegister = () => {
                                     Postcode
                                 </label>
                                 <input
-                                    className="border border-gray-500 rounded w-full py-2.5 px-3 mr-2 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                    className="border-2 border-gray-500 rounded w-full py-2.5 px-3 mr-2 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
                                     id="post_code"
                                     type="text"
                                     name="post_code"
@@ -337,7 +342,7 @@ const HostRegister = () => {
                                         Username
                                     </label>
                                     <input
-                                        className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                        className="border-2 border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
                                         id="username"
                                         type="text"
                                         name="username"
@@ -352,7 +357,7 @@ const HostRegister = () => {
                                         Email Address
                                     </label>
                                     <input
-                                        className="border border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                        className="border-2 border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
                                         id="email"
                                         type="email"
                                         name="email"
@@ -367,7 +372,7 @@ const HostRegister = () => {
                                         Password
                                     </label>
                                     <input
-                                        className="border border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                        className="border-2 border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
                                         id="password"
                                         type="password"
                                         name="password"
@@ -381,7 +386,7 @@ const HostRegister = () => {
                                         Confirm password
                                     </label>
                                     <input
-                                        className="border border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                        className="border-2 border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
                                         id="confirm_password"
                                         type="password"
                                         name="confirm_password"
@@ -418,10 +423,8 @@ const HostRegister = () => {
                         <button
                             disabled={loading}
                             type="submit"
-                            className={`btn-secondary ${
-                                loading && "bg-blue-gray-500"
-                            }`}>
-                            Submit
+                            className="btn-secondary ">
+                            {loading ? <SmallLoader /> : "Sign up now"}
                         </button>
                     )}
                 </div>

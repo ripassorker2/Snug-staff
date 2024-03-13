@@ -1,19 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unescaped-entities */
 "use client";
+import SmallLoader from "@/app/components/SmallLoader/SmallLoader";
 import {useUserContext} from "@/context/AuthProvider/AuthProvider";
 import {config} from "@/envConfig/envConfig";
 import {resistationSchema} from "@/schemas";
 import {useFormik} from "formik";
 import Link from "next/link";
 import {useRouter} from "next/navigation";
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import toast from "react-hot-toast";
 import {FcGoogle} from "react-icons/fc";
 
 const RegisterPage = () => {
     const {token} = useUserContext();
     const router = useRouter();
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         if (token) {
@@ -34,6 +36,7 @@ const RegisterPage = () => {
             onSubmit: async (values, action) => {
                 const {username, email, password, confirm_password} = values;
                 try {
+                    setLoading(true);
                     const response = await fetch(`${config.base_url}/sign-up`, {
                         method: "POST",
                         headers: {
@@ -51,7 +54,9 @@ const RegisterPage = () => {
                         toast.success("Account created successfully.");
                         action.resetForm();
                         router.push("/authtentication/login");
+                        setLoading(false);
                     } else {
+                        setLoading(false);
                         toast.error(
                             data?.username ||
                                 data?.email ||
@@ -59,7 +64,9 @@ const RegisterPage = () => {
                         );
                     }
                 } catch (error) {
+                    setLoading(false);
                     console.log(error);
+                    toast.error("Something went wrong");
                 }
             },
         });
@@ -82,7 +89,7 @@ const RegisterPage = () => {
                                 Username
                             </label>
                             <input
-                                className=" border border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                className=" border-2 border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
                                 id="username"
                                 type="username"
                                 name="username"
@@ -102,7 +109,7 @@ const RegisterPage = () => {
                                 Email Address
                             </label>
                             <input
-                                className=" border border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                className=" border-2 border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
                                 id="email"
                                 type="email"
                                 placeholder="Enter email..."
@@ -120,7 +127,7 @@ const RegisterPage = () => {
                                 Password
                             </label>
                             <input
-                                className=" border border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                className=" border-2 border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
                                 id="password"
                                 type="password"
                                 name="password"
@@ -140,7 +147,7 @@ const RegisterPage = () => {
                                 Confirm Password
                             </label>
                             <input
-                                className=" border border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                className=" border-2 border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
                                 id="confirm_password"
                                 type="password"
                                 name="confirm_password"
@@ -157,8 +164,10 @@ const RegisterPage = () => {
                                 )}
                         </div>
                         <div className="mt-2">
-                            <button className="btn-primary py-3 font-semibold  w-full">
-                                Sign Up
+                            <button
+                                disabled={loading}
+                                className="btn-primary py-3 font-semibold  w-full">
+                                {loading ? <SmallLoader /> : "Sign Up"}
                             </button>
 
                             <div className=" mt-2 flex justify-center">
