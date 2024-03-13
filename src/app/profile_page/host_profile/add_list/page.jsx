@@ -10,6 +10,7 @@ import {useState} from "react";
 import {MdOutlineCancel} from "react-icons/md";
 import {IoCloudUploadOutline} from "react-icons/io5";
 import {useUserContext} from "@/context/AuthProvider/AuthProvider";
+import toast from "react-hot-toast";
 
 const AddListPage = () => {
     const [activeStep, setActiveStep] = useState(0);
@@ -23,8 +24,6 @@ const AddListPage = () => {
     const {data: categories} = useGetPropertiesCategoryQuery();
     const {data: aminites} = useGetPropertiesAminityQuery();
     // const [uploadProperty, {}] = useUpdateProfileMutation();\
-
-    console.log(aminites);
 
     const [images, setImages] = useState([]);
     const [documents, setDocuments] = useState([]);
@@ -114,6 +113,24 @@ const AddListPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if (images.length < 4)
+            return toast.error("Please upload at least 4 images.");
+
+        if (documents.length < 1)
+            return toast.error("Please upload at least 1 document.");
+
+        if (
+            !formData.category ||
+            !formData.title ||
+            !formData.area ||
+            !formData.price ||
+            !formData.location ||
+            !formData.short_description ||
+            !formData.description
+        ) {
+            return toast.error("Please fill out all required fields.");
+        }
 
         const imagesData = new FormData();
         images.forEach((image, index) => {
@@ -259,23 +276,6 @@ const AddListPage = () => {
                         </div>
                         <div className="mt-2">
                             <label
-                                htmlFor="area"
-                                className="block text-base mb-1">
-                                Property total area
-                            </label>
-                            <input
-                                type="number"
-                                id="area"
-                                name="area"
-                                className="border-2 border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-600 text-gray-800"
-                                placeholder="Enter total property area..."
-                                value={formData.area}
-                                onChange={handleInputChange}
-                                required
-                            />
-                        </div>
-                        <div className="mt-2 lg:col-span-2">
-                            <label
                                 htmlFor="price"
                                 className="block text-base mb-1">
                                 Property price
@@ -287,6 +287,48 @@ const AddListPage = () => {
                                 className="border-2 border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-600 text-gray-800"
                                 placeholder="Enter property price..."
                                 value={formData.price}
+                                onChange={handleInputChange}
+                                required
+                            />
+                        </div>
+                        <div className="mt-4 col-span-2">
+                            <h2>Guest</h2>
+                            <div className="mt-1 flex justify-between text-gray-800">
+                                <p>Capacity of guests</p>
+                                <div>
+                                    <button
+                                        className="bg-secondary p-2 rounded-full text-gray-200 w-6 h-6 inline-flex items-center justify-center mr-2"
+                                        onClick={() =>
+                                            handleDecrement(setGuests)
+                                        }>
+                                        -
+                                    </button>
+                                    <button className="px-2 text-lg">
+                                        {guests}
+                                    </button>
+                                    <button
+                                        className="bg-secondary p-2 rounded-full text-gray-200 w-6 h-6 inline-flex items-center justify-center ml-2"
+                                        onClick={() =>
+                                            handleIncrement(setGuests)
+                                        }>
+                                        +
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="mt-2 lg:col-span-2">
+                            <label
+                                htmlFor="area"
+                                className="block text-base mb-1">
+                                Property total area
+                            </label>
+                            <input
+                                type="number"
+                                id="area"
+                                name="area"
+                                className="border-2 border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-600 text-gray-800"
+                                placeholder="Enter total property area..."
+                                value={formData.area}
                                 onChange={handleInputChange}
                                 required
                             />
@@ -316,6 +358,7 @@ const AddListPage = () => {
                                 </label>
                             </div>
                         </div>
+
                         <div className="mt-2">
                             <label
                                 htmlFor="location"
@@ -359,7 +402,7 @@ const AddListPage = () => {
                             <textarea
                                 id="description"
                                 name="description"
-                                className="border-2 border-gray-500 rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-600 text-gray-800 resize-none"
+                                className="border-2 border-gray-500 rounded w-full py-3 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-600 text-gray-800 resize-none"
                                 placeholder="Enter property description..."
                                 value={formData.description}
                                 onChange={handleInputChange}
@@ -453,7 +496,7 @@ const AddListPage = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="mt-4">
+                            {/* <div className="mt-4">
                                 <h2>Guest</h2>
                                 <div className="mt-1 flex justify-between text-gray-800">
                                     <p>Capacity of guests</p>
@@ -477,7 +520,7 @@ const AddListPage = () => {
                                         </button>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                         <div>
                             {/* <div>
@@ -530,7 +573,9 @@ const AddListPage = () => {
                                 </div>
                             </div> */}
                             <div>
-                                <h2 className="mt-6">Property documents</h2>
+                                <h2 className="mt-6">
+                                    Property documents (as image)
+                                </h2>
                                 <div className="grid lg:grid-cols-3 gap-3 grid-cols-2 mt-2">
                                     {documents.map((doc, index) => (
                                         <div key={index} className={`relative`}>
@@ -558,7 +603,7 @@ const AddListPage = () => {
                                                 size={25}
                                                 className="mr-1 font-semibold text-primary"
                                             />
-                                            <span>Upload documents</span>
+                                            <span>Upload documents </span>
                                             <input
                                                 type="file"
                                                 id="document-file"
@@ -599,19 +644,21 @@ const AddListPage = () => {
                                 </div>
                             ) : (
                                 <p className="text-red-500">
-                                    No images. Please select some image.
+                                    No images. Please select at least 4 image.
                                 </p>
                             )}
                         </div>
 
                         <div>
                             <h2 className=" mb-4">
-                                Property category : {formData.category}
+                                Property category :{" "}
+                                {formData.category || "none"}
                             </h2>
                             <h2 className="md:text-2xl text-xl mb-2">
                                 Property title : {formData.title}
                             </h2>
                             <div className="flex space-x-3 space-y-3 flex-wrap items-center mb-2">
+                                <button className="bg-gray-300  rounded-lg px-2 py-1 hidden"></button>
                                 <button className="bg-gray-300  rounded-lg px-2 py-1">
                                     {bedrooms} bedrooms
                                 </button>
@@ -682,7 +729,7 @@ const AddListPage = () => {
 
                             <div className="my-3">
                                 <b> What this place offers</b>
-                                {aminites.length ? (
+                                {selectedAmenities?.length ? (
                                     <div className="flex space-x-3 space-y-3 flex-wrap items-center">
                                         {aminites.map((aminite) => (
                                             <>
@@ -693,13 +740,16 @@ const AddListPage = () => {
                                         ))}
                                     </div>
                                 ) : (
-                                    <button className="bg-gray-300  rounded-lg px-2 py-1">
-                                        Nothing
-                                    </button>
+                                    <>
+                                        <br />
+                                        <button className="bg-gray-300  rounded-lg mt-2 px-2 py-1">
+                                            Nothing
+                                        </button>
+                                    </>
                                 )}
                             </div>
 
-                            <div className="mb-3">
+                            <div className="my-3 mt-6">
                                 <b>Property documents</b>
                                 {documents.length > 0 ? (
                                     <div className="grid md:grid-cols-2 gap-6 pt-2">
@@ -707,7 +757,7 @@ const AddListPage = () => {
                                             <Image
                                                 key={i}
                                                 src={docs.preview}
-                                                className={`w-full rounded-md object-center object-contain `}
+                                                className={`w-full md:h-[300px]  rounded-md object-center object-cover h-[170px] `}
                                                 height={200}
                                                 width={200}
                                                 alt={"proterty image"}
