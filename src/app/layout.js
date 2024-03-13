@@ -1,12 +1,12 @@
-import {Poppins} from "next/font/google";
 import "./globals.css";
+import {Montserrat} from "next/font/google";
 import Navbar from "./components/Navber/Navbar";
 import Footer from "./components/Footer/Footer";
 import {Toaster} from "react-hot-toast";
 import {AuthProvider} from "@/context/AuthProvider/AuthProvider";
 import {ReduxProvider} from "@/provider/ReduxProvider";
 
-const inter = Poppins({subsets: ["latin"], weight: "400"});
+const inter = Montserrat({subsets: ["latin"], weight: "500"});
 
 export const metadata = {
     title: "Snugstaff",

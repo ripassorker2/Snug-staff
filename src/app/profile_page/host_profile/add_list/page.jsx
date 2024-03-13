@@ -297,16 +297,20 @@ const AddListPage = () => {
                                 <p>Capacity of guests</p>
                                 <div>
                                     <button
+                                        type="button"
                                         className="bg-secondary p-2 rounded-full text-gray-200 w-6 h-6 inline-flex items-center justify-center mr-2"
                                         onClick={() =>
                                             handleDecrement(setGuests)
                                         }>
                                         -
                                     </button>
-                                    <button className="px-2 text-lg">
+                                    <button
+                                        type="button"
+                                        className="px-2 text-lg">
                                         {guests}
                                     </button>
                                     <button
+                                        type="button"
                                         className="bg-secondary p-2 rounded-full text-gray-200 w-6 h-6 inline-flex items-center justify-center ml-2"
                                         onClick={() =>
                                             handleIncrement(setGuests)
@@ -447,16 +451,20 @@ const AddListPage = () => {
                                     </p>
                                     <div>
                                         <button
+                                            type="button"
                                             className="bg-secondary p-2 rounded-full text-gray-200 w-6 h-6 inline-flex items-center justify-center mr-2"
                                             onClick={() =>
                                                 handleDecrement(setBedrooms)
                                             }>
                                             -
                                         </button>
-                                        <button className="px-2 text-lg">
+                                        <button
+                                            type="button"
+                                            className="px-2 text-lg">
                                             {bedrooms}
                                         </button>
                                         <button
+                                            type="button"
                                             className="bg-secondary p-2 rounded-full text-gray-200 w-6 h-6 inline-flex items-center justify-center ml-2"
                                             onClick={() =>
                                                 handleIncrement(setBedrooms)
@@ -477,16 +485,20 @@ const AddListPage = () => {
                                     </p>
                                     <div>
                                         <button
+                                            type="button"
                                             className="bg-secondary p-2 rounded-full text-gray-200 w-6 h-6 inline-flex items-center justify-center mr-2"
                                             onClick={() =>
                                                 handleDecrement(setBathrooms)
                                             }>
                                             -
                                         </button>
-                                        <button className="px-2 text-lg">
+                                        <button
+                                            type="button"
+                                            className="px-2 text-lg">
                                             {bathrooms}
                                         </button>
                                         <button
+                                            type="button"
                                             className="bg-secondary p-2 rounded-full text-gray-200 w-6 h-6 inline-flex items-center justify-center ml-2"
                                             onClick={() =>
                                                 handleIncrement(setBathrooms)
