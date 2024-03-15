@@ -23,10 +23,11 @@ const HostRegister = () => {
     const [activeStep, setActiveStep] = useState(0);
     const [isLastStep, setIsLastStep] = useState(false);
     const [isFirstStep, setIsFirstStep] = useState(false);
-    const [file, setFile] = useState(null);
 
     const handleNext = () => !isLastStep && setActiveStep((cur) => cur + 1);
     const handlePrev = () => !isFirstStep && setActiveStep((cur) => cur - 1);
+
+    const [file, setFile] = useState("");
 
     const [inputData, setInputData] = useState({
         username: "",
@@ -67,53 +68,49 @@ const HostRegister = () => {
             return toast.error("Passwords do not match.");
 
         setLoading(true);
+
         const formData = new FormData();
-        formData.append("file", file);
+        if (file) formData.append("host_profile.profile_pic", file);
 
-        console.log(formData?.get("file"));
+        // Append all other form data to formData
+        formData.append("username", inputData.username);
+        formData.append("email", inputData.email);
+        formData.append("password", inputData.password);
+        formData.append("confirm_password", inputData.confirm_password);
 
-        const host_data = {
-            username: inputData.username,
-            email: inputData.email,
-            password: inputData.password,
-            confirm_password: inputData.confirm_password,
-            host_profile: {
-                full_name: inputData.full_name,
-                address_line1: inputData.address_line1,
-                address_line_2: inputData.address_line_2,
-                city: inputData.city,
-                county: inputData.county,
-                post_code: inputData.post_code,
-                company_name: inputData.company_name,
-                Company_house_registration_number:
-                    inputData?.Company_house_registration_number,
-                Vat_number: inputData.Vat_number,
-                mobile: inputData.mobile,
-                // profile_pic: formData?.get("file"),
-            },
-        };
-        // console.log(host_data);
+        // Append host_profile data
+        formData.append("host_profile.full_name", inputData.full_name);
+        formData.append("host_profile.address_line1", inputData.address_line1);
+        formData.append(
+            "host_profile.address_line_2",
+            inputData.address_line_2
+        );
+        formData.append("host_profile.city", inputData.city);
+        formData.append("host_profile.county", inputData.county);
+        formData.append("host_profile.post_code", inputData.post_code);
+        formData.append("host_profile.company_name", inputData.company_name);
+        formData.append(
+            "host_profile.Company_house_registration_number",
+            inputData.Company_house_registration_number
+        );
+        formData.append("host_profile.Vat_number", inputData.Vat_number);
+        formData.append("host_profile.mobile", inputData.mobile);
+
         try {
             const response = await fetch(
                 `${config.base_url}/host-registration/`,
                 {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(host_data),
+                    body: formData,
                 }
             );
             const data = await response.json();
-            console.log(data);
             setLoading(false);
             if (data.success) {
                 toast.success("Account created successfully.");
                 router.push("/authtentication/login");
             } else {
-                toast.error(
-                    data?.username || data?.email || "Something went wrong"
-                );
+                toast.error("Something went wrong");
             }
         } catch (error) {
             setLoading(false);
@@ -126,6 +123,7 @@ const HostRegister = () => {
         <div className="container">
             <form
                 onSubmit={handleSubmit}
+                encType="multipart/form-data"
                 className={`bg-blue-gray-50 mx-auto rounded-md md:p-8 p-5 md:mt-10 mt-8 md:max-w-4xl`}>
                 <Stepper
                     className="mb-3"

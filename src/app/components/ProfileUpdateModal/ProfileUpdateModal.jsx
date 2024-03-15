@@ -12,11 +12,12 @@ import avatar from "../../../assets/blank-profile-picture-973460_1280.png";
 import {useUpdateProfileMutation} from "@/redux/api/utilsApiSlice";
 import {useUserContext} from "@/context/AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
+import SmallLoader from "../SmallLoader/SmallLoader";
 
 const ProfileUpdateModal = ({openModal, setOpenModal}) => {
-    const {user, token, refetch, setRefetch} = useUserContext();
+    const {user, refetch, setRefetch} = useUserContext();
     const [file, setFile] = useState(null);
-    const [updateProfile, {isSuccess}] = useUpdateProfileMutation();
+    const [updateProfile, {isSuccess, isLoading}] = useUpdateProfileMutation();
 
     useEffect(() => {
         if (isSuccess) {
@@ -29,39 +30,34 @@ const ProfileUpdateModal = ({openModal, setOpenModal}) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const form = event.target;
-        // const formData = new FormData(file);
-        // formData.append("file", file);
+        const formData = new FormData();
 
-        if (user?.role == "host") {
-            const data = {
-                full_name: form.full_name.value,
-                mobile: form.mobile.value,
-                address_line1: form.address_line1.value,
-                address_line_2: form.address_line_2.value,
-                city: form.city.value,
-                county: form.county.value,
-                post_code: form.post_code.value,
-                // profile_pic:
-            };
-            updateProfile({data, id: user?.id, token});
-        } else if (user?.role == "user") {
-            const data = {
-                phone: form.phone.value,
-                address_line1: form.address_line1.value,
-                address_line_2: form.address_line_2.value,
-                city: form.city.value,
-                street: form.street.value,
-                county: form.county.value,
-                post_code: form.post_code.value,
-                // profile_pic:
-            };
-            updateProfile({data, id: user?.id, token});
+        if (user?.role === "host") {
+            formData.append("full_name", form.full_name.value);
+            formData.append("mobile", form.mobile.value);
+            formData.append("address_line1", form.address_line1.value);
+            formData.append("address_line_2", form.address_line_2.value);
+            formData.append("city", form.city.value);
+            formData.append("county", form.county.value);
+            formData.append("post_code", form.post_code.value);
+        } else if (user?.role === "user") {
+            formData.append("phone", form.phone.value);
+            formData.append("address_line1", form.address_line1.value);
+            formData.append("address_line_2", form.address_line_2.value);
+            formData.append("city", form.city.value);
+            formData.append("street", form.street.value);
+            formData.append("county", form.county.value);
+            formData.append("post_code", form.post_code.value);
         }
+        if (file) formData.append("profile_pic", file);
+
+        updateProfile({formData, id: user?.id});
     };
+
     return (
         <>
             <Dialog open={openModal} size="lg" className="md:p-4 ">
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} encType="multipart/form-data">
                     <div className="flex justify-between items-center">
                         <DialogHeader>Update profile</DialogHeader>
                         <div className="mr-2">
@@ -100,13 +96,15 @@ const ProfileUpdateModal = ({openModal, setOpenModal}) => {
                                     <label htmlFor="file" className="relative">
                                         <Image
                                             src={user?.profile_pic || avatar}
+                                            height={100}
+                                            width={100}
                                             className="h-24 bg-contain w-24 rounded-full"
                                             alt="profile"
                                         />
 
                                         <input
                                             type="file"
-                                            name="profileImg"
+                                            name="file"
                                             id="file"
                                             accept=".png,.jpg,.jpeg"
                                             className="hidden"
@@ -258,8 +256,11 @@ const ProfileUpdateModal = ({openModal, setOpenModal}) => {
                         </div>
                     </DialogBody>
                     <DialogFooter>
-                        <button className="btn-secondary" type="submit">
-                            Submit
+                        <button
+                            disabled={isLoading}
+                            className="btn-secondary"
+                            type="submit">
+                            {isLoading ? <SmallLoader /> : " Submit"}
                         </button>
                     </DialogFooter>
                 </form>

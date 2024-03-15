@@ -23,10 +23,7 @@ const AddListPage = () => {
 
     const {data: categories} = useGetPropertiesCategoryQuery();
     const {data: aminites} = useGetPropertiesAminityQuery();
-    // const [uploadProperty, {}] = useUpdateProfileMutation();\
-
     const [images, setImages] = useState([]);
-    const [documents, setDocuments] = useState([]);
     const [selectedAmenities, setSelectedAmenities] = useState([]);
 
     const handleCheckboxChange = (e, name) => {
@@ -54,25 +51,8 @@ const AddListPage = () => {
         }
     };
 
-    const handleDocumentChange = (event) => {
-        const selectedFile = event.target.files[0];
-        if (selectedFile) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                setDocuments([
-                    ...documents,
-                    {file: selectedFile, preview: e.target.result},
-                ]);
-            };
-            reader.readAsDataURL(selectedFile);
-        }
-    };
-
     const handleRemoveImage = (index) => {
         setImages(images.filter((_, i) => i !== index));
-    };
-    const handleRemoveDocument = (index) => {
-        setDocuments(documents.filter((_, i) => i !== index));
     };
 
     const [bedrooms, setBedrooms] = useState(0);
@@ -117,9 +97,6 @@ const AddListPage = () => {
         if (images.length < 4)
             return toast.error("Please upload at least 4 images.");
 
-        if (documents.length < 1)
-            return toast.error("Please upload at least 1 document.");
-
         if (
             !formData.category ||
             !formData.title ||
@@ -135,11 +112,6 @@ const AddListPage = () => {
         const imagesData = new FormData();
         images.forEach((image, index) => {
             imagesData.append(`image${index}`, image.file);
-        });
-
-        const doscData = new FormData();
-        documents.forEach((docs, index) => {
-            doscData.append(`docs${index}`, docs.file);
         });
 
         const propertiesData = {
@@ -159,9 +131,6 @@ const AddListPage = () => {
             guest: guests,
             parking,
             aminites: selectedAmenities.map((name) => ({name})),
-            property_document: Array.from(doscData?.entries()).map(
-                ([key, value]) => ({document: value})
-            ),
         };
 
         console.log(propertiesData);
@@ -182,7 +151,7 @@ const AddListPage = () => {
                     <div className="grid lg:grid-cols-2 gap-x-10 gap-y-3">
                         <div className="lg:col-span-2">
                             <h2 className="my-2">Property images</h2>
-                            <div className="grid md:grid-cols-3 gap-3 grid-cols-2 ">
+                            <div className="grid md:grid-cols-3 gap-3 grid-cols-2">
                                 {images.map((image, index) => (
                                     <div
                                         key={index}
@@ -209,12 +178,12 @@ const AddListPage = () => {
                                         />
                                     </div>
                                 ))}
-                                <div>
+                                <div className="m-auto md:col-span-3">
                                     <label
                                         htmlFor="image-file"
-                                        className="cursor-pointer border border-gray-400 md:p-10 p-5 flex flex-col rounded-md items-center text-center col-span-1 md:h-[160px]">
+                                        className="cursor-pointer  border border-gray-400 md:p-10 p-5 flex flex-col rounded-md items-center text-center col-span-1 md:h-[160px]">
                                         <IoCloudUploadOutline
-                                            size={25}
+                                            size={35}
                                             className="mr-1 font-semibold text-primary"
                                         />
                                         <span>
@@ -508,125 +477,6 @@ const AddListPage = () => {
                                     </div>
                                 </div>
                             </div>
-                            {/* <div className="mt-4">
-                                <h2>Guest</h2>
-                                <div className="mt-1 flex justify-between text-gray-800">
-                                    <p>Capacity of guests</p>
-                                    <div>
-                                        <button
-                                            className="bg-secondary p-2 rounded-full text-gray-200 w-6 h-6 inline-flex items-center justify-center mr-2"
-                                            onClick={() =>
-                                                handleDecrement(setGuests)
-                                            }>
-                                            -
-                                        </button>
-                                        <button className="px-2 text-lg">
-                                            {guests}
-                                        </button>
-                                        <button
-                                            className="bg-secondary p-2 rounded-full text-gray-200 w-6 h-6 inline-flex items-center justify-center ml-2"
-                                            onClick={() =>
-                                                handleIncrement(setGuests)
-                                            }>
-                                            +
-                                        </button>
-                                    </div>
-                                </div>
-                            </div> */}
-                        </div>
-                        <div>
-                            {/* <div>
-                                <h2 className="my-2">Property images</h2>
-                                <div className="grid lg:grid-cols-3 gap-3 grid-cols-2">
-                                    {images.map((image, index) => (
-                                        <div
-                                            key={index}
-                                            className={`relative ${
-                                                index == 0 && " col-span-3"
-                                            }`}>
-                                            <Image
-                                                src={image.preview}
-                                                alt={`Preview ${index}`}
-                                                height={200}
-                                                width={200}
-                                                className={`rounded-md object-cover  object-center w-full ${
-                                                    index == 0
-                                                        ? "h-[250px]  "
-                                                        : "h-[140px]"
-                                                }`}
-                                            />
-                                            <MdOutlineCancel
-                                                size={22}
-                                                onClick={() =>
-                                                    handleRemoveImage(index)
-                                                }
-                                                className="absolute top-2 right-2 rounded-full text-gray-900 cursor-pointer"
-                                            />
-                                        </div>
-                                    ))}
-                                    <div>
-                                        <label
-                                            htmlFor="image-file"
-                                            className="cursor-pointer border border-gray-400 p-8 flex flex-col rounded-md items-center text-center col-span-1">
-                                            <IoCloudUploadOutline
-                                                size={25}
-                                                className="mr-1 font-semibold text-primary"
-                                            />
-                                            <span>Upload images</span>
-                                            <input
-                                                type="file"
-                                                id="image-file"
-                                                accept=".png,.jpg,.jpeg,.pdf,.webp"
-                                                className="hidden"
-                                                onChange={handleImageChange}
-                                            />
-                                        </label>
-                                    </div>
-                                </div>
-                            </div> */}
-                            <div>
-                                <h2 className="mt-6">
-                                    Property documents (as image)
-                                </h2>
-                                <div className="grid lg:grid-cols-3 gap-3 grid-cols-2 mt-2">
-                                    {documents.map((doc, index) => (
-                                        <div key={index} className={`relative`}>
-                                            <Image
-                                                src={doc.preview}
-                                                alt={`Preview ${index}`}
-                                                width={200}
-                                                height={200}
-                                                className={`rounded-md object-cover object-center w-full h-[140px]`}
-                                            />
-                                            <MdOutlineCancel
-                                                size={22}
-                                                onClick={() =>
-                                                    handleRemoveDocument(index)
-                                                }
-                                                className="absolute top-2 right-2 rounded-full text-gray-900 cursor-pointer"
-                                            />
-                                        </div>
-                                    ))}
-                                    <div>
-                                        <label
-                                            htmlFor="document-file"
-                                            className=" cursor-pointer border border-gray-400 p-8 flex flex-col rounded-md items-center text-center col-span-1">
-                                            <IoCloudUploadOutline
-                                                size={25}
-                                                className="mr-1 font-semibold text-primary"
-                                            />
-                                            <span>Upload documents </span>
-                                            <input
-                                                type="file"
-                                                id="document-file"
-                                                accept=".png,.jpg,.jpeg,.pdf,.webp"
-                                                className="hidden"
-                                                onChange={handleDocumentChange}
-                                            />
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 )}
@@ -758,28 +608,6 @@ const AddListPage = () => {
                                             Nothing
                                         </button>
                                     </>
-                                )}
-                            </div>
-
-                            <div className="my-3 mt-6">
-                                <b>Property documents</b>
-                                {documents.length > 0 ? (
-                                    <div className="grid md:grid-cols-2 gap-6 pt-2">
-                                        {documents?.map((docs, i) => (
-                                            <Image
-                                                key={i}
-                                                src={docs.preview}
-                                                className={`w-full md:h-[300px]  rounded-md object-center object-cover h-[170px] `}
-                                                height={200}
-                                                width={200}
-                                                alt={"proterty image"}
-                                            />
-                                        ))}
-                                    </div>
-                                ) : (
-                                    <p className="text-red-500">
-                                        No documents. Please select some image.
-                                    </p>
                                 )}
                             </div>
                         </div>

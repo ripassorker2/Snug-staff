@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    images: {
+        domains: ["codecommerze.com"],
+    },
     env: {
         BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
     },

@@ -17,6 +17,8 @@ const HostProfilePage = () => {
                     {user?.profile_pic ? (
                         <Image
                             src={user?.profile_pic}
+                            width={200}
+                            height={150}
                             className="w-28 h-28 bg-contain rounded-full"
                             alt="avatar"
                         />

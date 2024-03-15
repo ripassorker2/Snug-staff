@@ -3,13 +3,14 @@ import {api} from "./apiSlice";
 const utilsApiSlices = api.injectEndpoints({
     endpoints: (builder) => ({
         updateProfile: builder.mutation({
-            query: ({data, id, token}) => ({
+            query: ({formData, id}) => ({
                 url: `user-profile/${id}/`,
                 method: "PATCH",
-                body: data,
+                body: formData,
                 headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem(
+                        "snugstuff_access_token" || ""
+                    )}`,
                 },
             }),
         }),
