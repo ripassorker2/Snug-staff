@@ -8,7 +8,7 @@ const IsLogged = ({children}) => {
     const router = useRouter();
     useEffect(() => {
         if (!user) router.push("/authtentication/login");
-    }, [user]);
+    }, [user, router]);
     if (user) return children;
 };
 

@@ -7,9 +7,11 @@ const Step1 = ({
     images,
     formData,
     categories,
+    parking,
     handleRemoveImage,
     handleImageChange,
     handleInputChange,
+    handleParkingChange,
 }) => {
     return (
         <div className="lg:grid lg:grid-cols-2  gap-x-10 gap-y-3">
@@ -116,7 +118,7 @@ const Step1 = ({
                     required
                 />
             </div>
-            <div className="mt-4 col-span-2">
+            {/* <div className="mt-4 col-span-2">
                 <h2>Guest</h2>
                 <div className="mt-1 flex justify-between text-gray-800">
                     <p>Capacity of guests</p>
@@ -138,22 +140,7 @@ const Step1 = ({
                         </button>
                     </div>
                 </div>
-            </div>
-            <div className="mt-2 lg:col-span-2">
-                <label htmlFor="area" className="block text-base mb-1">
-                    Property total area
-                </label>
-                <input
-                    type="number"
-                    id="area"
-                    name="area"
-                    className="input-feild"
-                    placeholder="Enter total property area..."
-                    value={formData.area}
-                    onChange={handleInputChange}
-                    required
-                />
-            </div>
+            </div> */}
             <div className="mt-2 col-span-2">
                 <h2 className="mb-2 text-base">Parking area</h2>
                 <div className="flex space-x-6 mt-2">
@@ -179,6 +166,46 @@ const Step1 = ({
                     </label>
                 </div>
             </div>
+            <div className="mt-2 lg:col-span-2">
+                <label htmlFor="area" className="block text-base mb-1">
+                    Property total area
+                </label>
+                <input
+                    type="number"
+                    id="area"
+                    name="area"
+                    className="input-feild"
+                    placeholder="Enter total property area..."
+                    value={formData.area}
+                    onChange={handleInputChange}
+                    required
+                />
+            </div>
+            {/* <div className="mt-2 col-span-2">
+                <h2 className="mb-2 text-base">Parking area</h2>
+                <div className="flex space-x-6 mt-2">
+                    <label className="flex items-center space-x-2 text-gray-700">
+                        <input
+                            type="radio"
+                            name="parking"
+                            value={true}
+                            checked={parking === true}
+                            onChange={handleParkingChange}
+                        />
+                        <p>Yes</p>
+                    </label>
+                    <label className="flex items-center space-x-2 text-gray-700">
+                        <input
+                            type="radio"
+                            name="parking"
+                            value={false}
+                            checked={parking === false}
+                            onChange={handleParkingChange}
+                        />
+                        <p>No</p>
+                    </label>
+                </div>
+            </div> */}
             <div className="mt-2">
                 <label htmlFor="location" className="block text-base mb-1">
                     Property location
