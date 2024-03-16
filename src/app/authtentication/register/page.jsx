@@ -89,7 +89,7 @@ const RegisterPage = () => {
                                 Username
                             </label>
                             <input
-                                className=" border-2 border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                className="input-feild"
                                 id="username"
                                 type="username"
                                 name="username"
@@ -109,7 +109,7 @@ const RegisterPage = () => {
                                 Email Address
                             </label>
                             <input
-                                className=" border-2 border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                className="input-feild"
                                 id="email"
                                 type="email"
                                 placeholder="Enter email..."
@@ -127,7 +127,7 @@ const RegisterPage = () => {
                                 Password
                             </label>
                             <input
-                                className=" border-2 border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                className="input-feild"
                                 id="password"
                                 type="password"
                                 name="password"
@@ -147,7 +147,7 @@ const RegisterPage = () => {
                                 Confirm Password
                             </label>
                             <input
-                                className=" border-2 border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                className="input-feild"
                                 id="confirm_password"
                                 type="password"
                                 name="confirm_password"

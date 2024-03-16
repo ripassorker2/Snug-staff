@@ -93,7 +93,7 @@ const LoginPage = () => {
                                 Email Address
                             </label>
                             <input
-                                className=" border-2 border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                className="input-feild"
                                 id="email"
                                 type="email"
                                 placeholder="Enter email..."
@@ -110,7 +110,7 @@ const LoginPage = () => {
                                 Password
                             </label>
                             <input
-                                className=" border-2 border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                className="input-feild"
                                 id="password"
                                 type="password"
                                 placeholder="Enter password..."

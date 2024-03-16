@@ -3,14 +3,17 @@
 import {
     useGetPropertiesAminityQuery,
     useGetPropertiesCategoryQuery,
+    useUploadPropertyMutation,
 } from "@/redux/api/propertyApi";
 import {Checkbox, Step, Stepper} from "@material-tailwind/react";
 import Image from "next/image";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {MdOutlineCancel} from "react-icons/md";
 import {IoCloudUploadOutline} from "react-icons/io5";
 import {useUserContext} from "@/context/AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
+import SmallLoader from "@/app/components/SmallLoader/SmallLoader";
+import {useRouter} from "next/navigation";
 
 const AddListPage = () => {
     const [activeStep, setActiveStep] = useState(0);
@@ -23,6 +26,8 @@ const AddListPage = () => {
 
     const {data: categories} = useGetPropertiesCategoryQuery();
     const {data: aminites} = useGetPropertiesAminityQuery();
+    const [uploadPropety, {isLoading, isSuccess, isError}] =
+        useUploadPropertyMutation();
     const [images, setImages] = useState([]);
     const [selectedAmenities, setSelectedAmenities] = useState([]);
 
@@ -91,11 +96,26 @@ const AddListPage = () => {
         });
     };
 
+    const router = useRouter();
+
+    useEffect(() => {
+        if (isSuccess) {
+            router.push("/profile_page/host_profile/my_lists");
+            return toast.success("Property added successfully");
+        }
+    }, [isSuccess]);
+
+    useEffect(() => {
+        if (isError) {
+            toast.error("Something went wrong. Please try again");
+        }
+    }, [isError]);
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (images.length < 4)
-            return toast.error("Please upload at least 4 images.");
+        if (images.length < 3)
+            return toast.error("Please upload at least 3 images.");
 
         if (
             !formData.category ||
@@ -109,31 +129,33 @@ const AddListPage = () => {
             return toast.error("Please fill out all required fields.");
         }
 
-        const imagesData = new FormData();
+        const propertyFormData = new FormData();
+
         images.forEach((image, index) => {
-            imagesData.append(`image${index}`, image.file);
+            propertyFormData.append(`upload_image`, image.file);
+        });
+        selectedAmenities.forEach((iminity, index) => {
+            propertyFormData.append(`amenities_list`, iminity);
         });
 
-        const propertiesData = {
-            author: user?.id,
-            category: formData?.category,
-            title: formData?.title,
-            area: formData?.area,
-            price: formData?.price,
-            location: formData?.location,
-            short_description: formData?.short_description,
-            description: formData.description,
-            property_images: Array.from(imagesData?.entries()).map(
-                ([key, value]) => ({image: value})
-            ),
-            bed_room: bedrooms,
-            bath_room: bathrooms,
-            guest: guests,
-            parking,
-            aminites: selectedAmenities.map((name) => ({name})),
-        };
+        propertyFormData.append("author", user.id);
+        propertyFormData.append("category_id", formData.category);
+        propertyFormData.append("title", formData.title);
+        propertyFormData.append("area", formData.area);
+        propertyFormData.append("price", formData.price);
+        propertyFormData.append("location", formData.location);
+        propertyFormData.append(
+            "short_description",
+            formData.short_description
+        );
+        propertyFormData.append("description", formData.description);
 
-        console.log(propertiesData);
+        propertyFormData.append("bed_room", bedrooms);
+        propertyFormData.append("bath_room", bathrooms);
+        propertyFormData.append("guest", guests);
+        propertyFormData.append("parking", parking);
+
+        uploadPropety(propertyFormData);
     };
 
     return (
@@ -148,7 +170,7 @@ const AddListPage = () => {
             </Stepper>
             <div className="mt-5">
                 {activeStep === 0 && (
-                    <div className="grid lg:grid-cols-2 gap-x-10 gap-y-3">
+                    <div className="lg:grid lg:grid-cols-2  gap-x-10 gap-y-3">
                         <div className="lg:col-span-2">
                             <h2 className="my-2">Property images</h2>
                             <div className="grid md:grid-cols-3 gap-3 grid-cols-2">
@@ -156,17 +178,19 @@ const AddListPage = () => {
                                     <div
                                         key={index}
                                         className={`relative ${
-                                            index == 0 ? "md:col-span-3" : ""
+                                            index == 0
+                                                ? "md:col-span-3 col-span-2"
+                                                : ""
                                         }`}>
                                         <Image
                                             src={image.preview}
                                             alt={`Preview ${index}`}
                                             height={200}
                                             width={200}
-                                            className={`rounded-md h-[130px] object-cover object-center w-full ${
+                                            className={`rounded-md object-cover object-center w-full ${
                                                 index == 0
-                                                    ? "md:h-[350px] "
-                                                    : "md:h-[160px]"
+                                                    ? "md:h-[350px] h-[230px]  "
+                                                    : "md:h-[160px] h-[130px] "
                                             }`}
                                         />
                                         <MdOutlineCancel
@@ -178,7 +202,10 @@ const AddListPage = () => {
                                         />
                                     </div>
                                 ))}
-                                <div className="m-auto md:col-span-3">
+                                <div
+                                    className={` ${
+                                        !images.length && "md:col-span-3"
+                                    }`}>
                                     <label
                                         htmlFor="image-file"
                                         className="cursor-pointer  border border-gray-400 md:p-10 p-5 flex flex-col rounded-md items-center text-center col-span-1 md:h-[160px]">
@@ -210,17 +237,16 @@ const AddListPage = () => {
                                 Property category
                             </label>
                             <select
-                                className="border-2 border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-600 text-gray-800"
+                                className="input-feild"
                                 id="category"
                                 name="category"
                                 value={formData.category}
-                                onChange={handleInputChange}
-                                required>
+                                onChange={handleInputChange}>
                                 <option value="" disabled>
                                     Select one category ...
                                 </option>
                                 {categories?.map((category, index) => (
-                                    <option key={index} value={category.title}>
+                                    <option key={index} value={category.id}>
                                         {category.title}
                                     </option>
                                 ))}
@@ -236,7 +262,7 @@ const AddListPage = () => {
                                 type="text"
                                 id="title"
                                 name="title"
-                                className="border-2 border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-600 text-gray-800"
+                                className="input-feild"
                                 placeholder="Enter property title ..."
                                 value={formData.title}
                                 onChange={handleInputChange}
@@ -253,7 +279,7 @@ const AddListPage = () => {
                                 type="number"
                                 id="price"
                                 name="price"
-                                className="border-2 border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-600 text-gray-800"
+                                className="input-feild"
                                 placeholder="Enter property price..."
                                 value={formData.price}
                                 onChange={handleInputChange}
@@ -299,7 +325,7 @@ const AddListPage = () => {
                                 type="number"
                                 id="area"
                                 name="area"
-                                className="border-2 border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-600 text-gray-800"
+                                className="input-feild"
                                 placeholder="Enter total property area..."
                                 value={formData.area}
                                 onChange={handleInputChange}
@@ -331,7 +357,6 @@ const AddListPage = () => {
                                 </label>
                             </div>
                         </div>
-
                         <div className="mt-2">
                             <label
                                 htmlFor="location"
@@ -342,7 +367,7 @@ const AddListPage = () => {
                                 type="text"
                                 id="location"
                                 name="location"
-                                className="border-2 border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-600 text-gray-800"
+                                className="input-feild"
                                 placeholder="Enter property location..."
                                 value={formData.location}
                                 onChange={handleInputChange}
@@ -359,7 +384,7 @@ const AddListPage = () => {
                                 type="text"
                                 id="short_description"
                                 name="short_description"
-                                className="border-2 border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-600 text-gray-800 resize-none h-11"
+                                className="input-feild resize-none h-11"
                                 placeholder="Enter property short description..."
                                 value={formData.short_description}
                                 onChange={handleInputChange}
@@ -395,19 +420,18 @@ const AddListPage = () => {
                                         key={index}
                                         label={aminities.name}
                                         checked={selectedAmenities.includes(
-                                            aminities.name
+                                            aminities.id
                                         )}
                                         onChange={(e) =>
                                             handleCheckboxChange(
                                                 e,
-                                                aminities.name
+                                                aminities.id
                                             )
                                         }
                                     />
                                 ))}
                             </div>
                         </div>
-                        {/* parking , bedroom , bathrooms , guest */}
                         <div>
                             <div className="mt-4">
                                 <h2>Bedroom</h2>
@@ -593,6 +617,7 @@ const AddListPage = () => {
                                 <b> What this place offers</b>
                                 {selectedAmenities?.length ? (
                                     <div className="flex space-x-3 space-y-3 flex-wrap items-center">
+                                        <button className="hidden"></button>
                                         {aminites.map((aminite) => (
                                             <>
                                                 <button className="bg-gray-300  rounded-lg px-2 py-1">
@@ -631,8 +656,11 @@ const AddListPage = () => {
                     Next
                 </div>
                 {activeStep === 2 && (
-                    <button type="submit" className={`btn-secondary`}>
-                        Submit
+                    <button
+                        disabled={isLoading}
+                        type="submit"
+                        className={`btn-secondary`}>
+                        {isLoading ? <SmallLoader /> : "Submit"}
                     </button>
                 )}
             </div>

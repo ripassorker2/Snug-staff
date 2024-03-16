@@ -141,7 +141,7 @@ const HostRegister = () => {
                                     Full name
                                 </label>
                                 <input
-                                    className="border-2 border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                    className="input-feild"
                                     id="full_name"
                                     type="text"
                                     name="full_name"
@@ -155,7 +155,7 @@ const HostRegister = () => {
                                     Company Name
                                 </label>
                                 <input
-                                    className="border-2 border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                    className="input-feild"
                                     id="company_name"
                                     type="text"
                                     name="company_name"
@@ -169,7 +169,7 @@ const HostRegister = () => {
                                     Company house registration number
                                 </label>
                                 <input
-                                    className="border-2 border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                    className="input-feild"
                                     id="Company_house_registration_number"
                                     type="text"
                                     name="Company_house_registration_number"
@@ -185,7 +185,7 @@ const HostRegister = () => {
                                     VAT number(optional)
                                 </label>
                                 <input
-                                    className="border-2 border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                    className="input-feild"
                                     id="Vat_number"
                                     type="text"
                                     name="Vat_number"
@@ -199,7 +199,7 @@ const HostRegister = () => {
                                     Mobile number
                                 </label>
                                 <input
-                                    className="border-2 border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                    className="input-feild"
                                     id="mobile"
                                     type="text"
                                     name="mobile"
@@ -213,7 +213,7 @@ const HostRegister = () => {
                                     Address line 1
                                 </label>
                                 <input
-                                    className="border-2 border-gray-500 rounded w-full py-2.5 px-3 mr-2 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                    className="input-feild"
                                     id="address_line1"
                                     type="text"
                                     name="address_line1"
@@ -227,7 +227,7 @@ const HostRegister = () => {
                                     Address line 2
                                 </label>
                                 <input
-                                    className="border-2 border-gray-500 rounded w-full py-2.5 px-3 mr-2 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                    className="input-feild"
                                     id="address_line_2"
                                     type="text"
                                     name="address_line_2"
@@ -242,7 +242,7 @@ const HostRegister = () => {
                                     City
                                 </label>
                                 <input
-                                    className="border-2 border-gray-500 rounded w-full py-2.5 px-3 mr-2 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                    className="input-feild"
                                     id="city"
                                     type="text"
                                     name="city"
@@ -256,7 +256,7 @@ const HostRegister = () => {
                                     County
                                 </label>
                                 <input
-                                    className="border-2 border-gray-500 rounded w-full py-2.5 px-3 mr-2 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                    className="input-feild"
                                     id="county"
                                     type="text"
                                     name="county"
@@ -271,7 +271,7 @@ const HostRegister = () => {
                                     Postcode
                                 </label>
                                 <input
-                                    className="border-2 border-gray-500 rounded w-full py-2.5 px-3 mr-2 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                    className="input-feild"
                                     id="post_code"
                                     type="text"
                                     name="post_code"
@@ -340,7 +340,7 @@ const HostRegister = () => {
                                         Username
                                     </label>
                                     <input
-                                        className="border-2 border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                        className="input-feild"
                                         id="username"
                                         type="text"
                                         name="username"
@@ -355,7 +355,7 @@ const HostRegister = () => {
                                         Email Address
                                     </label>
                                     <input
-                                        className="border-2 border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                        className="input-feild"
                                         id="email"
                                         type="email"
                                         name="email"
@@ -370,7 +370,7 @@ const HostRegister = () => {
                                         Password
                                     </label>
                                     <input
-                                        className="border-2 border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                        className="input-feild"
                                         id="password"
                                         type="password"
                                         name="password"
@@ -384,7 +384,7 @@ const HostRegister = () => {
                                         Confirm password
                                     </label>
                                     <input
-                                        className="border-2 border-gray-500 rounded w-full py-2.5 px-3  focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                        className="input-feild"
                                         id="confirm_password"
                                         type="password"
                                         name="confirm_password"

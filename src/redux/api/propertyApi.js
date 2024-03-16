@@ -8,7 +8,6 @@ const propertiesApiSlices = api.injectEndpoints({
                 method: "POST",
                 body: data,
                 headers: {
-                    "Content-Type": "application/json",
                     Authorization: `Bearer ${localStorage.getItem(
                         "snugstuff_access_token" || ""
                     )}`,
