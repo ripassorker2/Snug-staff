@@ -13,6 +13,7 @@ const propertiesApiSlices = api.injectEndpoints({
                     )}`,
                 },
             }),
+            invalidatesTags: ["properties"],
         }),
         getPropertiesCategory: builder.query({
             query: () => ({
@@ -24,11 +25,23 @@ const propertiesApiSlices = api.injectEndpoints({
                 url: `aminities`,
             }),
         }),
+        getPropertiesByHost: builder.query({
+            query: () => ({
+                url: `host/property/`,
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem(
+                        "snugstuff_access_token" || ""
+                    )}`,
+                },
+            }),
+            providesTags: ["properties"],
+        }),
     }),
 });
 
 export const {
+    useUploadPropertyMutation,
     useGetPropertiesCategoryQuery,
     useGetPropertiesAminityQuery,
-    useUploadPropertyMutation,
+    useGetPropertiesByHostQuery,
 } = propertiesApiSlices;

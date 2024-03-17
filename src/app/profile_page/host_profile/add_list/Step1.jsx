@@ -82,7 +82,7 @@ const Step1 = ({
                         Select one category ...
                     </option>
                     {categories?.map((category, index) => (
-                        <option key={index} value={category.title}>
+                        <option key={index} value={category.id}>
                             {category.title}
                         </option>
                     ))}

@@ -18,6 +18,8 @@ const UserProfilePage = () => {
                     {user?.profile_pic ? (
                         <Image
                             src={user?.profile_pic}
+                            width={100}
+                            height={100}
                             className="w-28 h-28 object-cover rounded-full"
                             alt="avatar"
                         />

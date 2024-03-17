@@ -13,6 +13,7 @@ import {useRouter} from "next/navigation";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
 import Step3 from "./Step3";
+import HostProtected from "@/protect_route/HostProtect";
 
 const AddListPage = () => {
     const [activeStep, setActiveStep] = useState(0);
@@ -155,86 +156,94 @@ const AddListPage = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="mt-6 md:mb-10">
-            <Stepper
-                activeStep={activeStep}
-                isLastStep={(value) => setIsLastStep(value)}
-                isFirstStep={(value) => setIsFirstStep(value)}>
-                <Step onClick={() => setActiveStep(0)}>1</Step>
-                <Step onClick={() => setActiveStep(1)}>2</Step>
-                <Step onClick={() => setActiveStep(2)}>3</Step>
-            </Stepper>
-            <div className="mt-5">
-                {activeStep === 0 && (
-                    <Step1
-                        images={images}
-                        formData={formData}
-                        categories={categories}
-                        guests={guests}
-                        parking={parking}
-                        setGuests={setGuests}
-                        handleRemoveImage={handleRemoveImage}
-                        handleImageChange={handleImageChange}
-                        handleInputChange={handleInputChange}
-                        handleDecrement={handleDecrement}
-                        handleIncrement={handleIncrement}
-                        handleParkingChange={handleParkingChange}
-                    />
-                )}
-                {activeStep === 1 && (
-                    <Step2
-                        aminites={aminites}
-                        bedrooms={bedrooms}
-                        bathrooms={bathrooms}
-                        guests={guests}
-                        setGuests={setGuests}
-                        setBedrooms={setBedrooms}
-                        setBathrooms={setBathrooms}
-                        selectedAmenities={selectedAmenities}
-                        handleCheckboxChange={handleCheckboxChange}
-                        handleDecrement={handleDecrement}
-                        handleIncrement={handleIncrement}
-                    />
-                )}
-                {activeStep === 2 && (
-                    <Step3
-                        images={images}
-                        formData={formData}
-                        bedrooms={bedrooms}
-                        bathrooms={bathrooms}
-                        guests={guests}
-                        parking={parking}
-                        aminites={aminites}
-                        selectedAmenities={selectedAmenities}
-                    />
-                )}
-            </div>
-            <div
-                className={`mt-7 flex ${activeStep != 0 && "space-x-3"}  ${
-                    activeStep === 1 || 2 ? "justify-between" : "justify-end"
-                }`}>
-                <div
-                    className={`btn-primary ${activeStep === 0 && "hidden"}`}
-                    onClick={handlePrev}
-                    disabled={isFirstStep}>
-                    Prev
+        <HostProtected>
+            <form onSubmit={handleSubmit} className="mt-6 md:mb-10">
+                <Stepper
+                    activeStep={activeStep}
+                    isLastStep={(value) => setIsLastStep(value)}
+                    isFirstStep={(value) => setIsFirstStep(value)}>
+                    <Step onClick={() => setActiveStep(0)}>1</Step>
+                    <Step onClick={() => setActiveStep(1)}>2</Step>
+                    <Step onClick={() => setActiveStep(2)}>3</Step>
+                </Stepper>
+                <div className="mt-5">
+                    {activeStep === 0 && (
+                        <Step1
+                            images={images}
+                            formData={formData}
+                            categories={categories}
+                            guests={guests}
+                            parking={parking}
+                            setGuests={setGuests}
+                            handleRemoveImage={handleRemoveImage}
+                            handleImageChange={handleImageChange}
+                            handleInputChange={handleInputChange}
+                            handleDecrement={handleDecrement}
+                            handleIncrement={handleIncrement}
+                            handleParkingChange={handleParkingChange}
+                        />
+                    )}
+                    {activeStep === 1 && (
+                        <Step2
+                            aminites={aminites}
+                            bedrooms={bedrooms}
+                            bathrooms={bathrooms}
+                            guests={guests}
+                            setGuests={setGuests}
+                            setBedrooms={setBedrooms}
+                            setBathrooms={setBathrooms}
+                            selectedAmenities={selectedAmenities}
+                            handleCheckboxChange={handleCheckboxChange}
+                            handleDecrement={handleDecrement}
+                            handleIncrement={handleIncrement}
+                        />
+                    )}
+                    {activeStep === 2 && (
+                        <Step3
+                            images={images}
+                            formData={formData}
+                            bedrooms={bedrooms}
+                            bathrooms={bathrooms}
+                            guests={guests}
+                            parking={parking}
+                            aminites={aminites}
+                            selectedAmenities={selectedAmenities}
+                        />
+                    )}
                 </div>
                 <div
-                    className={`btn-primary ${activeStep === 2 && "hidden"}`}
-                    onClick={handleNext}
-                    disabled={isLastStep}>
-                    Next
+                    className={`mt-7 flex ${activeStep != 0 && "space-x-3"}  ${
+                        activeStep === 1 || 2
+                            ? "justify-between"
+                            : "justify-end"
+                    }`}>
+                    <div
+                        className={`btn-primary ${
+                            activeStep === 0 && "hidden"
+                        }`}
+                        onClick={handlePrev}
+                        disabled={isFirstStep}>
+                        Prev
+                    </div>
+                    <div
+                        className={`btn-primary ${
+                            activeStep === 2 && "hidden"
+                        }`}
+                        onClick={handleNext}
+                        disabled={isLastStep}>
+                        Next
+                    </div>
+                    {activeStep === 2 && (
+                        <button
+                            disabled={isLoading}
+                            type="submit"
+                            className={`btn-secondary`}>
+                            {isLoading ? <SmallLoader /> : "Submit"}
+                        </button>
+                    )}
                 </div>
-                {activeStep === 2 && (
-                    <button
-                        disabled={isLoading}
-                        type="submit"
-                        className={`btn-secondary`}>
-                        {isLoading ? <SmallLoader /> : "Submit"}
-                    </button>
-                )}
-            </div>
-        </form>
+            </form>
+        </HostProtected>
     );
 };
 
