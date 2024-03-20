@@ -1,12 +1,10 @@
 "use client";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {Checkbox, Tooltip} from "@material-tailwind/react";
 import {useGetPropertiesByHostQuery} from "@/redux/api/propertyApi";
 import Loading from "../../loading";
 import SubscriptionModal from "@/app/components/SubscriptionModal/SubscriptionModal";
 import Image from "next/image";
-import {useSuccessSubscriptionMutation} from "@/redux/api/subscriptionApi";
-import toast from "react-hot-toast";
 
 const TABLE_HEAD = ["", "Picture", "Property name", "Price", "Action"];
 
@@ -14,7 +12,6 @@ const SubscriptionPage = () => {
     const [selectedRows, setSelectedRows] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const {data, isLoading} = useGetPropertiesByHostQuery();
-    const [successSubscription, {isError}] = useSuccessSubscriptionMutation();
 
     const handleRowSelection = (id) => {
         if (selectedRows?.includes(id)) {
@@ -24,31 +21,12 @@ const SubscriptionPage = () => {
         }
     };
 
-    useEffect(() => {
-        const subsInfo = JSON.parse(localStorage.getItem("subs_info"));
-        if (subsInfo) {
-            const subsData = {
-                type_variation: "monthly",
-                property_list: subsInfo.property_list,
-                session_id: subsInfo.session_id,
-            };
-            successSubscription(subsData);
-            localStorage.removeItem("subs_info");
-        }
-    }, []);
-
-    useEffect(() => {
-        if (isError) {
-            toast.error("Something went wrong");
-            localStorage.removeItem("subs_info");
-        }
-    }, [isError]);
     if (isLoading) return <Loading />;
 
     return (
         <>
-            {data?.length ? (
-                <div className=" shadow-md rounded-lg">
+            {data?.filter((dt) => !dt.is_subcribed)?.length ? (
+                <div className="shadow-md rounded-lg">
                     <div className="w-full overflow-x-scroll ">
                         <table className="w-full min-w-max text-center">
                             <thead>

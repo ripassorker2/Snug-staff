@@ -1,21 +1,49 @@
 "use client";
-import React from "react";
-import {useGetHostSubscriptionQuery} from "@/redux/api/subscriptionApi";
+import React, {useEffect} from "react";
+import {
+    useGetHostSubscriptionQuery,
+    useSuccessSubscriptionMutation,
+} from "@/redux/api/subscriptionApi";
 import Loading from "../../loading";
+import Image from "next/image";
+import {Tooltip} from "@material-tailwind/react";
+import toast from "react-hot-toast";
 
 const TABLE_HEAD = [
-    "Property name",
     "Picture",
-    "Total paid",
+    "Property name",
+    "Paid",
     "Start date",
     "End date",
 ];
 
 const MySubscriptionPage = () => {
     const {data, isLoading} = useGetHostSubscriptionQuery();
+    const [successSubscription, {isError, isLoading: ssLoading}] =
+        useSuccessSubscriptionMutation();
+
     console.log(data);
 
-    if (isLoading) return <Loading />;
+    useEffect(() => {
+        const subsInfo = JSON.parse(localStorage.getItem("subs_info"));
+        if (subsInfo) {
+            const subsData = {
+                type_variation: "monthly",
+                property_list: subsInfo.property_list,
+                session_id: subsInfo.session_id,
+            };
+            successSubscription(subsData);
+            localStorage.removeItem("subs_info");
+        }
+    }, []);
+    useEffect(() => {
+        if (isError) {
+            toast.error("Something went wrong");
+            localStorage.removeItem("subs_info");
+        }
+    }, [isError]);
+
+    if (isLoading || ssLoading) return <Loading />;
     return (
         <>
             {data.length ? (
@@ -48,46 +76,41 @@ const MySubscriptionPage = () => {
                                     return (
                                         <tr key={index}>
                                             <td
-                                                className={`${classes} bg-blue-gray-100/20`}>
-                                                {/* <Tooltip
-                                                            placement="top"
-                                                            content={title}
-                                                            animate={{
-                                                                mount: {
-                                                                    scale: 1,
-                                                                    y: 0,
-                                                                },
-                                                                unmount: {
-                                                                    scale: 0,
-                                                                    y: 25,
-                                                                },
-                                                            }}>
-                                                            <p>
-                                                                {title.length >
-                                                                30
-                                                                    ? `${title.slice(
-                                                                          0,
-                                                                          30
-                                                                      )}...`
-                                                                    : title}
-                                                            </p>
-                                                        </Tooltip> */}
-                                                Property name
+                                                className={`${classes}  bg-blue-gray-100/20 flex justify-center items-center`}>
+                                                <Image
+                                                    src={dt.image}
+                                                    alt="property image"
+                                                    height={90}
+                                                    width={100}
+                                                    className="rounded-lg object-cover object-center"
+                                                />
                                             </td>
-                                            <td
-                                                className={`${classes} flex justify-center items-center`}>
-                                                {/* <Image
-                                                            src={
-                                                                property_images[0]
-                                                                    ?.image
-                                                            }
-                                                            alt="property image"
-                                                            height={90}
-                                                            width={100}
-                                                            className="rounded-lg object-cover object-center"
-                                                        /> */}
-                                                images
+                                            <td className={`${classes}`}>
+                                                <Tooltip
+                                                    placement="top"
+                                                    content={dt.property_name}
+                                                    animate={{
+                                                        mount: {
+                                                            scale: 1,
+                                                            y: 0,
+                                                        },
+                                                        unmount: {
+                                                            scale: 0,
+                                                            y: 25,
+                                                        },
+                                                    }}>
+                                                    <p>
+                                                        {dt.property_name
+                                                            .length > 30
+                                                            ? `${dt.property_name.slice(
+                                                                  0,
+                                                                  30
+                                                              )}...`
+                                                            : dt.property_name}
+                                                    </p>
+                                                </Tooltip>
                                             </td>
+
                                             <td
                                                 className={`${classes} bg-blue-gray-100/20`}>
                                                 ${dt.total_paid}
