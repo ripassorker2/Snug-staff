@@ -29,8 +29,8 @@ const HostProfilePage = () => {
                             alt="avatar"
                         />
                     )}
-                    <h2 className="text-lg font-semibold">ripassorkerrifat</h2>
-                    <p>example@gmail.com</p>
+                    <h2 className="text-lg font-medium"> {user?.username}</h2>
+                    <p> {user?.email}</p>
                 </div>
 
                 <div className="mt-6">
@@ -48,14 +48,14 @@ const HostProfilePage = () => {
                     <div>
                         <h2 className="text-base">Business email</h2>
                         <div className="bg-blue-gray-50 cursor-not-allowed text-base rounded-md text-gray-900 px-4 py-3">
-                            {/* {user?.full_name} */}ripassorkerrifat@gmail.com
+                            {user?.email}
                         </div>
                     </div>
 
                     <div>
                         <h2 className="text-base">Business phone</h2>
                         <div className="bg-blue-gray-50 text-base rounded-md text-gray-900 px-4 py-3">
-                            {user?.mobile}
+                            {user?.phone}
                         </div>
                     </div>
                     <div>

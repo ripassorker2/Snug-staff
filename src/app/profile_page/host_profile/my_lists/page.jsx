@@ -51,10 +51,12 @@ const MyLists = () => {
                                 </div>
                                 <div className="mt-3 leading-5 text-base">
                                     <h3 className="text-lg font-semibold text-gray-800">
-                                        {dt.title}
+                                        {dt.title.length > 55
+                                            ? `${dt.title.slice(0, 55)}...`
+                                            : dt.title}
                                     </h3>
 
-                                    <p className="pt-1">
+                                    <p className="pt-2">
                                         <b>${dt.price}</b> per person/night
                                     </p>
                                 </div>

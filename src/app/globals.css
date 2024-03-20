@@ -8,7 +8,7 @@
     box-sizing: border-box;
 }
 .container {
-    max-width: 1350px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 10px 20px;
 }
@@ -23,10 +23,10 @@ span {
         @apply text-gray-800 text-base;
     }
     .btn-primary {
-        @apply bg-primary duration-500 md:px-8 px-6  py-3  text-gray-100 text-base font-medium md:w-auto w-full text-center inline-flex justify-center items-center;
+        @apply bg-primary duration-500 md:px-8 px-6  py-3  text-gray-100 text-base font-medium md:w-auto w-full text-center inline-flex justify-center items-center rounded-lg;
     }
     .btn-secondary {
-        @apply bg-secondary duration-500 md:px-8 px-6  py-3  text-gray-100 text-base font-medium md:w-auto w-full text-center inline-flex justify-center items-center;
+        @apply bg-secondary duration-500 md:px-8 px-6  py-3  text-gray-100 text-base font-medium md:w-auto w-full text-center inline-flex justify-center items-center rounded-lg;
     }
     .heading {
         @apply md:text-5xl text-3xl font-semibold text-gray-900;

@@ -7,7 +7,7 @@ const HostProtected = ({children}) => {
     if (user?.role == "host") return children;
     else
         return (
-            <div className="text-center mt-20 h-[60vh] text-lg">
+            <div className="text-center mt-32 h-[60vh] text-lg">
                 <h2 className=" ">You are not authorized.</h2>
                 <p>
                     This page is for host. Please{" "}

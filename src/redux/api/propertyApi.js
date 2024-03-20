@@ -34,7 +34,7 @@ const propertiesApiSlices = api.injectEndpoints({
                     )}`,
                 },
             }),
-            providesTags: ["properties"],
+            providesTags: ["properties", "subscriptions"],
         }),
     }),
 });
