@@ -22,8 +22,6 @@ const MySubscriptionPage = () => {
     const [successSubscription, {isError, isLoading: ssLoading}] =
         useSuccessSubscriptionMutation();
 
-    console.log(data);
-
     useEffect(() => {
         const subsInfo = JSON.parse(localStorage.getItem("subs_info"));
         if (subsInfo) {

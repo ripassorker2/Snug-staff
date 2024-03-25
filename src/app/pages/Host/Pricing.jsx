@@ -16,18 +16,16 @@ const Pricing = () => {
                         tailored to meet your individual needs.
                     </p>
                 </div>
-                <div className="grid md:grid-cols-2 gap-5">
+                <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
                     <div className="relative p-6  border-2 border-gray-300 rounded-lg hover:border-2 hover:border-gray-500 duration-300 max-w-sm ">
                         <div className="">
-                            <h3 className="text-xl font-semibold ">
-                                Commission
-                            </h3>
+                            <h3 className="text-xl font-semibold ">Free</h3>
                             <p className="mt-4 flex items-baseline ">
                                 <span className="md:text-4xl text-2xl font-extrabold tracking-tight">
-                                    $10
+                                    $0
                                 </span>
                                 <span className="ml-1 text-xl font-semibold">
-                                    on each booking amount
+                                    on each booking for only 3 property
                                 </span>
                             </p>
 
@@ -198,6 +196,72 @@ const Pricing = () => {
                                     />
                                     <p className="ml-3 ">
                                         Unparalleled Hospitality
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                        <Link
+                            href="/authtentication/become-a-host/register"
+                            className="btn-secondary mt-6 group w-full">
+                            Create account{" "}
+                            <FaArrowRight className="ml-2 group-hover:ml-4 duration-300 " />
+                        </Link>
+                    </div>
+                    <div className="relative p-6  border-2 border-gray-300 rounded-lg hover:border-2 hover:border-gray-500 duration-300 max-w-sm ">
+                        <div className="">
+                            <h3 className="text-xl font-semibold ">
+                                Commission
+                            </h3>
+                            <p className="mt-4 flex items-baseline ">
+                                <span className="md:text-4xl text-2xl font-extrabold tracking-tight">
+                                    $10
+                                </span>
+                                <span className="ml-1 text-xl font-semibold">
+                                    on each booking amount
+                                </span>
+                            </p>
+
+                            <ul className="mt-5 space-y-2 text-base font-medium">
+                                <li className="flex">
+                                    <FaCheck
+                                        size={20}
+                                        className="text-primary"
+                                    />
+                                    <p className="ml-3 ">Free advertising</p>
+                                </li>
+                                <li className="flex">
+                                    <FaCheck
+                                        size={20}
+                                        className="text-primary"
+                                    />
+                                    <p className="ml-3 ">
+                                        Advantage of securing more direct
+                                        bookings
+                                    </p>
+                                </li>
+                                <li className="flex">
+                                    <FaCheck
+                                        size={20}
+                                        className="text-primary"
+                                    />
+                                    <p className="ml-3 ">
+                                        Control of rental business
+                                    </p>
+                                </li>
+                                <li className="flex">
+                                    <FaCheck
+                                        size={20}
+                                        className="text-primary"
+                                    />
+                                    <p className="ml-3 ">Maximize earnings</p>
+                                </li>
+                                <li className="flex">
+                                    <FaCheck
+                                        size={20}
+                                        className="text-primary"
+                                    />
+                                    <p className="ml-3 ">
+                                        Unparalleled hospitality
                                     </p>
                                 </li>
                             </ul>

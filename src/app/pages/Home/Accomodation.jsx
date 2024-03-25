@@ -11,7 +11,7 @@ const Accomodation = () => {
                         <Image
                             src={img1}
                             alt=""
-                            className="rounded object-contain"
+                            className="rounded-xl object-contain"
                         />
                     </div>
                     <div className="flex items-center justify-center">
@@ -42,7 +42,7 @@ const Accomodation = () => {
                         <Image
                             src={img2}
                             alt=""
-                            className="rounded object-contain"
+                            className="rounded-xl object-contain"
                         />
                     </div>
                     <div className="flex items-center justify-center">
@@ -72,7 +72,7 @@ const Accomodation = () => {
                         <Image
                             src={img2}
                             alt=""
-                            className="rounded object-contain"
+                            className="rounded-xl object-contain"
                         />
                     </div>
                 </div>

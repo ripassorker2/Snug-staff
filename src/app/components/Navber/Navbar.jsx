@@ -41,6 +41,13 @@ const Navbar = () => {
                                 </div>
                             </MenuHandler>
                             <MenuList className="w-[230px] text-gray-900 font-medium  text-base">
+                                <MenuItem className="mt-1">
+                                    <Link
+                                        className="block  w-full text-center"
+                                        href={"/properties"}>
+                                        Properties
+                                    </Link>
+                                </MenuItem>
                                 {!user?.id ? (
                                     <>
                                         <MenuItem className="mt-1">
