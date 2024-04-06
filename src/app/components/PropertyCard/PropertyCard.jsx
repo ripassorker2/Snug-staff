@@ -2,19 +2,17 @@ import Image from "next/image";
 import React from "react";
 import {FaArrowRight, FaUser} from "react-icons/fa";
 import {MdOutlineBathroom, MdOutlineBedroomParent} from "react-icons/md";
-import image from "../../../assets/accomodation2.jpg";
 import Link from "next/link";
 
-const PropertyCard = () => {
+const PropertyCard = ({property}) => {
     return (
-        <div className="border border-gray-400 p-4 hover:border-gray-500 duration-300 rounded-xl shadow-md">
+        <div className="p-4 border rounded-xl border-gray-300 shadow-lg">
             <figure className="h-[250px] overflow-hidden">
                 <Image
-                    // src={dt.property_images[0].image}
-                    src={image}
+                    src={property?.property_images[0]?.image}
                     width={200}
                     height={200}
-                    className="rounded-xl w-full h-full  object-cover object-center hover:scale-105 hover:skew-x-2 duration-300"
+                    className="rounded-xl w-full h-full  object-cover object-center hover:scale-105  duration-300"
                     alt="property images"
                 />
             </figure>
@@ -23,32 +21,31 @@ const PropertyCard = () => {
                 <button className="hidden "></button>
                 <button className="bg-gray-300  inline-flex items-center rounded-lg px-2 py-1">
                     <MdOutlineBedroomParent size={14} className="mr-1" />{" "}
-                    {/* {dt.bed_room} */}4 bed
+                    {property.bed_room} bed
                 </button>
                 <button className="bg-gray-300  inline-flex items-center rounded-lg px-2 py-1">
                     <MdOutlineBathroom size={14} className="mr-1" />
-                    {/* {dt.bath_room} */}3 bath
+                    {property.bath_room} bath
                 </button>
                 <button className="bg-gray-300  inline-flex items-center rounded-lg px-2 py-1">
                     <FaUser size={14} className=" mr-1" />
-                    {/* {dt.guest} */}2 guest
+                    {property.guest} guest
                 </button>
             </div>
             <div className="mt-3 leading-5 text-base">
                 <h3 className="text-lg font-semibold text-gray-800">
-                    {/* {dt.title.length > 55
-                        ? `${dt.title.slice(0, 55)}...`
-                        : dt.title} */}
-                    this is a title
+                    {property.title.length > 55
+                        ? `${property.title.slice(0, 55)}...`
+                        : property.title}
                 </h3>
 
                 <p className="pt-2">
-                    {/* <b>${dt.price}</b> */}
-                    $978 per person/night
+                    <b>${property?.price}</b>
+                    per person/night
                 </p>
             </div>
-            <Link href={`/properties/demo_id_123`}>
-                <button className="btn-secondary mt-4 w-full rounded-lg group">
+            <Link href={`/properties/${property?.slug}`}>
+                <button className="btn-secondary mt-3 w-full rounded-lg group">
                     More details{" "}
                     <FaArrowRight className="ml-2 group-hover:ml-4 duration-300 " />
                 </button>

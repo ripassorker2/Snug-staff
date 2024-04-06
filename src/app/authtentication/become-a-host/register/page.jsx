@@ -94,7 +94,7 @@ const HostRegister = () => {
             inputData.Company_house_registration_number
         );
         formData.append("host_profile.Vat_number", inputData.Vat_number);
-        formData.append("host_profile.mobile", inputData.mobile);
+        formData.append("host_profile.phone", inputData.mobile);
 
         try {
             const response = await fetch(
@@ -398,11 +398,11 @@ const HostRegister = () => {
                     )}
                 </div>
                 <div
-                    className={`mt-6  flex  ${
+                    className={`mt-6  flex   ${
                         activeStep == 1 ? "justify-between" : "justify-end"
                     } `}>
                     <div
-                        className={`btn-primary ${
+                        className={`btn-primary mr-6 ${
                             activeStep == 0 && "hidden btn-primary"
                         }`}
                         onClick={handlePrev}

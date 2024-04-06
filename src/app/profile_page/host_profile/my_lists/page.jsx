@@ -51,8 +51,8 @@ const MyLists = () => {
                                 </div>
                                 <div className="mt-3 leading-5 text-base">
                                     <h3 className="text-lg font-semibold text-gray-800">
-                                        {dt.title.length > 55
-                                            ? `${dt.title.slice(0, 55)}...`
+                                        {dt.title.length > 39
+                                            ? `${dt.title.slice(0, 39)}...`
                                             : dt.title}
                                     </h3>
 
@@ -67,7 +67,7 @@ const MyLists = () => {
                         ))}
                     </div>
                 ) : (
-                    <p className="mt-16 text-base text-gray-800">
+                    <p className="mt-7 text-base text-gray-800">
                         You dont have any property.
                     </p>
                 )}

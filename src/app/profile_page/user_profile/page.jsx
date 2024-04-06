@@ -41,6 +41,14 @@ const UserProfilePage = () => {
                 </div>
                 <div className="grid md:grid-cols-2 gap-x-10 gap-y-4 mt-2">
                     <div>
+                        <h2 className="text-base">Full name</h2>
+                        <div
+                            className="bg-blue-gray-50 text-base rounded-md text-gray-900 px-4
+                    py-3">
+                            {user?.full_name ? user.full_name : "none"}
+                        </div>
+                    </div>
+                    <div>
                         <h2 className="text-base">Address line 1</h2>
                         <div
                             className="bg-blue-gray-50 text-base rounded-md text-gray-900 px-4

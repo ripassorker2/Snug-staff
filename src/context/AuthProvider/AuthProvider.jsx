@@ -22,7 +22,7 @@ export const AuthProvider = ({children}) => {
             })
                 .then((res) => res.json())
                 .then((data) => {
-                    if (data.code) {
+                    if (data.detail) {
                         localStorage.removeItem("snugstuff_access_token");
                         localStorage.removeItem("snugstuff_refresh_token");
                         setUser(null);

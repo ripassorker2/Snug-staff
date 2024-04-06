@@ -3,7 +3,7 @@ import {Dialog} from "@material-tailwind/react";
 import {IoMdArrowRoundBack} from "react-icons/io";
 import Image from "next/image";
 
-const GalleryModal = ({showModal, setShowModal}) => {
+const GalleryModal = ({images, showModal, setShowModal}) => {
     return (
         <Dialog
             open={showModal}
@@ -16,56 +16,42 @@ const GalleryModal = ({showModal, setShowModal}) => {
                 <IoMdArrowRoundBack
                     onClick={() => setShowModal(false)}
                     size={25}
-                    className="mt-10"
+                    className="my-5 "
                 />
 
-                <div className="max-w-5xl mx-auto overflow-auto max-h-[88vh]">
+                <div className="max-w-4xl mx-auto overflow-auto max-h-[88vh]">
                     <div className="grid gap-4 md:grid-cols-2">
-                        <div>
-                            <Image
-                                className="h-auto w-full rounded-lg object-cover object-center"
-                                src="https://mrwallpaper.com/images/hd/real-estate-modern-white-house-dcxpp5xsw4e7wqgc.jpg"
-                                width={200}
-                                height={200}
-                                alt="gallery-photo"
-                            />
-                        </div>
-                        <div>
-                            <Image
-                                className="h-auto w-full rounded-lg object-cover object-center"
-                                src="https://mrwallpaper.com/images/hd/real-estate-modern-white-house-dcxpp5xsw4e7wqgc.jpg"
-                                width={200}
-                                height={200}
-                                alt="gallery-photo"
-                            />
-                        </div>
-                        <div className="col-span-2">
-                            <Image
-                                className="h-auto w-full rounded-lg object-cover object-center"
-                                src="https://mrwallpaper.com/images/hd/real-estate-modern-white-house-dcxpp5xsw4e7wqgc.jpg"
-                                width={200}
-                                height={200}
-                                alt="gallery-photo"
-                            />
-                        </div>
-                        <div>
-                            <Image
-                                className="h-auto w-full rounded-lg object-cover object-center"
-                                src="https://mrwallpaper.com/images/hd/real-estate-modern-white-house-dcxpp5xsw4e7wqgc.jpg"
-                                width={200}
-                                height={200}
-                                alt="gallery-photo"
-                            />
-                        </div>
-                        <div>
-                            <Image
-                                className="h-auto w-full rounded-lg object-cover object-center"
-                                src="https://mrwallpaper.com/images/hd/real-estate-modern-white-house-dcxpp5xsw4e7wqgc.jpg"
-                                width={200}
-                                height={200}
-                                alt="gallery-photo"
-                            />
-                        </div>
+                        {images?.map((img, i) => (
+                            <div
+                                key={i}
+                                className={`${
+                                    i == 0 ||
+                                    i == 3 ||
+                                    i == 6 ||
+                                    i == 9 ||
+                                    i == 11 ||
+                                    i == 14
+                                        ? "col-span-2"
+                                        : ""
+                                } `}>
+                                <Image
+                                    className={`max-h-[450px] w-full rounded-lg object-cover object-center ${
+                                        i == 0 ||
+                                        i == 3 ||
+                                        i == 6 ||
+                                        i == 9 ||
+                                        i == 11 ||
+                                        i == 14
+                                            ? "max-h-[450px]"
+                                            : "md:h-[300px]"
+                                    }  `}
+                                    src={img.image}
+                                    width={200}
+                                    height={200}
+                                    alt="gallery-photo"
+                                />
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>

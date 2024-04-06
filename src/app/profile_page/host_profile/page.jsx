@@ -10,6 +10,7 @@ import HostProtected from "@/protect_route/HostProtect";
 const HostProfilePage = () => {
     const {user} = useUserContext();
     const [openModal, setOpenModal] = useState(false);
+
     return (
         <HostProtected>
             <div className="mb-6">

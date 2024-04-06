@@ -44,28 +44,31 @@ const LoginPage = () => {
                                 "Content-Type": "application/json",
                             },
                             body: JSON.stringify({
-                                email,
+                                username: email,
                                 password,
+                                grant_type: "password",
+                                client_id: config.client_id,
+                                client_secret: config.client_secret,
                             }),
                         }
                     );
                     const data = await response.json();
-                    if (data.access) {
-                        setToken(data.access);
+                    if (data.access_token) {
+                        setToken(data.access_token);
                         localStorage.setItem(
                             "snugstuff_access_token",
-                            data.access
+                            data.access_token
                         );
                         localStorage.setItem(
                             "snugstuff_refresh_token",
-                            data.refresh
+                            data.refresh_token
                         );
                         action.resetForm();
                         setLoading(false);
                         toast.success("Login successfully.");
                         router.push("/");
                     } else {
-                        toast.error(data.detail);
+                        toast.error(data.error_description);
                         setLoading(false);
                     }
                 } catch (error) {

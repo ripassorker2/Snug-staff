@@ -33,14 +33,14 @@ const ProfileUpdateModal = ({openModal, setOpenModal}) => {
         const formData = new FormData();
 
         if (user?.role === "host") {
-            formData.append("full_name", form.full_name.value);
-            formData.append("mobile", form.mobile.value);
+            formData.append("phone", form.phone.value);
             formData.append("address_line1", form.address_line1.value);
             formData.append("address_line_2", form.address_line_2.value);
             formData.append("city", form.city.value);
             formData.append("county", form.county.value);
             formData.append("post_code", form.post_code.value);
         } else if (user?.role === "user") {
+            formData.append("full_name", form.full_name.value);
             formData.append("phone", form.phone.value);
             formData.append("address_line1", form.address_line1.value);
             formData.append("address_line_2", form.address_line_2.value);
@@ -118,45 +118,13 @@ const ProfileUpdateModal = ({openModal, setOpenModal}) => {
                         </div>
                         <div className="grid md:grid-cols-2 gap-x-10 md:gap-y-3 text-gray-900 text-lg">
                             {user?.role == "host" && (
-                                <>
-                                    <div className="mt-2">
-                                        <label className="block mb-1">
-                                            Full name
-                                        </label>
-                                        <input
-                                            className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
-                                            id="full_name"
-                                            type="text"
-                                            name="full_name"
-                                            required
-                                            placeholder="Enter full_name..."
-                                            defaultValue={user.full_name}
-                                        />
-                                    </div>{" "}
-                                    <div className="mt-2">
-                                        <label className="block text-base mb-1">
-                                            Mobile number
-                                        </label>
-                                        <input
-                                            className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
-                                            id="mobile"
-                                            type="text"
-                                            name="mobile"
-                                            required
-                                            placeholder="Enter mobile number..."
-                                            defaultValue={user?.mobile}
-                                        />
-                                    </div>
-                                </>
-                            )}
-                            {user?.role == "user" && (
                                 <div className="mt-2">
                                     <label className="block text-base mb-1">
                                         Mobile number
                                     </label>
                                     <input
                                         className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
-                                        id="phone"
+                                        id="mobile"
                                         type="text"
                                         name="phone"
                                         required
@@ -164,6 +132,38 @@ const ProfileUpdateModal = ({openModal, setOpenModal}) => {
                                         defaultValue={user?.phone}
                                     />
                                 </div>
+                            )}
+                            {user?.role == "user" && (
+                                <>
+                                    <div className="mt-2">
+                                        <label className="block text-base mb-1">
+                                            Full Name
+                                        </label>
+                                        <input
+                                            className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                            id="full_name"
+                                            type="text"
+                                            name="full_name"
+                                            required
+                                            placeholder="Enter full name..."
+                                            defaultValue={user?.full_name}
+                                        />
+                                    </div>
+                                    <div className="mt-2">
+                                        <label className="block text-base mb-1">
+                                            Mobile number
+                                        </label>
+                                        <input
+                                            className="border border-gray-500 rounded w-full py-2.5 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-700"
+                                            id="phone"
+                                            type="text"
+                                            name="phone"
+                                            required
+                                            placeholder="Enter mobile number..."
+                                            defaultValue={user?.phone}
+                                        />
+                                    </div>
+                                </>
                             )}
 
                             <div className="mt-2">

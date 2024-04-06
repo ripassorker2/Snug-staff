@@ -50,6 +50,7 @@ const RegisterPage = () => {
                         }),
                     });
                     const data = await response.json();
+                    console.log(data);
                     if (data.success) {
                         toast.success("Account created successfully.");
                         action.resetForm();

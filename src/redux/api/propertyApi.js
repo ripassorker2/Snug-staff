@@ -15,6 +15,16 @@ const propertiesApiSlices = api.injectEndpoints({
             }),
             invalidatesTags: ["properties"],
         }),
+        getAllProperties: builder.query({
+            query: () => ({
+                url: `property`,
+            }),
+        }),
+        getPropertyDetails: builder.query({
+            query: ({slug}) => ({
+                url: `property/${slug}/`,
+            }),
+        }),
         getPropertiesCategory: builder.query({
             query: () => ({
                 url: `category`,
@@ -40,6 +50,8 @@ const propertiesApiSlices = api.injectEndpoints({
 });
 
 export const {
+    useGetAllPropertiesQuery,
+    useGetPropertyDetailsQuery,
     useUploadPropertyMutation,
     useGetPropertiesCategoryQuery,
     useGetPropertiesAminityQuery,
