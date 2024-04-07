@@ -97,7 +97,7 @@ const PropertyDetails = ({params}) => {
                             <div className="flex space-x-2 items-center">
                                 <Image
                                     src={property?.logo}
-                                    className="rounded-full"
+                                    className="rounded-full object-contain border w-12 h-12 border-gray-400"
                                     height={50}
                                     width={50}
                                     alt="host image"
@@ -137,7 +137,7 @@ const PropertyDetails = ({params}) => {
                         />
                     </div>
                 </div>
-                <div className="mt-12 ">
+                {/* <div className="mt-12 ">
                     <Maps
                         data={{
                             lat: 26.33551733419103,
@@ -145,7 +145,7 @@ const PropertyDetails = ({params}) => {
                             address: "Dhaka Bangladesh.",
                         }}
                     />
-                </div>
+                </div> */}
             </div>
             {showModal && (
                 <GalleryModal

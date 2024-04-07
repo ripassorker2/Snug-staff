@@ -1,3 +1,4 @@
+import {Checkbox} from "@material-tailwind/react";
 import Image from "next/image";
 import React from "react";
 import {IoCloudUploadOutline} from "react-icons/io5";
@@ -7,11 +8,12 @@ const Step1 = ({
     images,
     formData,
     categories,
-    parking,
+    aminites,
     handleRemoveImage,
     handleImageChange,
     handleInputChange,
-    handleParkingChange,
+    selectedAmenities,
+    handleCheckboxChange,
 }) => {
     return (
         <div className="lg:grid lg:grid-cols-2  gap-x-10 gap-y-3">
@@ -67,7 +69,7 @@ const Step1 = ({
                     </div>
                 </div>
             </div>
-            <div className="mt-2 lg:col-span-2">
+            <div className="mt-2 ">
                 <label htmlFor="category" className="block text-base mb-1">
                     Property category
                 </label>
@@ -103,70 +105,8 @@ const Step1 = ({
                     required
                 />
             </div>
+
             <div className="mt-2">
-                <label htmlFor="price" className="block text-base mb-1">
-                    Property price
-                </label>
-                <input
-                    type="number"
-                    id="price"
-                    name="price"
-                    className="input-feild"
-                    placeholder="Enter property price..."
-                    value={formData.price}
-                    onChange={handleInputChange}
-                    required
-                />
-            </div>
-            {/* <div className="mt-4 col-span-2">
-                <h2>Guest</h2>
-                <div className="mt-1 flex justify-between text-gray-800">
-                    <p>Capacity of guests</p>
-                    <div>
-                        <button
-                            type="button"
-                            className="bg-secondary p-2 rounded-full text-gray-200 w-6 h-6 inline-flex items-center justify-center mr-2"
-                            onClick={() => handleDecrement(setGuests)}>
-                            -
-                        </button>
-                        <button type="button" className="px-2 text-lg">
-                            {guests}
-                        </button>
-                        <button
-                            type="button"
-                            className="bg-secondary p-2 rounded-full text-gray-200 w-6 h-6 inline-flex items-center justify-center ml-2"
-                            onClick={() => handleIncrement(setGuests)}>
-                            +
-                        </button>
-                    </div>
-                </div>
-            </div> */}
-            <div className="mt-2 col-span-2">
-                <h2 className="mb-2 text-base">Parking area</h2>
-                <div className="flex space-x-6 mt-2">
-                    <label className="flex items-center space-x-2 text-gray-700">
-                        <input
-                            type="radio"
-                            name="parking"
-                            value={true}
-                            checked={parking === true}
-                            onChange={handleParkingChange}
-                        />
-                        <p>Yes</p>
-                    </label>
-                    <label className="flex items-center space-x-2 text-gray-700">
-                        <input
-                            type="radio"
-                            name="parking"
-                            value={false}
-                            checked={parking === false}
-                            onChange={handleParkingChange}
-                        />
-                        <p>No</p>
-                    </label>
-                </div>
-            </div>
-            <div className="mt-2 lg:col-span-2">
                 <label htmlFor="area" className="block text-base mb-1">
                     Property total area
                 </label>
@@ -181,31 +121,7 @@ const Step1 = ({
                     required
                 />
             </div>
-            {/* <div className="mt-2 col-span-2">
-                <h2 className="mb-2 text-base">Parking area</h2>
-                <div className="flex space-x-6 mt-2">
-                    <label className="flex items-center space-x-2 text-gray-700">
-                        <input
-                            type="radio"
-                            name="parking"
-                            value={true}
-                            checked={parking === true}
-                            onChange={handleParkingChange}
-                        />
-                        <p>Yes</p>
-                    </label>
-                    <label className="flex items-center space-x-2 text-gray-700">
-                        <input
-                            type="radio"
-                            name="parking"
-                            value={false}
-                            checked={parking === false}
-                            onChange={handleParkingChange}
-                        />
-                        <p>No</p>
-                    </label>
-                </div>
-            </div> */}
+
             <div className="mt-2">
                 <label htmlFor="location" className="block text-base mb-1">
                     Property location
@@ -222,6 +138,36 @@ const Step1 = ({
                 />
             </div>
             <div className="mt-2">
+                <label htmlFor="latitude" className="block text-base mb-1">
+                    Property location latitude
+                </label>
+                <input
+                    type="number"
+                    id="latitude"
+                    name="latitude"
+                    className="input-feild"
+                    placeholder="Enter property location latitude..."
+                    value={formData.latitude}
+                    onChange={handleInputChange}
+                    required
+                />
+            </div>
+            <div className="mt-2">
+                <label htmlFor="longitude" className="block text-base mb-1">
+                    Property location longitude
+                </label>
+                <input
+                    type="number"
+                    id="longitude"
+                    name="longitude"
+                    className="input-feild"
+                    placeholder="Enter property location longitude..."
+                    value={formData.longitude}
+                    onChange={handleInputChange}
+                    required
+                />
+            </div>
+            <div className="mt-2">
                 <label
                     htmlFor="short_description"
                     className="block text-base mb-1">
@@ -231,25 +177,42 @@ const Step1 = ({
                     type="text"
                     id="short_description"
                     name="short_description"
-                    className="input-feild resize-none h-11"
+                    className="input-feild  py-3 text-gray-800 resize-none"
                     placeholder="Enter property short description..."
                     value={formData.short_description}
                     onChange={handleInputChange}
                     required
                 />
             </div>
-            <div className="mt-2 lg:col-span-2">
+            <div className="mt-2 ">
                 <label htmlFor="description" className="block text-base mb-1">
                     Property description
                 </label>
                 <textarea
                     id="description"
                     name="description"
-                    className="border-2 border-gray-500 rounded w-full py-3 px-3 focus:outline-none focus:shadow-outline focus:border-gray-700 placeholder:text-gray-600 text-gray-800 resize-none"
+                    className="input-feild  py-3 text-gray-800 resize-none"
                     placeholder="Enter property description..."
                     value={formData.description}
                     onChange={handleInputChange}
                     required></textarea>
+            </div>
+            <div className="mt-2 md:col-span-2">
+                <label className="block text-base mb-1">
+                    Property aminites
+                </label>
+                <div>
+                    {aminites?.map((aminities, index) => (
+                        <Checkbox
+                            key={index}
+                            label={aminities.name}
+                            checked={selectedAmenities.includes(aminities.id)}
+                            onChange={(e) =>
+                                handleCheckboxChange(e, aminities.id)
+                            }
+                        />
+                    ))}
+                </div>
             </div>
         </div>
     );

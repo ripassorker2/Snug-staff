@@ -30,9 +30,7 @@ const AddListPage = () => {
         useUploadPropertyMutation();
     const [images, setImages] = useState([]);
     const [selectedAmenities, setSelectedAmenities] = useState([]);
-    const [bedrooms, setBedrooms] = useState(0);
-    const [bathrooms, setBathrooms] = useState(0);
-    const [guests, setGuests] = useState(0);
+
     const [parking, setParking] = useState(true);
 
     const handleCheckboxChange = (e, name) => {
@@ -64,12 +62,24 @@ const AddListPage = () => {
         setImages(images.filter((_, i) => i !== index));
     };
 
-    const handleDecrement = (setter) => {
-        setter((prevValue) => Math.max(prevValue - 1, 0));
+    const [buttonData, setButtonData] = useState({
+        bed_room: 0,
+        bath_room: 0,
+        minimum_guest: 0,
+        maximum_guest: 0,
+        minimum_stay: 0,
+    });
+    const handleDecrement = (field) => {
+        setButtonData((prevData) => ({
+            ...prevData,
+            [field]: Math.max(prevData[field] - 1, 0),
+        }));
     };
-
-    const handleIncrement = (setter) => {
-        setter((prevValue) => prevValue + 1);
+    const handleIncrement = (field) => {
+        setButtonData((prevData) => ({
+            ...prevData,
+            [field]: prevData[field] + 1,
+        }));
     };
 
     const handleParkingChange = (e) => {
@@ -80,10 +90,17 @@ const AddListPage = () => {
         category: "",
         title: "",
         area: "",
-        price: "",
         location: "",
+        latitude: "",
+        longitude: "",
         short_description: "",
         description: "",
+        per_day_price: "",
+        per_guest_price: "",
+        cleaning_fee: "",
+        discount_price_days: "",
+        discount_parcentage: "",
+        allowed_cancelation_days: "",
     });
 
     const handleInputChange = (e) => {
@@ -98,15 +115,13 @@ const AddListPage = () => {
 
     useEffect(() => {
         if (isSuccess) {
-            router.push("/profile_page/host_profile/my_lists");
             toast.success("Property added successfully");
+            router.push("/profile_page/host_profile/my_lists");
         }
     }, [isSuccess, router]);
 
     useEffect(() => {
-        if (isError) {
-            toast.error("Something went wrong. Please try again");
-        }
+        if (isError) toast.error("Something went wrong. Please try again");
     }, [isError]);
 
     const handleSubmit = (e) => {
@@ -114,45 +129,71 @@ const AddListPage = () => {
 
         if (images.length < 3) toast.error("Please upload at least 3 images.");
 
-        if (
-            !formData.category ||
-            !formData.title ||
-            !formData.area ||
-            !formData.price ||
-            !formData.location ||
-            !formData.short_description ||
-            !formData.description
-        ) {
-            return toast.error("Please fill out all required fields.");
-        }
+        // if (
+        //     !formData.category ||
+        //     !formData.title ||
+        //     !formData.area ||
+        //     !formData.price ||
+        //     !formData.location ||
+        //     !formData.short_description ||
+        //     !formData.description
+        // ) {
+        //     return toast.error("Please fill out all required fields.");
+        // }
 
-        const propertyFormData = new FormData();
+        const pdata = {
+            category: formData.category,
+            title: formData.title,
+            area: formData.area,
+            location: formData.location,
+            latitude: formData.latitude,
+            longitude: formData.longitude,
+            short_description: formData.short_description,
+            description: formData.description,
+            per_day_price: formData.per_day_price,
+            per_guest_price: formData.per_guest_price,
+            cleaning_fee: formData.cleaning_fee,
+            discount_price_days: formData.discount_price_days,
+            discount_parcentage: formData.discount_parcentage,
+            allowed_cancelation_days: formData.allowed_cancelation_days,
+            bed_room: buttonData.bed_room,
+            bath_room: buttonData.bath_room,
+            minimum_guest: buttonData.minimum_guest,
+            maximum_guest: buttonData.maximum_guest,
+            minimum_stay: buttonData.minimum_stay,
+            images: images,
+            aminites: selectedAmenities,
+        };
 
-        images.forEach((image) => {
-            propertyFormData.append(`upload_image`, image.file);
-        });
-        selectedAmenities.forEach((iminity) => {
-            propertyFormData.append(`amenities_list`, iminity);
-        });
+        console.log(pdata);
 
-        propertyFormData.append("author", user.id);
-        propertyFormData.append("category_id", formData.category);
-        propertyFormData.append("title", formData.title);
-        propertyFormData.append("area", formData.area);
-        propertyFormData.append("price", formData.price);
-        propertyFormData.append("location", formData.location);
-        propertyFormData.append(
-            "short_description",
-            formData.short_description
-        );
-        propertyFormData.append("description", formData.description);
+        // const propertyFormData = new FormData();
 
-        propertyFormData.append("bed_room", bedrooms);
-        propertyFormData.append("bath_room", bathrooms);
-        propertyFormData.append("guest", guests);
-        propertyFormData.append("parking", parking);
+        // images.forEach((image) => {
+        //     propertyFormData.append(`upload_image`, image.file);
+        // });
+        // selectedAmenities.forEach((iminity) => {
+        //     propertyFormData.append(`amenities_list`, iminity);
+        // });
 
-        uploadPropety(propertyFormData);
+        // propertyFormData.append("author", user.id);
+        // propertyFormData.append("category_id", formData.category);
+        // propertyFormData.append("title", formData.title);
+        // propertyFormData.append("area", formData.area);
+        // propertyFormData.append("price", formData.price);
+        // propertyFormData.append("location", formData.location);
+        // propertyFormData.append(
+        //     "short_description",
+        //     formData.short_description
+        // );
+        // propertyFormData.append("description", formData.description);
+
+        // // propertyFormData.append("bed_room", bedrooms);
+        // // propertyFormData.append("bath_room", bathrooms);
+        // // propertyFormData.append("guest", guests);
+        // propertyFormData.append("parking", parking);
+
+        // uploadPropety(propertyFormData);
     };
 
     return (
@@ -172,41 +213,32 @@ const AddListPage = () => {
                             images={images}
                             formData={formData}
                             categories={categories}
-                            guests={guests}
-                            parking={parking}
-                            setGuests={setGuests}
+                            aminites={aminites}
                             handleRemoveImage={handleRemoveImage}
                             handleImageChange={handleImageChange}
                             handleInputChange={handleInputChange}
-                            handleDecrement={handleDecrement}
-                            handleIncrement={handleIncrement}
-                            handleParkingChange={handleParkingChange}
+                            selectedAmenities={selectedAmenities}
+                            handleCheckboxChange={handleCheckboxChange}
                         />
                     )}
                     {activeStep === 1 && (
                         <Step2
-                            aminites={aminites}
-                            bedrooms={bedrooms}
-                            bathrooms={bathrooms}
-                            guests={guests}
-                            setGuests={setGuests}
-                            setBedrooms={setBedrooms}
-                            setBathrooms={setBathrooms}
-                            selectedAmenities={selectedAmenities}
-                            handleCheckboxChange={handleCheckboxChange}
+                            formData={formData}
+                            parking={parking}
+                            buttonData={buttonData}
                             handleDecrement={handleDecrement}
                             handleIncrement={handleIncrement}
+                            handleInputChange={handleInputChange}
+                            handleParkingChange={handleParkingChange}
                         />
                     )}
                     {activeStep === 2 && (
                         <Step3
                             images={images}
                             formData={formData}
-                            bedrooms={bedrooms}
-                            bathrooms={bathrooms}
-                            guests={guests}
-                            parking={parking}
                             aminites={aminites}
+                            parking={parking}
+                            buttonData={buttonData}
                             selectedAmenities={selectedAmenities}
                         />
                     )}

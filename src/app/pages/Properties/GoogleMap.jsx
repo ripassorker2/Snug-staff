@@ -11,7 +11,8 @@ const Map = ({data}) => {
             <MapContainer
                 className="md:h-[500px] h-[300px] w-full z-[5] rounded-lg mt-4 "
                 center={[data.lat, data.lng]}
-                zoom={10}>
+                zoom={10}
+                scrollWheelZoom={false}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
