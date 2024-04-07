@@ -153,16 +153,16 @@ const Step1 = ({
                 />
             </div>
             <div className="mt-2">
-                <label htmlFor="longitude" className="block text-base mb-1">
-                    Property location longitude
+                <label htmlFor="longtitude" className="block text-base mb-1">
+                    Property location longtitude
                 </label>
                 <input
                     type="number"
-                    id="longitude"
-                    name="longitude"
+                    id="longtitude"
+                    name="longtitude"
                     className="input-feild"
-                    placeholder="Enter property location longitude..."
-                    value={formData.longitude}
+                    placeholder="Enter property location longtitude..."
+                    value={formData.longtitude}
                     onChange={handleInputChange}
                     required
                 />

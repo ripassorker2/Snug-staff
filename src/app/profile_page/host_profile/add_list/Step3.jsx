@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 
 const Step3 = ({
+    categories,
     images,
     formData,
     buttonData,
@@ -41,6 +42,18 @@ const Step3 = ({
             </div>
 
             <div>
+                <h2 className="my-2">
+                    Property category :{" "}
+                    {formData.category ? (
+                        categories.find(
+                            (category) =>
+                                category.id == Number(formData.category)
+                        )?.title
+                    ) : (
+                        <p className="text-red-500">Please select a category</p>
+                    )}
+                </h2>
+
                 <h2 className="md:text-2xl text-xl ">
                     Property title :{" "}
                     {formData.title ? (
@@ -51,6 +64,7 @@ const Step3 = ({
                         </p>
                     )}
                 </h2>
+
                 <div className="flex space-x-3 space-y-2 flex-wrap items-center mb-2">
                     <button className=" hidden"></button>
                     <button className=" !-ml-0 border-[2px]  shadow-md  rounded-lg px-2 py-1">
@@ -117,10 +131,10 @@ const Step3 = ({
                         )}
                     </h2>
                     <h2 className=" my-2 ">
-                        <b>Location longitude: </b>
-                        {formData.longitude || (
+                        <b>Location longtitude: </b>
+                        {formData.longtitude || (
                             <button className="text-red-500 ">
-                                Please provide property longitude.
+                                Please provide property longtitude.
                             </button>
                         )}
                     </h2>

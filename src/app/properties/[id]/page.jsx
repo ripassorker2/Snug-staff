@@ -72,7 +72,10 @@ const PropertyDetails = ({params}) => {
                                 {property?.bath_room} bathrooms
                             </button>
                             <button className="border-[2px]  shadow-md  rounded-lg px-2 py-1">
-                                {property?.guest} guests
+                                {property?.minimum_guest || 0} min guest
+                            </button>
+                            <button className="border-[2px]  shadow-md  rounded-lg px-2 py-1">
+                                {property?.maximum_guest || 0} max guest
                             </button>
                         </div>
                         <div className="my-6">
@@ -137,15 +140,15 @@ const PropertyDetails = ({params}) => {
                         />
                     </div>
                 </div>
-                {/* <div className="mt-12 ">
+                <div className="mt-12 ">
                     <Maps
                         data={{
-                            lat: 26.33551733419103,
-                            lng: 88.55087753715073,
-                            address: "Dhaka Bangladesh.",
+                            lat: `${property?.latitude}`,
+                            lng: `${property?.longtitude}`,
+                            address: `${property?.location}`,
                         }}
                     />
-                </div> */}
+                </div>
             </div>
             {showModal && (
                 <GalleryModal

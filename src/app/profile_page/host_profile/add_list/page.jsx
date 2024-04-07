@@ -92,7 +92,7 @@ const AddListPage = () => {
         area: "",
         location: "",
         latitude: "",
-        longitude: "",
+        longtitude: "",
         short_description: "",
         description: "",
         per_day_price: "",
@@ -127,73 +127,72 @@ const AddListPage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (images.length < 3) toast.error("Please upload at least 3 images.");
+        if (images.length < 3)
+            return toast.error("Please upload at least 3 images.");
 
-        // if (
-        //     !formData.category ||
-        //     !formData.title ||
-        //     !formData.area ||
-        //     !formData.price ||
-        //     !formData.location ||
-        //     !formData.short_description ||
-        //     !formData.description
-        // ) {
-        //     return toast.error("Please fill out all required fields.");
-        // }
+        if (
+            !formData.category ||
+            !formData.title ||
+            !formData.area ||
+            !formData.location ||
+            !formData.latitude ||
+            !formData.longtitude ||
+            !formData.short_description ||
+            !formData.description ||
+            !formData.per_day_price ||
+            !formData.per_guest_price ||
+            !formData.cleaning_fee ||
+            !formData.discount_price_days ||
+            !formData.discount_parcentage ||
+            !formData.allowed_cancelation_days
+        ) {
+            return toast.error("Please fill out all required fields.");
+        }
 
-        const pdata = {
-            category: formData.category,
-            title: formData.title,
-            area: formData.area,
-            location: formData.location,
-            latitude: formData.latitude,
-            longitude: formData.longitude,
-            short_description: formData.short_description,
-            description: formData.description,
-            per_day_price: formData.per_day_price,
-            per_guest_price: formData.per_guest_price,
-            cleaning_fee: formData.cleaning_fee,
-            discount_price_days: formData.discount_price_days,
-            discount_parcentage: formData.discount_parcentage,
-            allowed_cancelation_days: formData.allowed_cancelation_days,
-            bed_room: buttonData.bed_room,
-            bath_room: buttonData.bath_room,
-            minimum_guest: buttonData.minimum_guest,
-            maximum_guest: buttonData.maximum_guest,
-            minimum_stay: buttonData.minimum_stay,
-            images: images,
-            aminites: selectedAmenities,
-        };
+        const propertyFormData = new FormData();
 
-        console.log(pdata);
+        images.forEach((image) => {
+            propertyFormData.append(`upload_image`, image.file);
+        });
+        selectedAmenities.forEach((iminity) => {
+            propertyFormData.append(`amenities_list`, iminity);
+        });
 
-        // const propertyFormData = new FormData();
+        propertyFormData.append("author", user.id);
+        propertyFormData.append("category_id", formData.category);
+        propertyFormData.append("title", formData.title);
+        propertyFormData.append("area", formData.area);
+        propertyFormData.append("location", formData.location);
+        propertyFormData.append("latitude", formData.latitude);
+        propertyFormData.append("longtitude", formData.longtitude);
+        propertyFormData.append(
+            "short_description",
+            formData.short_description
+        );
+        propertyFormData.append("description", formData.description);
+        propertyFormData.append("per_day_price", formData.per_day_price);
+        propertyFormData.append("per_guest_price", formData.per_guest_price);
+        propertyFormData.append("cleaning_fee", formData.cleaning_fee);
+        propertyFormData.append(
+            "discount_price_days",
+            formData.discount_price_days
+        );
+        propertyFormData.append(
+            "discount_parcentage",
+            formData.discount_parcentage
+        );
+        propertyFormData.append(
+            "allowed_cancelation_days",
+            formData.allowed_cancelation_days
+        );
+        propertyFormData.append("bed_room", buttonData.bed_room);
+        propertyFormData.append("bath_room", buttonData.bath_room);
+        propertyFormData.append("minimum_guest", buttonData.minimum_guest);
+        propertyFormData.append("maximum_guest", buttonData.maximum_guest);
+        propertyFormData.append("minimum_stay", buttonData.minimum_stay);
+        propertyFormData.append("parking", parking);
 
-        // images.forEach((image) => {
-        //     propertyFormData.append(`upload_image`, image.file);
-        // });
-        // selectedAmenities.forEach((iminity) => {
-        //     propertyFormData.append(`amenities_list`, iminity);
-        // });
-
-        // propertyFormData.append("author", user.id);
-        // propertyFormData.append("category_id", formData.category);
-        // propertyFormData.append("title", formData.title);
-        // propertyFormData.append("area", formData.area);
-        // propertyFormData.append("price", formData.price);
-        // propertyFormData.append("location", formData.location);
-        // propertyFormData.append(
-        //     "short_description",
-        //     formData.short_description
-        // );
-        // propertyFormData.append("description", formData.description);
-
-        // // propertyFormData.append("bed_room", bedrooms);
-        // // propertyFormData.append("bath_room", bathrooms);
-        // // propertyFormData.append("guest", guests);
-        // propertyFormData.append("parking", parking);
-
-        // uploadPropety(propertyFormData);
+        uploadPropety(propertyFormData);
     };
 
     return (
@@ -234,6 +233,7 @@ const AddListPage = () => {
                     )}
                     {activeStep === 2 && (
                         <Step3
+                            categories={categories}
                             images={images}
                             formData={formData}
                             aminites={aminites}

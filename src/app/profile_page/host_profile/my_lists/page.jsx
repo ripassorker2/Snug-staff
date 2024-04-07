@@ -22,7 +22,7 @@ const MyLists = () => {
                                 key={i}
                                 className="border border-gray-400 p-4 rounded-lg shadow-md">
                                 <Image
-                                    src={dt.property_images[0].image}
+                                    src={dt?.property_images[0]?.image}
                                     width={200}
                                     height={200}
                                     className="rounded-lg w-full h-[200px]"
