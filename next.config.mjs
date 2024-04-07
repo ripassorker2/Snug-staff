@@ -13,6 +13,7 @@ const nextConfig = {
         CLIENT_ID: process.env.NEXT_AUTH_CLIENT_ID,
         CLIENT_SECRET: process.env.NEXT_AUTH_CLIENT_SECRET,
     },
+    turbo: true,
 };
 
 export default nextConfig;

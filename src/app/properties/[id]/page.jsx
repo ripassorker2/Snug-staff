@@ -1,13 +1,14 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import GalleryModal from "@/app/components/GalleryModal/GalleryModal";
 import Image from "next/image";
 import React, {useState} from "react";
 import {BiSolidGrid} from "react-icons/bi";
 import {MdOutlineChecklistRtl, MdOutlineStar} from "react-icons/md";
-import userImage from "../../../assets/profile-circle.1023x1024.png";
 import DatePicker from "../../pages/Properties/DatePicker";
 import {useGetPropertyDetailsQuery} from "@/redux/api/propertyApi";
 import Loading from "@/app/profile_page/loading";
+import Maps from "../../pages/Properties/GoogleMap";
 
 const PropertyDetails = ({params}) => {
     const [showModal, setShowModal] = useState(false);
@@ -28,30 +29,24 @@ const PropertyDetails = ({params}) => {
             <div className="md:mt-20 mt-12">
                 <div className="w-full grid md:grid-cols-5 gap-3 md:rounded-l-xl rounded-xl overflow-hidden">
                     <figure className="md:h-[510px] overflow-hidden md:col-span-3">
-                        <Image
+                        <img
                             src={property?.property_images[0]?.image}
                             className="w-full h-full  object-cover object-center hover:scale-105 duration-300   "
-                            width={200}
-                            height={200}
                             alt="property image"
                         />
                     </figure>
-                    <div className="md:col-span-2 grid gap-2 md:rounded-r-xl rounded-b-xl overflow-hidden">
+                    <div className="md:col-span-2 grid gap-2 md:rounded-r-xl md:rounded-b-none rounded-b-xl overflow-hidden">
                         <figure className="overflow-hidden md:h-[250px]">
-                            <Image
+                            <img
                                 src={property?.property_images[1]?.image}
                                 className="w-full h-full  object-cover object-center hover:scale-105 duration-300"
-                                width={200}
-                                height={200}
                                 alt="property image"
                             />
                         </figure>
                         <figure className="overflow-hidden md:h-[250px] relative">
-                            <Image
+                            <img
                                 src={property?.property_images[2]?.image}
                                 className="w-full h-full  object-cover object-center hover:scale-105 duration-300"
-                                width={200}
-                                height={200}
                                 alt="property image"
                             />
                             <button
@@ -101,7 +96,7 @@ const PropertyDetails = ({params}) => {
                         <div className="my-4">
                             <div className="flex space-x-2 items-center">
                                 <Image
-                                    src={userImage}
+                                    src={property?.logo}
                                     className="rounded-full"
                                     height={50}
                                     width={50}
@@ -142,7 +137,7 @@ const PropertyDetails = ({params}) => {
                         />
                     </div>
                 </div>
-                {/* <div className="mt-12 ">
+                <div className="mt-12 ">
                     <Maps
                         data={{
                             lat: 26.33551733419103,
@@ -150,7 +145,7 @@ const PropertyDetails = ({params}) => {
                             address: "Dhaka Bangladesh.",
                         }}
                     />
-                </div> */}
+                </div>
             </div>
             {showModal && (
                 <GalleryModal

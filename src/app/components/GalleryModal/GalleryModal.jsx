@@ -1,8 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import {Dialog} from "@material-tailwind/react";
 import {IoMdArrowRoundBack} from "react-icons/io";
-import Image from "next/image";
-
 const GalleryModal = ({images, showModal, setShowModal}) => {
     return (
         <Dialog
@@ -34,7 +33,7 @@ const GalleryModal = ({images, showModal, setShowModal}) => {
                                         ? "col-span-2"
                                         : ""
                                 } `}>
-                                <Image
+                                <img
                                     className={`max-h-[450px] w-full rounded-lg object-cover object-center ${
                                         i == 0 ||
                                         i == 3 ||
@@ -46,8 +45,6 @@ const GalleryModal = ({images, showModal, setShowModal}) => {
                                             : "md:h-[300px]"
                                     }  `}
                                     src={img.image}
-                                    width={200}
-                                    height={200}
                                     alt="gallery-photo"
                                 />
                             </div>
