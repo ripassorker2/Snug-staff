@@ -1,77 +1,158 @@
 "use client";
 import HostProtected from "@/protect_route/HostProtect";
 import Image from "next/image";
-import {FaUser} from "react-icons/fa";
-import {MdOutlineBedroomParent, MdOutlineBathroom} from "react-icons/md";
 import {useGetPropertiesByHostQuery} from "@/redux/api/propertyApi";
 import Loading from "../../loading";
-
+import {Tooltip} from "@material-tailwind/react";
+import {useState} from "react";
+import PropertyDetailModal from "@/app/components/Modal/PropertyDetailModal/PropertyDetailModal";
+import DeleteModal from "@/app/components/Modal/DeleteModal/DeleteModal";
+const TABLE_HEAD = ["Picture", "Property name", "Details", "Update", "Delete"];
 const MyLists = () => {
-    const {data, isLoading} = useGetPropertiesByHostQuery();
+    const [detailsModal, setDetailsModal] = useState(false);
+    const [deleteModal, setDeleteModal] = useState(false);
+    const [currentProperty, setCurrentProperty] = useState(null);
+
+    const {data: properties, isLoading} = useGetPropertiesByHostQuery();
     if (isLoading) return <Loading />;
+
     return (
         <HostProtected>
-            <div className="text-gray-800">
-                <h2 className="sub-head">
-                    <span>My all properties</span>
-                </h2>
-                {data?.length ? (
-                    <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 mt-8">
-                        {data?.map((dt, i) => (
-                            <div
-                                key={i}
-                                className="border border-gray-400 p-4 rounded-lg shadow-md">
-                                <Image
-                                    src={dt?.property_images[0]?.image}
-                                    width={200}
-                                    height={200}
-                                    className="rounded-lg w-full h-[200px]"
-                                    alt="property images"
-                                />
-                                <div className="flex space-x-3 space-y-3 -ml-3 flex-wrap items-center my-2 text-sm">
-                                    <button className="hidden "></button>
-                                    <button className="bg-gray-300  inline-flex items-center rounded-lg px-2 py-1">
-                                        <MdOutlineBedroomParent
-                                            size={14}
-                                            className="mr-1"
-                                        />{" "}
-                                        {dt.bed_room} bed
-                                    </button>
-                                    <button className="bg-gray-300  inline-flex items-center rounded-lg px-2 py-1">
-                                        <MdOutlineBathroom
-                                            size={14}
-                                            className="mr-1"
-                                        />
-                                        {dt.bath_room} bath
-                                    </button>
-                                    <button className="bg-gray-300  inline-flex items-center rounded-lg px-2 py-1">
-                                        <FaUser size={14} className=" mr-1" />
-                                        {dt.guest} guest
-                                    </button>
-                                </div>
-                                <div className="mt-3 leading-5 text-base">
-                                    <h3 className="text-lg font-semibold text-gray-800">
-                                        {dt.title.length > 39
-                                            ? `${dt.title.slice(0, 39)}...`
-                                            : dt.title}
-                                    </h3>
+            {properties.length ? (
+                <div className="">
+                    <h2 className="sub-head pb-4">
+                        <span>My properties</span>
+                    </h2>
+                    <div className="shadow-md rounded-lg scrollbar">
+                        <div className="w-full  overflow-x-auto ">
+                            <table className="w-full min-w-max text-center">
+                                <thead>
+                                    <tr>
+                                        {TABLE_HEAD.map((head, index) => (
+                                            <th
+                                                key={index}
+                                                className="border-b  border-blue-gray-100 bg-blue-gray-50 p-4">
+                                                <p className="font-medium ">
+                                                    {head}
+                                                </p>
+                                            </th>
+                                        ))}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {properties?.map((property, index) => {
+                                        const isLast =
+                                            index === properties.length - 1;
+                                        const classes = isLast
+                                            ? "p-4 text-[15px]"
+                                            : "p-4 border-b border-gray-300 text-[15px]";
 
-                                    <p className="pt-2">
-                                        <b>${dt.price}</b> per person/night
-                                    </p>
-                                </div>
-                                <button className="btn-secondary mt-4 w-full rounded-lg">
-                                    More details
-                                </button>
-                            </div>
-                        ))}
+                                        return (
+                                            <tr key={index}>
+                                                <td
+                                                    className={`${classes}  bg-blue-gray-100/20 flex justify-center items-center`}>
+                                                    <Image
+                                                        src={
+                                                            property
+                                                                ?.property_images[0]
+                                                                ?.image
+                                                        }
+                                                        alt="property image"
+                                                        height={90}
+                                                        width={100}
+                                                        wipropertyh={100}
+                                                        className="rounded-lg object-cover object-center"
+                                                    />
+                                                </td>
+                                                <td className={`${classes}`}>
+                                                    <Tooltip
+                                                        placement="top"
+                                                        content={property.title}
+                                                        animate={{
+                                                            mount: {
+                                                                scale: 1,
+                                                                y: 0,
+                                                            },
+                                                            unmount: {
+                                                                scale: 0,
+                                                                y: 25,
+                                                            },
+                                                        }}>
+                                                        <p>
+                                                            {property.title
+                                                                .length > 30
+                                                                ? `${property.title.slice(
+                                                                      0,
+                                                                      30
+                                                                  )}...`
+                                                                : property.title}
+                                                        </p>
+                                                    </Tooltip>
+                                                </td>
+
+                                                <td
+                                                    className={`${classes} bg-blue-gray-100/20`}>
+                                                    <button
+                                                        onClick={() => {
+                                                            setCurrentProperty(
+                                                                property
+                                                            );
+                                                            setDetailsModal(
+                                                                true
+                                                            );
+                                                        }}
+                                                        className="bg-primary text-gray-200 rounded-xl px-2 py-[3px] text-sm">
+                                                        Details
+                                                    </button>
+                                                </td>
+                                                <td className={`${classes}`}>
+                                                    <button className="bg-secondary text-gray-200 rounded-xl px-2 py-[3px] text-sm">
+                                                        Update
+                                                    </button>
+                                                </td>
+                                                <td
+                                                    className={`${classes} bg-blue-gray-100/20`}>
+                                                    <button
+                                                        onClick={() => {
+                                                            setCurrentProperty(
+                                                                property
+                                                            );
+                                                            setDeleteModal(
+                                                                true
+                                                            );
+                                                        }}
+                                                        className="bg-red-500 text-gray-200 rounded-xl px-2 py-[3px] text-sm">
+                                                        Delete
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                ) : (
-                    <p className="mt-7 text-base text-gray-800">
-                        You dont have any property.
-                    </p>
-                )}
-            </div>
+                </div>
+            ) : (
+                <p className="text-center mt-32 h-[60vh] text-lg">
+                    No property available.
+                </p>
+            )}
+            {detailsModal && currentProperty && (
+                <PropertyDetailModal
+                    property={currentProperty}
+                    showModal={detailsModal}
+                    setShowModal={setDetailsModal}
+                />
+            )}
+
+            {deleteModal && (
+                <DeleteModal
+                    id={currentProperty.id}
+                    showModal={deleteModal}
+                    setShowModal={setDeleteModal}
+                />
+            )}
         </HostProtected>
     );
 };

@@ -19,17 +19,17 @@ const PropertyCard = ({property}) => {
 
             <div className="flex space-x-3 space-y-3 -ml-3 flex-wrap items-center my-2 text-sm">
                 <button className="hidden "></button>
-                <button className="bg-gray-300  inline-flex items-center rounded-lg px-2 py-1">
+                <button className=" inline-flex items-center border-[2px]  shadow-md  rounded-lg px-2 py-1">
                     <MdOutlineBedroomParent size={14} className="mr-1" />{" "}
                     {property.bed_room} bed
                 </button>
-                <button className="bg-gray-300  inline-flex items-center rounded-lg px-2 py-1">
+                <button className=" inline-flex items-center border-[2px]  shadow-md  rounded-lg px-2 py-1">
                     <MdOutlineBathroom size={14} className="mr-1" />
                     {property.bath_room} bath
                 </button>
-                <button className="bg-gray-300  inline-flex items-center rounded-lg px-2 py-1">
+                <button className=" inline-flex items-center border-[2px]  shadow-md  rounded-lg px-2 py-1">
                     <FaUser size={14} className=" mr-1" />
-                    {property.guest} guest
+                    {property.minimum_guest} min guest
                 </button>
             </div>
             <div className="mt-3 leading-5 text-base">

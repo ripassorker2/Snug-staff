@@ -18,7 +18,7 @@ const GalleryModal = ({images, showModal, setShowModal}) => {
                     className="my-5 "
                 />
 
-                <div className="max-w-4xl mx-auto overflow-auto max-h-[88vh]">
+                <div className="max-w-4xl mx-auto overflow-auto pb-8 max-h-[88vh]">
                     <div className="grid gap-4 md:grid-cols-2">
                         {images?.map((img, i) => (
                             <div
@@ -30,7 +30,7 @@ const GalleryModal = ({images, showModal, setShowModal}) => {
                                     i == 9 ||
                                     i == 11 ||
                                     i == 14
-                                        ? "col-span-2"
+                                        ? "md:col-span-2"
                                         : ""
                                 } `}>
                                 <img
@@ -42,7 +42,7 @@ const GalleryModal = ({images, showModal, setShowModal}) => {
                                         i == 11 ||
                                         i == 14
                                             ? "max-h-[450px]"
-                                            : "md:h-[300px]"
+                                            : "h-[300px]"
                                     }  `}
                                     src={img.image}
                                     alt="gallery-photo"

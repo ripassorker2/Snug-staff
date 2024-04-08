@@ -113,6 +113,15 @@ const Step3 = ({
                     <b> Parking area : </b>
                     {parking ? "Available" : "Not available"}
                 </h2>
+
+                <h2 className="my-2">
+                    <b>Property area : </b>
+                    {formData.area || (
+                        <button className="text-red-500 ">
+                            Please provide property area.
+                        </button>
+                    )}
+                </h2>
                 <h2 className="my-2">
                     <b>Location : </b>
                     {formData.location || (

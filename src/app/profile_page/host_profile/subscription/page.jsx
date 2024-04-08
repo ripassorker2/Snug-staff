@@ -3,7 +3,7 @@ import {useState} from "react";
 import {Checkbox, Tooltip} from "@material-tailwind/react";
 import {useGetPropertiesByHostQuery} from "@/redux/api/propertyApi";
 import Loading from "../../loading";
-import SubscriptionModal from "@/app/components/SubscriptionModal/SubscriptionModal";
+import SubscriptionModal from "@/app/components/Modal/SubscriptionModal/SubscriptionModal";
 import Image from "next/image";
 
 const TABLE_HEAD = ["", "Picture", "Property name", "Price", "Action"];
@@ -26,8 +26,8 @@ const SubscriptionPage = () => {
     return (
         <>
             {data?.filter((dt) => !dt.is_subcribed)?.length ? (
-                <div className="shadow-md rounded-lg">
-                    <div className="w-full overflow-x-scroll ">
+                <div className="shadow-md rounded-lg scrollbar">
+                    <div className="w-full overflow-x-auto ">
                         <table className="w-full min-w-max text-center">
                             <thead>
                                 <tr>

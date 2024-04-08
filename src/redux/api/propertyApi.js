@@ -15,6 +15,18 @@ const propertiesApiSlices = api.injectEndpoints({
             }),
             invalidatesTags: ["properties"],
         }),
+        deleteProperty: builder.mutation({
+            query: ({id}) => ({
+                url: `host/property/${id}/`,
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${
+                        localStorage.getItem("snugstuff_access_token") || ""
+                    }`,
+                },
+            }),
+            invalidatesTags: ["properties"],
+        }),
         getAllProperties: builder.query({
             query: () => ({
                 url: `property`,
@@ -56,4 +68,5 @@ export const {
     useGetPropertiesCategoryQuery,
     useGetPropertiesAminityQuery,
     useGetPropertiesByHostQuery,
+    useDeletePropertyMutation,
 } = propertiesApiSlices;

@@ -4,7 +4,7 @@ import React, {useState} from "react";
 import userLogo from "../../../assets/profile-circle.1023x1024.png";
 import {useUserContext} from "@/context/AuthProvider/AuthProvider";
 import {MdEdit} from "react-icons/md";
-import ProfileUpdateModal from "@/app/components/ProfileUpdateModal/ProfileUpdateModal";
+import ProfileUpdateModal from "@/app/components/Modal/ProfileUpdateModal/ProfileUpdateModal";
 import UserProtected from "@/protect_route/UserProtect";
 
 const UserProfilePage = () => {

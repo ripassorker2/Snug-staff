@@ -4,7 +4,7 @@ import MarkerShadow from "../../../../node_modules/leaflet/dist/images/marker-sh
 import "leaflet/dist/leaflet.css";
 import {MapContainer, TileLayer, Marker, Popup} from "react-leaflet";
 
-const Map = ({data}) => {
+const GoogleMap = ({data}) => {
     return (
         <div className="relative">
             <h2 className="text-xl ">Where we place.</h2>
@@ -45,4 +45,4 @@ const Map = ({data}) => {
     );
 };
 
-export default Map;
+export default GoogleMap;

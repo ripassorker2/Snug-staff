@@ -2,7 +2,7 @@
 "use client";
 import React, {useEffect, useState} from "react";
 import toast from "react-hot-toast";
-import SmallLoader from "../SmallLoader/SmallLoader";
+import SmallLoader from "../../SmallLoader/SmallLoader";
 import {
     useGetSubscriptionMutation,
     useSuccessSubscriptionMutation,
@@ -68,46 +68,44 @@ const SubscriptionModal = ({
     };
 
     return (
-        <>
-            <Dialog
-                open={showModal}
-                size="sm"
-                animate={{
-                    mount: {scale: 1, y: 0},
-                    unmount: {scale: 0.9, y: -100},
-                }}>
-                <DialogBody className="md:p-8 p-5 text-gray-700">
-                    <p className="text-lg pb-2 font-semibold">
-                        <span> Select your subscription type</span>
-                    </p>
-                    <select
-                        className="focus:outline-none border border-gray-300 bg-blue-gray-100/30 px-4 py-2.5 rounded-md w-full"
-                        value={selectedOption}
-                        onChange={(e) => setSelectedOption(e.target.value)}>
-                        <option value={0}>Free</option>
-                        <option selected value={1}>
-                            Monthly
-                        </option>
-                    </select>
-                </DialogBody>
-                <DialogFooter>
-                    <button
-                        onClick={() => {
-                            setShowModal(false);
-                            setSelectedRows([]);
-                        }}
-                        className="mr-4 btn-primary">
-                        Cancel
-                    </button>
-                    <button
-                        disabled={isLoading || ssLoading}
-                        className="btn-secondary"
-                        onClick={handleSubmit}>
-                        {isLoading || ssLoading ? <SmallLoader /> : "Confirm"}
-                    </button>
-                </DialogFooter>
-            </Dialog>
-        </>
+        <Dialog
+            open={showModal}
+            size="sm"
+            animate={{
+                mount: {scale: 1, y: 0},
+                unmount: {scale: 0.9, y: -100},
+            }}>
+            <DialogBody className="md:p-8 p-5 text-gray-700">
+                <p className="text-lg pb-2 font-semibold">
+                    <span> Select your subscription type</span>
+                </p>
+                <select
+                    className="focus:outline-none border border-gray-300 bg-blue-gray-100/30 px-4 py-2.5 rounded-md w-full"
+                    value={selectedOption}
+                    onChange={(e) => setSelectedOption(e.target.value)}>
+                    <option value={0}>Free</option>
+                    <option selected value={1}>
+                        Monthly
+                    </option>
+                </select>
+            </DialogBody>
+            <DialogFooter>
+                <button
+                    onClick={() => {
+                        setShowModal(false);
+                        setSelectedRows([]);
+                    }}
+                    className="mr-4 btn-primary">
+                    Cancel
+                </button>
+                <button
+                    disabled={isLoading || ssLoading}
+                    className="btn-secondary"
+                    onClick={handleSubmit}>
+                    {isLoading || ssLoading ? <SmallLoader /> : "Confirm"}
+                </button>
+            </DialogFooter>
+        </Dialog>
     );
 };
 

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import React, {useEffect, useState} from "react";
 import {
@@ -8,11 +9,11 @@ import {
 } from "@material-tailwind/react";
 import {MdCancel} from "react-icons/md";
 import Image from "next/image";
-import avatar from "../../../assets/blank-profile-picture-973460_1280.png";
+import avatar from "../../../../assets/blank-profile-picture-973460_1280.png";
 import {useUpdateProfileMutation} from "@/redux/api/utilsApiSlice";
 import {useUserContext} from "@/context/AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
-import SmallLoader from "../SmallLoader/SmallLoader";
+import SmallLoader from "../../SmallLoader/SmallLoader";
 
 const ProfileUpdateModal = ({openModal, setOpenModal}) => {
     const {user, refetch, setRefetch} = useUserContext();

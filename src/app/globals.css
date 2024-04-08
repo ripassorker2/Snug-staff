@@ -46,7 +46,8 @@ span {
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 5px;
+    height: 5px;
     display: none;
 }
 
@@ -54,8 +55,15 @@ span {
     background: #eae7e7;
     border-radius: 5px;
 }
-
 ::-webkit-scrollbar-thumb {
     background-color: rgb(167, 183, 183);
     border-radius: 6px;
+}
+.scrollbar {
+    scrollbar-width: thin;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.scrollbar:hover ::-webkit-scrollbar {
+    display: block;
 }
