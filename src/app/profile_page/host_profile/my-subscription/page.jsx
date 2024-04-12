@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import React, {useEffect} from "react";
 import {
@@ -46,7 +47,7 @@ const MySubscriptionPage = () => {
     return (
         <HostProtected>
             {data.length ? (
-                <div className="">
+                <>
                     <h2 className="sub-head pb-4">
                         <span>My subscription properties</span>
                     </h2>
@@ -132,7 +133,7 @@ const MySubscriptionPage = () => {
                             </table>
                         </div>
                     </div>
-                </div>
+                </>
             ) : (
                 <p className="text-center mt-32 h-[60vh] text-lg">
                     No property available.

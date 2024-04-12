@@ -4,13 +4,14 @@ import MarkerShadow from "../../../../node_modules/leaflet/dist/images/marker-sh
 import "leaflet/dist/leaflet.css";
 import {MapContainer, TileLayer, Marker, Popup} from "react-leaflet";
 
-const GoogleMap = ({data}) => {
+const GoogleMap = ({lat = 0.0, long = 0.0, location = ""}) => {
+    console.log(lat, long, location);
     return (
         <div className="relative">
             <h2 className="text-xl ">Where we place.</h2>
             <MapContainer
                 className="md:h-[500px] h-[300px] w-full z-[5] rounded-lg mt-4 "
-                center={[data.lat, data.lng]}
+                center={[lat, long]}
                 zoom={10}
                 scrollWheelZoom={false}>
                 <TileLayer
@@ -30,10 +31,10 @@ const GoogleMap = ({data}) => {
                             shadowSize: [41, 41],
                         })
                     }
-                    position={[data.lat, data.lng]}>
+                    position={[lat, long]}>
                     <Popup className="">
                         <div className="text-center text-xs">
-                            <h3>{data.address}</h3>
+                            <h3>{location}</h3>
                         </div>
                     </Popup>
                 </Marker>

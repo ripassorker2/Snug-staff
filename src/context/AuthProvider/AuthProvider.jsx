@@ -9,6 +9,7 @@ export const AuthProvider = ({children}) => {
     const [loading, setLoading] = useState(true);
     const [refetch, setRefetch] = useState(false);
     const [token, setToken] = useState("");
+
     useEffect(() => {
         setLoading(true);
         setToken(localStorage.getItem("snugstuff_access_token") || "");

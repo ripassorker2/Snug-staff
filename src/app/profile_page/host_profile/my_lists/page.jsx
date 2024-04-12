@@ -1,13 +1,15 @@
 "use client";
-import HostProtected from "@/protect_route/HostProtect";
+import {useState} from "react";
 import Image from "next/image";
-import {useGetPropertiesByHostQuery} from "@/redux/api/propertyApi";
 import Loading from "../../loading";
 import {Tooltip} from "@material-tailwind/react";
-import {useState} from "react";
-import PropertyDetailModal from "@/app/components/Modal/PropertyDetailModal/PropertyDetailModal";
-import DeleteModal from "@/app/components/Modal/DeleteModal/DeleteModal";
+import HostProtected from "@/protect_route/HostProtect";
+import {useGetPropertiesByHostQuery} from "@/redux/api/propertyApi";
+import DeleteModal from "../../../components/Modal/DeleteModal/DeleteModal";
+import DetailModal from "../../../components/Modal/PropertyDetailModal/DetailModal";
+
 const TABLE_HEAD = ["Picture", "Property name", "Details", "Update", "Delete"];
+
 const MyLists = () => {
     const [detailsModal, setDetailsModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
@@ -19,7 +21,7 @@ const MyLists = () => {
     return (
         <HostProtected>
             {properties.length ? (
-                <div className="">
+                <>
                     <h2 className="sub-head pb-4">
                         <span>My properties</span>
                     </h2>
@@ -132,21 +134,22 @@ const MyLists = () => {
                             </table>
                         </div>
                     </div>
-                </div>
+                </>
             ) : (
                 <p className="text-center mt-32 h-[60vh] text-lg">
                     No property available.
                 </p>
             )}
-            {detailsModal && currentProperty && (
-                <PropertyDetailModal
+
+            {detailsModal && (
+                <DetailModal
                     property={currentProperty}
                     showModal={detailsModal}
                     setShowModal={setDetailsModal}
                 />
             )}
 
-            {deleteModal && (
+            {deleteModal && currentProperty && (
                 <DeleteModal
                     id={currentProperty.id}
                     showModal={deleteModal}

@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const HostProtected = ({children}) => {
     const {user} = useUserContext();
-    if (user?.role == "host") return children;
+    if (user?.role == "host") return <>{children}</>;
     else
         return (
             <div className="text-center mt-32 h-[60vh] text-lg">

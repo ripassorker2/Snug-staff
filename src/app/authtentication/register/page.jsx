@@ -5,23 +5,25 @@ import SmallLoader from "@/app/components/SmallLoader/SmallLoader";
 import {useUserContext} from "@/context/AuthProvider/AuthProvider";
 import {config} from "@/envConfig/envConfig";
 import {resistationSchema} from "@/schemas";
+import {afterLogin} from "@/utils/afterLogin";
+import {getTokens} from "@/utils/googleLogin";
 import {useFormik} from "formik";
 import Link from "next/link";
 import {useRouter} from "next/navigation";
 import React, {useEffect, useState} from "react";
 import toast from "react-hot-toast";
 import {FcGoogle} from "react-icons/fc";
+import {useGoogleLogin} from "@react-oauth/google";
 
 const RegisterPage = () => {
-    const {token} = useUserContext();
+    const {token, setToken} = useUserContext();
     const router = useRouter();
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        if (token) {
-            router.push("/");
-        }
+        if (token) router.push("/");
     }, [token]);
+
     const initialResisterValues = {
         username: "",
         email: "",
@@ -52,10 +54,10 @@ const RegisterPage = () => {
                     const data = await response.json();
                     console.log(data);
                     if (data.success) {
-                        toast.success("Account created successfully.");
                         action.resetForm();
                         router.push("/authtentication/login");
                         setLoading(false);
+                        toast.success("Account created successfully.");
                     } else {
                         setLoading(false);
                         toast.error(
@@ -71,6 +73,20 @@ const RegisterPage = () => {
                 }
             },
         });
+
+    const handleGoogleLogin = useGoogleLogin({
+        onSuccess: (res) => {
+            getTokens(res.code)
+                .then((data) => {
+                    if (data.access_token)
+                        afterLogin(setToken, data, router, toast);
+                })
+                .catch((error) => {
+                    console.error("Something went wrong.", error);
+                });
+        },
+        flow: "auth-code",
+    });
     return (
         <div className="container">
             <div className="flex justify-center items-center mt-8">
@@ -180,25 +196,29 @@ const RegisterPage = () => {
                                     -----------------
                                 </div>
                             </div>
-                            <div className="mt-2">
-                                <button className="btn-secondary inline-flex justify-center items-center py-3 font-semibold  w-full">
-                                    <FcGoogle className="mr-2" size={22} />{" "}
-                                    Continue with google
-                                </button>
-                            </div>
-                            <div className="mt-2">
-                                <div className="desc">
-                                    Already have an account?
-                                    <Link
-                                        href={"/authtentication/login"}
-                                        className="hover:underline">
-                                        {" "}
-                                        <span> Login from Here</span>
-                                    </Link>
-                                </div>
-                            </div>
                         </div>
                     </form>
+                    <div>
+                        <div className="mt-2">
+                            <button
+                                onClick={() => handleGoogleLogin()}
+                                className="btn-secondary inline-flex justify-center items-center py-3 font-semibold  w-full">
+                                <FcGoogle className="mr-2" size={22} /> Continue
+                                with google
+                            </button>
+                        </div>
+                        <div className="mt-2">
+                            <div className="desc">
+                                Already have an account?
+                                <Link
+                                    href={"/authtentication/login"}
+                                    className="hover:underline">
+                                    {" "}
+                                    <span>Please Login from Here</span>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

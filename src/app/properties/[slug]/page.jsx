@@ -6,7 +6,7 @@ import {useGetPropertyDetailsQuery} from "@/redux/api/propertyApi";
 import Loading from "@/app/profile_page/loading";
 import PropertyImages from "@/app/pages/Properties/PropertyImages";
 import BasicInfo from "@/app/pages/Properties/BasicInfo";
-import GoogleMap from "@/app/pages/Properties/GoogleMap";
+import GoogleMap from "@/app/components/Map/GoogleMap";
 
 const PropertyDetails = ({params}) => {
     const [showModal, setShowModal] = useState(false);
@@ -44,11 +44,9 @@ const PropertyDetails = ({params}) => {
                 </div>
                 <div className="mt-12 ">
                     <GoogleMap
-                        data={{
-                            lat: `${property?.latitude}`,
-                            lng: `${property?.longtitude}`,
-                            address: `${property?.location}`,
-                        }}
+                        lat={property?.latitude}
+                        long={property?.longtitude}
+                        location={property?.location}
                     />
                 </div>
             </div>

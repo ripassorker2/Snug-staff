@@ -1,12 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import GoogleMap from "@/app/pages/Properties/GoogleMap";
 import {Dialog, DialogBody, DialogHeader} from "@material-tailwind/react";
-import React from "react";
 import {MdOutlineCancel} from "react-icons/md";
 
-const PropertyDetailModal = ({property, showModal, setShowModal}) => {
-    console.log(property);
-    console.log(property.aminites);
+const DetailModal = ({property, showModal, setShowModal}) => {
     return (
         <Dialog
             open={showModal}
@@ -75,21 +71,24 @@ const PropertyDetailModal = ({property, showModal, setShowModal}) => {
                         {property.discount_parcentage}%
                     </h2>
                 </div>
-                <h2 className="mb-1">
-                    <b className="font-semibold">Price</b> : ${property.price}
-                </h2>
-                <h2 className="mb-1">
-                    <b className="font-semibold"> Parking area : </b>
-                    {property.parking ? "Available" : "Not available"}
-                </h2>
-                <h2 className="mb-1">
-                    <b className="font-semibold"> Property area : </b>
-                    {property.area}
-                </h2>
-                <h2 className="mb-1">
-                    <b className="font-semibold">Location : </b>
-                    {property.location}
-                </h2>
+                <div>
+                    <h2 className="mb-1">
+                        <b className="font-semibold">Price</b> : $
+                        {property.price}
+                    </h2>
+                    <h2 className="mb-1">
+                        <b className="font-semibold"> Parking area : </b>
+                        {property.parking ? "Available" : "Not available"}
+                    </h2>
+                    <h2 className="mb-1">
+                        <b className="font-semibold"> Property area : </b>
+                        {property.area}
+                    </h2>
+                    <h2 className="mb-1">
+                        <b className="font-semibold">Location : </b>
+                        {property.location}
+                    </h2>
+                </div>
 
                 <div className="my-2">
                     <b className="font-semibold">Short description</b>
@@ -118,16 +117,13 @@ const PropertyDetailModal = ({property, showModal, setShowModal}) => {
                         ))}
                     </div>
                 </div>
-
-                <div className="mt-5">
+                {/* <div className="mt-5 ">
                     <GoogleMap
-                        data={{
-                            lat: `${property?.latitude}`,
-                            lng: `${property?.longtitude}`,
-                            address: `${property?.location}`,
-                        }}
+                        lat={property?.latitude}
+                        long={property?.longtitude}
+                        location={property?.location}
                     />
-                </div>
+                </div> */}
 
                 <div className="flex justify-end mt-5">
                     <button
@@ -143,4 +139,4 @@ const PropertyDetailModal = ({property, showModal, setShowModal}) => {
     );
 };
 
-export default PropertyDetailModal;
+export default DetailModal;

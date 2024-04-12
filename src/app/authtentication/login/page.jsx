@@ -11,6 +11,9 @@ import {useRouter} from "next/navigation";
 import React, {useEffect, useState} from "react";
 import toast from "react-hot-toast";
 import {FcGoogle} from "react-icons/fc";
+import {useGoogleLogin} from "@react-oauth/google";
+import {getTokens} from "@/utils/googleLogin";
+import {afterLogin} from "@/utils/afterLogin";
 
 const LoginPage = () => {
     const {token, setToken} = useUserContext();
@@ -47,26 +50,16 @@ const LoginPage = () => {
                                 username: email,
                                 password,
                                 grant_type: "password",
-                                client_id: config.client_id,
-                                client_secret: config.client_secret,
+                                client_id: config.auth_client_id,
+                                client_secret: config.auth_client_secret,
                             }),
                         }
                     );
                     const data = await response.json();
                     if (data.access_token) {
-                        setToken(data.access_token);
-                        localStorage.setItem(
-                            "snugstuff_access_token",
-                            data.access_token
-                        );
-                        localStorage.setItem(
-                            "snugstuff_refresh_token",
-                            data.refresh_token
-                        );
+                        afterLogin(setToken, data, router, toast);
                         action.resetForm();
                         setLoading(false);
-                        toast.success("Login successfully.");
-                        router.push("/");
                     } else {
                         toast.error(data.error_description);
                         setLoading(false);
@@ -78,6 +71,21 @@ const LoginPage = () => {
                 }
             },
         });
+
+    const handleGoogleLogin = useGoogleLogin({
+        onSuccess: (res) => {
+            getTokens(res.code)
+                .then((data) => {
+                    if (data.access_token)
+                        afterLogin(setToken, data, router, toast);
+                })
+                .catch((error) => {
+                    console.error("Something went wrong.", error);
+                });
+        },
+        flow: "auth-code",
+    });
+
     return (
         <div className="container">
             <div className="flex justify-center items-center md:mt-16 mt-8">
@@ -142,25 +150,29 @@ const LoginPage = () => {
                                     -----------------
                                 </div>
                             </div>
-                            <div className="mt-2">
-                                <button className="btn-secondary inline-flex justify-center items-center py-3 font-semibold  w-full">
-                                    <FcGoogle className="mr-2" size={22} />{" "}
-                                    Continue with google
-                                </button>
-                            </div>
-                            <div className="mt-2">
-                                <div className="desc">
-                                    Don't have an account?{" "}
-                                    <Link
-                                        href={"/authtentication/register"}
-                                        className="hover:underline">
-                                        {" "}
-                                        <span> Sign up for free</span>
-                                    </Link>
-                                </div>
-                            </div>
                         </div>
                     </form>
+                    <div>
+                        <div className="mt-2">
+                            <button
+                                onClick={() => handleGoogleLogin()}
+                                className="btn-secondary inline-flex justify-center items-center py-3 font-semibold  w-full">
+                                <FcGoogle className="mr-2" size={22} /> Continue
+                                with google
+                            </button>
+                        </div>
+                        <div className="mt-2">
+                            <div className="desc">
+                                Don't have an account?{" "}
+                                <Link
+                                    href={"/authtentication/register"}
+                                    className="hover:underline">
+                                    {" "}
+                                    <span> Sign up for free</span>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
