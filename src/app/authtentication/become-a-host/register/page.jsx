@@ -61,7 +61,7 @@ const HostRegister = () => {
             (key) => key !== "Vat_number" && !inputData[key]
         );
 
-        if (requiredFields.length > 0)
+        if (requiredFields?.length > 0)
             return toast.error("Please fill the form properly.");
 
         if (inputData.password !== inputData.confirm_password)

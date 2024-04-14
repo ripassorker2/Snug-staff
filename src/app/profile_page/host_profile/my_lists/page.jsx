@@ -20,7 +20,7 @@ const MyLists = () => {
 
     return (
         <HostProtected>
-            {properties.length ? (
+            {properties?.length ? (
                 <>
                     <h2 className="sub-head pb-4">
                         <span>My properties</span>
@@ -44,7 +44,7 @@ const MyLists = () => {
                                 <tbody>
                                     {properties?.map((property, index) => {
                                         const isLast =
-                                            index === properties.length - 1;
+                                            index === properties?.length - 1;
                                         const classes = isLast
                                             ? "p-4 text-[15px]"
                                             : "p-4 border-b border-gray-300 text-[15px]";
@@ -81,8 +81,8 @@ const MyLists = () => {
                                                             },
                                                         }}>
                                                         <p>
-                                                            {property.title
-                                                                .length > 30
+                                                            {property?.title
+                                                                ?.length > 30
                                                                 ? `${property.title.slice(
                                                                       0,
                                                                       30

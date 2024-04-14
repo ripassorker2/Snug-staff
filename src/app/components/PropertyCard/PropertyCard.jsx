@@ -5,11 +5,14 @@ import {MdOutlineBathroom, MdOutlineBedroomParent} from "react-icons/md";
 import Link from "next/link";
 
 const PropertyCard = ({property}) => {
+    const cardImage = property?.property_images?.find(
+        (pr) => pr.is_featured == true
+    );
     return (
         <div className="p-4 border rounded-xl border-gray-300 shadow-lg">
             <figure className="h-[250px] overflow-hidden">
                 <Image
-                    src={property?.property_images[0]?.image}
+                    src={cardImage?.image}
                     width={200}
                     height={200}
                     className="rounded-xl w-full h-full  object-cover object-center hover:scale-105  duration-300"
@@ -34,8 +37,8 @@ const PropertyCard = ({property}) => {
             </div>
             <div className="mt-3 leading-5 text-base">
                 <h3 className="text-lg font-semibold text-gray-800">
-                    {property.title.length > 55
-                        ? `${property.title.slice(0, 55)}...`
+                    {property?.title?.length > 55
+                        ? `${property?.title.slice(0, 55)}...`
                         : property.title}
                 </h3>
 

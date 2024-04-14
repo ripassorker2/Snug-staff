@@ -1,23 +1,16 @@
 import {Checkbox} from "@material-tailwind/react";
-import Image from "next/image";
-import React from "react";
-import {IoCloudUploadOutline} from "react-icons/io5";
-import {MdOutlineCancel} from "react-icons/md";
 
 const Step1 = ({
-    images,
     formData,
     categories,
     aminites,
-    handleRemoveImage,
-    handleImageChange,
     handleInputChange,
     selectedAmenities,
     handleCheckboxChange,
 }) => {
     return (
         <div className="lg:grid lg:grid-cols-2  gap-x-10 gap-y-3">
-            <div className="lg:col-span-2">
+            {/* <div className="lg:col-span-2">
                 <h2 className="my-2">Property images</h2>
                 <div className="grid md:grid-cols-3 gap-3 grid-cols-2">
                     {images.map((image, index) => (
@@ -68,7 +61,7 @@ const Step1 = ({
                         </label>
                     </div>
                 </div>
-            </div>
+            </div> */}
             <div className="mt-2 ">
                 <label htmlFor="category" className="block text-base mb-1">
                     Property category

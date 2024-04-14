@@ -138,7 +138,7 @@ const SubscriptionPage = () => {
                                                             ) : (
                                                                 <button
                                                                     disabled={
-                                                                        selectedRows.length
+                                                                        selectedRows?.length
                                                                     }
                                                                     onClick={() => {
                                                                         setShowModal(
@@ -160,7 +160,7 @@ const SubscriptionPage = () => {
                                 </tbody>
                             </table>
                         </div>
-                        {selectedRows.length > 0 && (
+                        {selectedRows?.length > 0 && (
                             <div className=" py-6  lg:ml-8 md:ml-5 ml-3">
                                 <button
                                     onClick={() => setShowModal(true)}

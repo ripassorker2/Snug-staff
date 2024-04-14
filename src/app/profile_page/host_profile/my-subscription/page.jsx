@@ -46,7 +46,7 @@ const MySubscriptionPage = () => {
     if (isLoading || ssLoading) return <Loading />;
     return (
         <HostProtected>
-            {data.length ? (
+            {data?.length ? (
                 <>
                     <h2 className="sub-head pb-4">
                         <span>My subscription properties</span>
@@ -70,7 +70,7 @@ const MySubscriptionPage = () => {
                                 <tbody>
                                     {data?.map((dt, index) => {
                                         const isLast =
-                                            index === data.length - 1;
+                                            index === data?.length - 1;
                                         const classes = isLast
                                             ? "p-4 text-[15px]"
                                             : "p-4 border-b border-gray-300 text-[15px]";
@@ -136,7 +136,7 @@ const MySubscriptionPage = () => {
                 </>
             ) : (
                 <p className="text-center mt-32 h-[60vh] text-lg">
-                    No property available.
+                    No subscription property available.
                 </p>
             )}
         </HostProtected>

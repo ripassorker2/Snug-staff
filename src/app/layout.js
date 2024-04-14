@@ -6,6 +6,7 @@ import {Toaster} from "react-hot-toast";
 import {AuthProvider} from "@/context/AuthProvider/AuthProvider";
 import {ReduxProvider} from "@/provider/ReduxProvider";
 import {GoogleOAuthProvider} from "@react-oauth/google";
+import {config} from "@/envConfig/envConfig";
 
 const inter = Montserrat({subsets: ["latin"], weight: "500"});
 
@@ -20,7 +21,8 @@ export default function RootLayout({children}) {
             <body className={inter.className}>
                 <Toaster position="top-right" />
                 <ReduxProvider>
-                    <GoogleOAuthProvider clientId="90266371782-fl2io0m2v1r2pgb2smiamk79ut9kar8o.apps.googleusercontent.com">
+                    <GoogleOAuthProvider
+                        clientId={`${config.google_client_id}`}>
                         <AuthProvider>
                             <Navbar />
                             {children}

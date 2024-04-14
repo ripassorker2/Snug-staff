@@ -1,5 +1,6 @@
 "use client";
 import {config} from "@/envConfig/envConfig";
+import {logOut} from "@/utils/logout";
 import React, {createContext, useContext, useEffect, useState} from "react";
 
 export const UserContext = createContext();
@@ -23,13 +24,8 @@ export const AuthProvider = ({children}) => {
             })
                 .then((res) => res.json())
                 .then((data) => {
-                    if (data.detail) {
-                        localStorage.removeItem("snugstuff_access_token");
-                        localStorage.removeItem("snugstuff_refresh_token");
-                        setUser(null);
-                    } else {
-                        setUser(data[0]);
-                    }
+                    if (data.detail) logOut(setToken, setUser);
+                    else setUser(data[0]);
                     setLoading(false);
                 });
         } else {

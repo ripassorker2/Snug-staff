@@ -3,7 +3,9 @@ import React from "react";
 
 const Step3 = ({
     categories,
-    images,
+    featureImage,
+    showcaseImages,
+    listImages,
     formData,
     buttonData,
     parking,
@@ -12,31 +14,71 @@ const Step3 = ({
 }) => {
     return (
         <div className="text-gray-800 text-base">
-            <h2 className="md:text-xl text-lg pb-3">
-                <span>Preview of property</span>
-            </h2>
-            <div className="mb-5">
-                <b className="text-base pb-2">Property images</b>
-                {images.length > 0 ? (
-                    <div className="grid md:grid-cols-3 grid-cols-2 gap-6 ">
-                        {images?.map((img, i) => (
-                            <Image
-                                key={i}
-                                src={img.preview}
-                                className={`w-full rounded-md object-center object-cover ${
-                                    i === 0
-                                        ? "md:col-span-3 col-span-2 max-h-[350px]"
-                                        : "md:h-[200px] h-[110px]"
-                                }`}
-                                height={200}
-                                width={200}
-                                alt={"proterty image"}
-                            />
+            <div className="mb-3">
+                <h2>
+                    <b>Feature image</b>
+                </h2>
+                {featureImage ? (
+                    <div className="relative ">
+                        <Image
+                            src={featureImage.preview}
+                            alt="Feature Image Preview"
+                            height={200}
+                            width={200}
+                            className="rounded-md md:h-[400px] h-[230px] object-cover object-center w-full"
+                        />
+                    </div>
+                ) : (
+                    <p className="text-red-500">
+                        Please select a feature image.
+                    </p>
+                )}
+            </div>
+            <div className="mb-3">
+                <h2>
+                    <b>Showcase images</b>
+                </h2>
+                {showcaseImages?.length ? (
+                    <div className="grid md:grid-cols-3 gap-3 grid-cols-2">
+                        {showcaseImages.map((image, index) => (
+                            <div key={index} className="relative">
+                                <Image
+                                    src={image.preview}
+                                    alt={`Showcase Image Preview ${index}`}
+                                    height={200}
+                                    width={200}
+                                    className="rounded-md md:h-[240px] h-[130px] object-cover object-center w-full"
+                                />
+                            </div>
                         ))}
                     </div>
                 ) : (
                     <p className="text-red-500">
-                        No images. Please select at least 4 image.
+                        Please select 3 showcase image.
+                    </p>
+                )}
+            </div>
+            <div className="mb-3">
+                <h2>
+                    <b>Gallery images</b>
+                </h2>
+                {listImages?.length ? (
+                    <div className="grid md:grid-cols-3 gap-3 grid-cols-2">
+                        {listImages.map((image, index) => (
+                            <div key={index} className="relative">
+                                <Image
+                                    src={image.preview}
+                                    alt={`Showcase Image Preview ${index}`}
+                                    height={200}
+                                    width={200}
+                                    className="rounded-md md:h-[240px] h-[130px] object-cover object-center w-full"
+                                />
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <p className="text-red-500">
+                        Please select some gallery images.
                     </p>
                 )}
             </div>

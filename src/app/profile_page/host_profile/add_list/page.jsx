@@ -1,7 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import {
     useGetPropertiesAminityQuery,
     useGetPropertiesCategoryQuery,
+    useUploadPropertyImagesMutation,
     useUploadPropertyMutation,
 } from "@/redux/api/propertyApi";
 import {Step, Stepper} from "@material-tailwind/react";
@@ -14,6 +16,7 @@ import Step1 from "./Step1";
 import Step2 from "./Step2";
 import Step3 from "./Step3";
 import HostProtected from "@/protect_route/HostProtect";
+import Step0 from "./Step0";
 
 const AddListPage = () => {
     const [activeStep, setActiveStep] = useState(0);
@@ -26,9 +29,12 @@ const AddListPage = () => {
 
     const {data: categories} = useGetPropertiesCategoryQuery();
     const {data: aminites} = useGetPropertiesAminityQuery();
-    const [uploadPropety, {isLoading, isSuccess, isError}] =
+    const [uploadPropety, {data, isLoading, isSuccess, isError}] =
         useUploadPropertyMutation();
-    const [images, setImages] = useState([]);
+    const [
+        uploadPropertyImage,
+        {isLoading: upIsLoading, isSuccess: upIsSuccess, isError: upIsErroor},
+    ] = useUploadPropertyImagesMutation();
     const [selectedAmenities, setSelectedAmenities] = useState([]);
 
     const [parking, setParking] = useState(true);
@@ -44,24 +50,51 @@ const AddListPage = () => {
         }
     };
 
-    const handleImageChange = (event) => {
-        const selectedFile = event.target.files[0];
-        if (selectedFile) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                setImages([
-                    ...images,
-                    {file: selectedFile, preview: e.target.result},
-                ]);
-            };
-            reader.readAsDataURL(selectedFile);
+    const [featureImage, setFeatureImage] = useState(null);
+    const [showcaseImages, setShowcaseImages] = useState([]);
+    const [listImages, setListImages] = useState([]);
+
+    const handleRemoveImage = (type, index) => {
+        switch (type) {
+            case "feature":
+                setFeatureImage(null);
+                break;
+            case "showcase":
+                setShowcaseImages(showcaseImages.filter((_, i) => i !== index));
+                break;
+            case "list":
+                setListImages(listImages.filter((_, i) => i !== index));
+                break;
+            default:
+                break;
         }
     };
 
-    const handleRemoveImage = (index) => {
-        setImages(images.filter((_, i) => i !== index));
-    };
+    const handleImageChange = (e, type) => {
+        const file = e.target.files[0];
+        if (!file) return;
 
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            const preview = event.target.result;
+            const newImage = {preview, file};
+
+            switch (type) {
+                case "feature":
+                    setFeatureImage(newImage);
+                    break;
+                case "showcase":
+                    setShowcaseImages([...showcaseImages, newImage]);
+                    break;
+                case "list":
+                    setListImages([...listImages, newImage]);
+                    break;
+                default:
+                    break;
+            }
+        };
+        reader.readAsDataURL(file);
+    };
     const [buttonData, setButtonData] = useState({
         bed_room: 0,
         bath_room: 0,
@@ -114,21 +147,40 @@ const AddListPage = () => {
     const router = useRouter();
 
     useEffect(() => {
-        if (isSuccess) {
-            toast.success("Property added successfully");
-            router.push("/profile_page/host_profile/my_lists");
+        if (isSuccess && data) {
+            const propertyImageData = new FormData();
+            propertyImageData.append("property", data.id);
+            propertyImageData.append("featured_image", featureImage.file);
+            showcaseImages.forEach((image) => {
+                propertyImageData.append(`showcase_image`, image.file);
+            });
+            listImages.forEach((image) => {
+                propertyImageData.append(`list_image`, image.file);
+            });
+            uploadPropertyImage(propertyImageData);
         }
-    }, [isSuccess, router]);
+    }, [isSuccess, data]);
 
     useEffect(() => {
-        if (isError) toast.error("Something went wrong. Please try again");
-    }, [isError]);
+        if (upIsSuccess) {
+            toast.success("Property created successfully.");
+            router.push("/profile_page/host_profile/my_lists");
+        }
+    }, [upIsSuccess]);
+
+    useEffect(() => {
+        if (isError || upIsErroor)
+            toast.error("Something went wrong. Please try again");
+    }, [isError, upIsErroor]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (images.length < 3)
-            return toast.error("Please upload at least 3 images.");
+        if (!featureImage) return toast.error("Please upload a feature image.");
+        if (showcaseImages?.length < 3)
+            return toast.error("Please upload 3 showcase images.");
+        if (!listImages)
+            return toast.error("Please upload some gallery images.");
 
         if (
             !formData.category ||
@@ -148,16 +200,11 @@ const AddListPage = () => {
         ) {
             return toast.error("Please fill out all required fields.");
         }
-
         const propertyFormData = new FormData();
 
-        images.forEach((image) => {
-            propertyFormData.append(`upload_image`, image.file);
-        });
         selectedAmenities.forEach((iminity) => {
             propertyFormData.append(`amenities_list`, iminity);
         });
-
         propertyFormData.append("author", user.id);
         propertyFormData.append("category_id", formData.category);
         propertyFormData.append("title", formData.title);
@@ -205,22 +252,29 @@ const AddListPage = () => {
                     <Step onClick={() => setActiveStep(0)}>1</Step>
                     <Step onClick={() => setActiveStep(1)}>2</Step>
                     <Step onClick={() => setActiveStep(2)}>3</Step>
+                    <Step onClick={() => setActiveStep(3)}>4</Step>
                 </Stepper>
                 <div className="mt-5">
                     {activeStep === 0 && (
+                        <Step0
+                            featureImage={featureImage}
+                            showcaseImages={showcaseImages}
+                            listImages={listImages}
+                            handleRemoveImage={handleRemoveImage}
+                            handleImageChange={handleImageChange}
+                        />
+                    )}
+                    {activeStep === 1 && (
                         <Step1
-                            images={images}
                             formData={formData}
                             categories={categories}
                             aminites={aminites}
-                            handleRemoveImage={handleRemoveImage}
-                            handleImageChange={handleImageChange}
                             handleInputChange={handleInputChange}
                             selectedAmenities={selectedAmenities}
                             handleCheckboxChange={handleCheckboxChange}
                         />
                     )}
-                    {activeStep === 1 && (
+                    {activeStep === 2 && (
                         <Step2
                             formData={formData}
                             parking={parking}
@@ -231,10 +285,12 @@ const AddListPage = () => {
                             handleParkingChange={handleParkingChange}
                         />
                     )}
-                    {activeStep === 2 && (
+                    {activeStep === 3 && (
                         <Step3
+                            featureImage={featureImage}
+                            showcaseImages={showcaseImages}
+                            listImages={listImages}
                             categories={categories}
-                            images={images}
                             formData={formData}
                             aminites={aminites}
                             parking={parking}
@@ -259,18 +315,22 @@ const AddListPage = () => {
                     </div>
                     <div
                         className={`btn-primary ${
-                            activeStep === 2 && "hidden"
+                            activeStep === 3 && "hidden"
                         }`}
                         onClick={handleNext}
                         disabled={isLastStep}>
                         Next
                     </div>
-                    {activeStep === 2 && (
+                    {activeStep === 3 && (
                         <button
-                            disabled={isLoading}
+                            disabled={isLoading || upIsLoading}
                             type="submit"
                             className={`btn-secondary`}>
-                            {isLoading ? <SmallLoader /> : "Submit"}
+                            {isLoading || upIsLoading ? (
+                                <SmallLoader />
+                            ) : (
+                                "Submit"
+                            )}
                         </button>
                     )}
                 </div>

@@ -7,16 +7,11 @@ import {IoMenu} from "react-icons/io5";
 import {Menu, MenuHandler, MenuList, MenuItem} from "@material-tailwind/react";
 import Link from "next/link";
 import {useUserContext} from "@/context/AuthProvider/AuthProvider";
+import {logOut} from "@/utils/logout";
 
 const Navbar = () => {
     const {user, setUser, setToken} = useUserContext();
-    console.log(user);
-    const handleLogout = () => {
-        localStorage.removeItem("snugstuff_access_token");
-        localStorage.removeItem("snugstuff_refresh_token");
-        setToken("");
-        setUser(null);
-    };
+
     return (
         <div className="border-b-2 py-3 sticky top-0 right-0 z-50 bg-white">
             <div className="container">
@@ -101,7 +96,9 @@ const Navbar = () => {
                                         )}
                                         <MenuItem className="mt-1">
                                             <div
-                                                onClick={handleLogout}
+                                                onClick={() =>
+                                                    logOut(setToken, setUser)
+                                                }
                                                 className="block  w-full text-center">
                                                 Logout
                                             </div>

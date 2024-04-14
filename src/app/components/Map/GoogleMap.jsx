@@ -5,7 +5,6 @@ import "leaflet/dist/leaflet.css";
 import {MapContainer, TileLayer, Marker, Popup} from "react-leaflet";
 
 const GoogleMap = ({lat = 0.0, long = 0.0, location = ""}) => {
-    console.log(lat, long, location);
     return (
         <div className="relative">
             <h2 className="text-xl ">Where we place.</h2>

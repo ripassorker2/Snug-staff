@@ -14,6 +14,7 @@ export const getTokens = (tokenCode) => {
                 client_id: `${config.google_client_id}`,
                 client_secret: `${config.google_client_secret}`,
                 redirect_uri: "http://localhost:3000",
+                // redirect_uri: "https://snugstaff-eight.vercel.app",
             }),
         })
             .then((res) => {

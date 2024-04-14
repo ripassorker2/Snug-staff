@@ -10,7 +10,7 @@ const Step2 = ({
     handleParkingChange,
 }) => {
     return (
-        <div className="grid lg:grid-cols-2 gap-x-10 lg:gap-y-3">
+        <div className="lg:grid lg:grid-cols-2 gap-x-8 lg:gap-y-3">
             <div className="mt-2 col-span-2">
                 <h2 className="mb-2 text-base">Parking area</h2>
                 <div className="flex space-x-6 mt-2">
@@ -36,7 +36,7 @@ const Step2 = ({
                     </label>
                 </div>
             </div>
-            <div className="mt-2 ">
+            <div className="mt-4 md:mt-2 ">
                 <label htmlFor="price" className="block text-base mb-1">
                     Per day price
                 </label>
@@ -51,7 +51,7 @@ const Step2 = ({
                     required
                 />
             </div>
-            <div className="mt-2 ">
+            <div className="mt-4 md:mt-2 ">
                 <label htmlFor="price" className="block text-base mb-1">
                     Per guest price
                 </label>
@@ -66,7 +66,7 @@ const Step2 = ({
                     required
                 />
             </div>
-            <div className="mt-2 ">
+            <div className="mt-4 md:mt-2 ">
                 <label htmlFor="price" className="block text-base mb-1">
                     Cleaning fee
                 </label>
@@ -81,7 +81,7 @@ const Step2 = ({
                     required
                 />
             </div>
-            <div className="mt-2 ">
+            <div className="mt-4 md:mt-2 ">
                 <label htmlFor="price" className="block text-base mb-1">
                     Discount price days
                 </label>
@@ -96,7 +96,7 @@ const Step2 = ({
                     required
                 />
             </div>
-            <div className="mt-2 ">
+            <div className="mt-4 md:mt-2 ">
                 <label htmlFor="price" className="block text-base mb-1">
                     Discount parcentage (%)
                 </label>
@@ -111,7 +111,7 @@ const Step2 = ({
                     required
                 />
             </div>
-            <div className="mt-2 ">
+            <div className="mt-4 md:mt-2 ">
                 <label htmlFor="price" className="block text-base mb-1">
                     Allowed cancelation days
                 </label>
@@ -130,7 +130,7 @@ const Step2 = ({
                 <div className="mt-4">
                     <h2>Bedroom</h2>
                     <div className="mt-1 flex justify-between text-gray-800">
-                        <p className="hidden md:block">Number of bedrooms</p>
+                        <p className="block">Number of bedrooms</p>
                         <div>
                             <button
                                 type="button"

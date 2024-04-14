@@ -3,11 +3,14 @@ import React from "react";
 import {BiSolidGrid} from "react-icons/bi";
 
 const PropertyImages = ({property, setShowModal}) => {
+    const showcaseImage = property?.property_images?.filter(
+        (pr) => pr.is_showcased == true
+    );
     return (
         <div className="w-full grid md:grid-cols-5 gap-3 md:rounded-l-xl rounded-xl overflow-hidden">
             <figure className="md:h-[510px] h-[280px] overflow-hidden md:col-span-3">
                 <img
-                    src={property?.property_images[0]?.image}
+                    src={showcaseImage[0]?.image}
                     className="w-full h-full  object-cover object-center hover:scale-105 duration-300   "
                     alt="property image"
                 />
@@ -15,14 +18,14 @@ const PropertyImages = ({property, setShowModal}) => {
             <div className="md:col-span-2 grid gap-2 md:rounded-r-xl md:rounded-b-none rounded-b-xl overflow-hidden">
                 <figure className="overflow-hidden md:h-[250px] h-[280px]">
                     <img
-                        src={property?.property_images[1]?.image}
+                        src={showcaseImage[1]?.image}
                         className="w-full h-full  object-cover object-center hover:scale-105 duration-300"
                         alt="property image"
                     />
                 </figure>
                 <figure className="overflow-hidden md:h-[250px] relative h-[280px]">
                     <img
-                        src={property?.property_images[2]?.image}
+                        src={showcaseImage[2]?.image}
                         className="w-full h-full  object-cover object-center hover:scale-105 duration-300"
                         alt="property image"
                     />
