@@ -3,6 +3,9 @@ import React from "react";
 import {Dialog} from "@material-tailwind/react";
 import {IoMdArrowRoundBack} from "react-icons/io";
 const GalleryModal = ({images, showModal, setShowModal}) => {
+    const galleryImages = images.filter(
+        (img) => !img.is_featured && !img.is_showcased
+    );
     return (
         <Dialog
             open={showModal}
@@ -20,7 +23,7 @@ const GalleryModal = ({images, showModal, setShowModal}) => {
 
                 <div className="max-w-4xl mx-auto overflow-auto pb-8 max-h-[88vh]">
                     <div className="grid gap-4 md:grid-cols-2">
-                        {images?.map((img, i) => (
+                        {galleryImages?.map((img, i) => (
                             <div
                                 key={i}
                                 className={`${

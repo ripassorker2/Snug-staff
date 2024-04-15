@@ -1,6 +1,7 @@
 "use client";
 import {useState} from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Loading from "../../loading";
 import {Tooltip} from "@material-tailwind/react";
 import HostProtected from "@/protect_route/HostProtect";
@@ -63,7 +64,7 @@ const MyLists = () => {
                                                         height={90}
                                                         width={100}
                                                         wipropertyh={100}
-                                                        className="rounded-lg object-cover object-center"
+                                                        className="rounded-lg h-[66px] object-cover object-center"
                                                     />
                                                 </td>
                                                 <td className={`${classes}`}>
@@ -108,9 +109,11 @@ const MyLists = () => {
                                                     </button>
                                                 </td>
                                                 <td className={`${classes}`}>
-                                                    <button className="bg-secondary text-gray-200 rounded-xl px-2 py-[3px] text-sm">
+                                                    <Link
+                                                        href={`/properties/update/${property.slug}`}
+                                                        className="bg-secondary text-gray-200 rounded-xl px-2 py-[3px] text-sm">
                                                         Update
-                                                    </button>
+                                                    </Link>
                                                 </td>
                                                 <td
                                                     className={`${classes} bg-blue-gray-100/20`}>

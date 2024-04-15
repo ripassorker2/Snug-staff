@@ -35,6 +35,7 @@ const AddListPage = () => {
         uploadPropertyImage,
         {isLoading: upIsLoading, isSuccess: upIsSuccess, isError: upIsErroor},
     ] = useUploadPropertyImagesMutation();
+
     const [selectedAmenities, setSelectedAmenities] = useState([]);
 
     const [parking, setParking] = useState(true);

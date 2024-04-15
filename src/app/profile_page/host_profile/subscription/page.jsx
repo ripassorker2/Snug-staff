@@ -93,7 +93,7 @@ const SubscriptionPage = () => {
                                                                 alt="property image"
                                                                 height={90}
                                                                 width={100}
-                                                                className="rounded-lg object-cover object-center"
+                                                                className="rounded-lg h-[66px] object-cover object-center"
                                                             />
                                                         </td>
                                                         <td

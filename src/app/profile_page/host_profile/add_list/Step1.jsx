@@ -10,58 +10,6 @@ const Step1 = ({
 }) => {
     return (
         <div className="lg:grid lg:grid-cols-2  gap-x-10 gap-y-3">
-            {/* <div className="lg:col-span-2">
-                <h2 className="my-2">Property images</h2>
-                <div className="grid md:grid-cols-3 gap-3 grid-cols-2">
-                    {images.map((image, index) => (
-                        <div
-                            key={index}
-                            className={`relative ${
-                                index == 0 ? "md:col-span-3 col-span-2" : ""
-                            }`}>
-                            <Image
-                                src={image.preview}
-                                alt={`Preview ${index}`}
-                                height={200}
-                                width={200}
-                                className={`rounded-md object-cover object-center w-full ${
-                                    index == 0
-                                        ? "md:h-[350px] h-[230px]  "
-                                        : "md:h-[160px] h-[130px] "
-                                }`}
-                            />
-                            <MdOutlineCancel
-                                size={22}
-                                onClick={() => handleRemoveImage(index)}
-                                className="absolute top-2 right-2 rounded-full text-primary cursor-pointer"
-                            />
-                        </div>
-                    ))}
-                    <div className={` ${!images.length && "md:col-span-3"}`}>
-                        <label
-                            htmlFor="image-file"
-                            className="cursor-pointer  border border-gray-400 md:p-10 p-5 flex flex-col rounded-md items-center text-center col-span-1 md:h-[160px]">
-                            <IoCloudUploadOutline
-                                size={35}
-                                className="mr-1 font-semibold text-primary"
-                            />
-                            <span>
-                                Upload{" "}
-                                <span className="hidden md:block">
-                                    property images
-                                </span>{" "}
-                            </span>
-                            <input
-                                type="file"
-                                id="image-file"
-                                accept=".png,.jpg,.jpeg,.pdf,.webp"
-                                className="hidden"
-                                onChange={handleImageChange}
-                            />
-                        </label>
-                    </div>
-                </div>
-            </div> */}
             <div className="mt-2 ">
                 <label htmlFor="category" className="block text-base mb-1">
                     Property category

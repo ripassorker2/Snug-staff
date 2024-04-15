@@ -19,6 +19,8 @@ const PropertyDetails = ({params}) => {
         slug: params.slug,
     });
 
+    console.log(property);
+
     if (isLoading) return <Loading />;
 
     return (

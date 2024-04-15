@@ -1,3 +1,4 @@
+import {getToken} from "@/utils/getToken";
 import {api} from "./apiSlice";
 
 const propertiesApiSlices = api.injectEndpoints({
@@ -8,9 +9,7 @@ const propertiesApiSlices = api.injectEndpoints({
                 method: "POST",
                 body: data,
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem(
-                        "snugstuff_access_token" || ""
-                    )}`,
+                    Authorization: `Bearer ${getToken()}`,
                 },
             }),
             invalidatesTags: ["properties"],
@@ -21,21 +20,46 @@ const propertiesApiSlices = api.injectEndpoints({
                 method: "POST",
                 body: data,
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem(
-                        "snugstuff_access_token" || ""
-                    )}`,
+                    Authorization: `Bearer ${getToken()}`,
                 },
             }),
             invalidatesTags: ["properties"],
+        }),
+        uploadNewImage: builder.mutation({
+            query: (data) => ({
+                url: `proprty_image/`,
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
+                body: data,
+            }),
+        }),
+        imageUpdate: builder.mutation({
+            query: ({file, imageId}) => ({
+                url: `proprty_image/${imageId}/`,
+                method: "PATCH",
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
+                body: file,
+            }),
+        }),
+        deleteImage: builder.mutation({
+            query: ({imageId}) => ({
+                url: `proprty_image/${imageId}/`,
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
+            }),
         }),
         deleteProperty: builder.mutation({
             query: ({id}) => ({
                 url: `host/property/${id}/`,
                 method: "DELETE",
                 headers: {
-                    Authorization: `Bearer ${
-                        localStorage.getItem("snugstuff_access_token") || ""
-                    }`,
+                    Authorization: `Bearer ${getToken()}`,
                 },
             }),
             invalidatesTags: ["properties"],
@@ -64,9 +88,7 @@ const propertiesApiSlices = api.injectEndpoints({
             query: () => ({
                 url: `host/property/`,
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem(
-                        "snugstuff_access_token" || ""
-                    )}`,
+                    Authorization: `Bearer ${getToken()}`,
                 },
             }),
             providesTags: ["properties", "subscriptions"],
@@ -83,4 +105,7 @@ export const {
     useGetPropertiesByHostQuery,
     useDeletePropertyMutation,
     useUploadPropertyImagesMutation,
+    useImageUpdateMutation,
+    useDeleteImageMutation,
+    useUploadNewImageMutation,
 } = propertiesApiSlices;
