@@ -65,7 +65,7 @@ const PropertyUpdatePage = ({params}) => {
                 discount_price_days: property.discount_price_days || "",
                 discount_parcentage: property.discount_parcentage || "",
                 allowed_cancelation_days:
-                    property.allowed_cancelation_days || "",
+                    property.allowed_cancelation_day || "",
             });
 
             setButtonData({
