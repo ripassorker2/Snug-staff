@@ -14,6 +14,17 @@ const propertiesApiSlices = api.injectEndpoints({
             }),
             invalidatesTags: ["properties"],
         }),
+        updateProperty: builder.mutation({
+            query: ({updateData, id}) => ({
+                url: `host/property/${id}/`,
+                method: "PATCH",
+                body: updateData,
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
+            }),
+            invalidatesTags: ["properties"],
+        }),
         uploadPropertyImages: builder.mutation({
             query: (data) => ({
                 url: `proprty_image/`,
@@ -108,4 +119,5 @@ export const {
     useImageUpdateMutation,
     useDeleteImageMutation,
     useUploadNewImageMutation,
+    useUpdatePropertyMutation,
 } = propertiesApiSlices;

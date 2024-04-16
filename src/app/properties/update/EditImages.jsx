@@ -61,8 +61,6 @@ const EditImages = ({property}) => {
         }
     };
 
-    console.log(uploadNewImageData);
-
     const handleShowcaseImageUpdate = (index) => {
         const file = showcaseFiles[index];
         const imageId = imageIds[index];
@@ -118,17 +116,17 @@ const EditImages = ({property}) => {
     }, [deleteSuccess]);
 
     useEffect(() => {
-        if (uploadNewImageSuccess) {
-            // setGalleryImages((prevImages) => {
-            //     return [
-            //         ...prevImages,
-            //         {
-            //             ...uploadNewImageData,
-            //             is_featured: false,
-            //             is_showcased: false,
-            //         },
-            //     ];
-            // });
+        if (uploadNewImageSuccess && uploadNewImageData) {
+            setGalleryImages((prevImages) => {
+                return [
+                    ...prevImages,
+                    {
+                        ...uploadNewImageData,
+                        is_featured: false,
+                        is_showcased: false,
+                    },
+                ];
+            });
             setNewGalleryFile(null);
             toast.success("Uploaded new gallery image");
         }
@@ -144,14 +142,14 @@ const EditImages = ({property}) => {
                             <img
                                 src={URL.createObjectURL(featureFile)}
                                 alt="Feature Image Preview"
-                                height={200}
-                                width={200}
-                                className="rounded-md md:h-[500px] h-[230px] object-cover object-center w-full"
+                                height={100}
+                                width={100}
+                                className="rounded-md md:h-[500px] h-[220px] object-cover object-center w-full"
                             />
                         </div>
                         <label htmlFor="file">
                             <CiEdit
-                                className="absolute cursor-pointer text-primary top-5 right-20 bg-white p-0.5 rounded-full"
+                                className="absolute cursor-pointer text-primary top-3 right-20 bg-white p-0.5 rounded-full"
                                 size={24}
                             />
 
@@ -166,7 +164,7 @@ const EditImages = ({property}) => {
                                 }
                             />
                         </label>
-                        <div className="absolute top-5 right-5 flex space-x-1.5">
+                        <div className="absolute top-3 right-3 flex space-x-1.5">
                             {isLoading ? (
                                 <SmallLoader />
                             ) : (
@@ -189,14 +187,14 @@ const EditImages = ({property}) => {
                             <img
                                 src={featuredImage?.image}
                                 alt="Feature Image Preview"
-                                height={200}
-                                width={200}
+                                height={100}
+                                width={100}
                                 className="rounded-md md:h-[500px] h-[230px] object-cover object-center w-full"
                             />
                         </div>
                         <label htmlFor="file">
                             <CiEdit
-                                className="absolute top-5 cursor-pointer text-primary right-5 bg-white p-0.5 rounded-full"
+                                className="absolute top-3 cursor-pointer text-primary right-3 bg-white p-0.5 rounded-full"
                                 size={24}
                             />
 
@@ -224,13 +222,13 @@ const EditImages = ({property}) => {
                                     <img
                                         src={URL.createObjectURL(file)}
                                         alt="Showcase Image Preview"
-                                        height={200}
-                                        width={200}
-                                        className="rounded-md md:h-[230px] h-[140px] object-cover object-center w-full"
+                                        height={100}
+                                        width={100}
+                                        className="rounded-md md:h-[230px] h-[220px] object-cover object-center w-full"
                                     />
                                     <label htmlFor={`showcase-file-${index}`}>
                                         <CiEdit
-                                            className="absolute cursor-pointer text-primary top-5 right-20 bg-white p-0.5 rounded-full"
+                                            className="absolute cursor-pointer text-primary top-3 right-20 bg-white p-0.5 rounded-full"
                                             size={24}
                                         />
                                         <input
@@ -258,7 +256,7 @@ const EditImages = ({property}) => {
                                             }}
                                         />
                                     </label>
-                                    <div className="absolute top-5 right-5 flex space-x-1.5">
+                                    <div className="absolute top-3 right-3 flex space-x-1.5">
                                         {isLoading ? (
                                             <SmallLoader />
                                         ) : (
@@ -295,15 +293,18 @@ const EditImages = ({property}) => {
                             ) : (
                                 <div className="relative">
                                     <img
-                                        src={showcaseImages[index]?.image}
+                                        src={
+                                            showcaseImages &&
+                                            showcaseImages[index]?.image
+                                        }
                                         alt="Showcase Image Preview"
-                                        height={200}
-                                        width={200}
-                                        className="rounded-md md:h-[230px] h-[140px] object-cover object-center w-full"
+                                        height={100}
+                                        width={100}
+                                        className="rounded-md md:h-[230px] h-[220px] object-cover object-center w-full"
                                     />
                                     <label htmlFor={`showcase-file-${index}`}>
                                         <CiEdit
-                                            className="absolute top-5 cursor-pointer text-primary right-5 bg-white p-0.5 rounded-full"
+                                            className="absolute top-3 cursor-pointer text-primary right-3 bg-white p-0.5 rounded-full"
                                             size={24}
                                         />
                                         <input
@@ -341,14 +342,14 @@ const EditImages = ({property}) => {
             <div className="mt-6">
                 <h2 className="mb-1">Gallery images </h2>
                 <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8 grid-cols-1">
-                    {galleryImages.map((image, index) => (
+                    {galleryImages?.map((image, index) => (
                         <div key={index} className="relative">
                             <img
                                 src={image.image}
                                 alt={`Gallery Image ${index}`}
-                                height={200}
-                                width={200}
-                                className="rounded-md md:h-[220px] h-[130px] object-cover object-center w-full"
+                                height={100}
+                                width={100}
+                                className="rounded-md md:h-[220px] h-[220px] object-cover object-center w-full"
                             />
                             <button
                                 onClick={() => handleDeletedImage(image?.id)}
@@ -360,7 +361,7 @@ const EditImages = ({property}) => {
                             </button>
                         </div>
                     ))}
-                    {galleryImages.length < 15 && (
+                    {galleryImages?.length < 15 && (
                         <>
                             {newGalleryFile ? (
                                 <div className="relative ">
@@ -369,9 +370,9 @@ const EditImages = ({property}) => {
                                             newGalleryFile
                                         )}
                                         alt="Feature Image Preview"
-                                        height={200}
-                                        width={200}
-                                        className="rounded-md md:h-[210px] h-[130px] object-cover object-center w-full"
+                                        height={100}
+                                        width={100}
+                                        className="rounded-md md:h-[220px] h-[220px] object-cover object-center w-full"
                                     />
                                     <div className="absolute top-2 right-2 flex space-x-1">
                                         {uploadNewImageLoading ? (
@@ -393,13 +394,13 @@ const EditImages = ({property}) => {
                             ) : (
                                 <label
                                     htmlFor="feature-image-file"
-                                    className="cursor-pointer border border-gray-400 p-5 pt-10 flex flex-col rounded-md items-center text-center md:h-[210px] h-[130px]">
+                                    className="cursor-pointer border border-gray-400 p-5 pt-10 flex flex-col rounded-md items-center text-center md:h-[220px] h-[220px]">
                                     <IoCloudUploadOutline
                                         size={35}
                                         className="mr-1 font-semibold text-primary"
                                     />
                                     <span>
-                                        Upload feature <br /> image
+                                        Upload gallery <br /> image
                                     </span>
                                     <input
                                         type="file"
