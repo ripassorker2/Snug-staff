@@ -16,9 +16,7 @@ const HostRegister = () => {
     const router = useRouter();
 
     useEffect(() => {
-        if (token) {
-            router.push("/");
-        }
+        if (token) router.push("/");
     }, [token]);
     const [activeStep, setActiveStep] = useState(0);
     const [isLastStep, setIsLastStep] = useState(false);

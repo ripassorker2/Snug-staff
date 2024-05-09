@@ -211,7 +211,7 @@ const RegisterPage = () => {
                             <div className="desc">
                                 Already have an account?
                                 <Link
-                                    href={"/authtentication/login"}
+                                    href={"/auth/login"}
                                     className="hover:underline">
                                     {" "}
                                     <span>Please Login from Here</span>

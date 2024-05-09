@@ -165,12 +165,28 @@ const LoginPage = () => {
                             <div className="desc">
                                 Don't have an account?{" "}
                                 <Link
-                                    href={"/authtentication/register"}
+                                    href={"/auth/register"}
                                     className="hover:underline">
                                     {" "}
                                     <span> Sign up for free</span>
                                 </Link>
                             </div>
+                        </div>
+                        <div className="mt-2">
+                            <div className=" mt-2 flex justify-center">
+                                <div className=" border-gray-700">
+                                    -----------------
+                                </div>
+                                <h2 className="text-lg -mt-1"> or </h2>
+                                <div className=" border-gray-700">
+                                    -----------------
+                                </div>
+                            </div>
+                            <Link
+                                href={"/auth/become-a-host"}
+                                className="btn-primary py-3 font-semibold  w-full mt-2">
+                                Become a host
+                            </Link>
                         </div>
                     </div>
                 </div>

@@ -4,13 +4,19 @@ import {FaArrowRight, FaUser} from "react-icons/fa";
 import {MdOutlineBathroom, MdOutlineBedroomParent} from "react-icons/md";
 import Link from "next/link";
 
-const PropertyCard = ({property}) => {
+const PropertyCard = ({property, path = ""}) => {
     const cardImage = property?.property_images?.find(
         (pr) => pr.is_featured == true
     );
     return (
-        <div className="p-4 border rounded-xl border-gray-300 shadow-lg">
-            <figure className="h-[250px] overflow-hidden">
+        <div
+            className={`border rounded-xl border-gray-300 shadow-lg ${
+                path == "/properties" ? "p-4" : "p-6"
+            } `}>
+            <figure
+                className={` overflow-hidden ${
+                    path == "/properties" ? "h-[160px]" : "h-[240px]"
+                }`}>
                 <Image
                     src={cardImage?.image}
                     width={200}
@@ -20,7 +26,12 @@ const PropertyCard = ({property}) => {
                 />
             </figure>
 
-            <div className="flex space-x-3 space-y-3 -ml-3 flex-wrap items-center my-2 text-sm">
+            <div
+                className={`flex  flex-wrap items-center my-2 text-sm ${
+                    path == "/properties"
+                        ? "space-x-3 -ml-1"
+                        : "space-x-3 -ml-2.5"
+                }`}>
                 <button className="hidden "></button>
                 <button className=" inline-flex items-center border-[2px]  shadow-md  rounded-lg px-2 py-1">
                     <MdOutlineBedroomParent size={14} className="mr-1" />{" "}
@@ -32,10 +43,11 @@ const PropertyCard = ({property}) => {
                 </button>
                 <button className=" inline-flex items-center border-[2px]  shadow-md  rounded-lg px-2 py-1">
                     <FaUser size={14} className=" mr-1" />
-                    {property.minimum_guest} min guest
+                    {property.minimum_guest} {path == "/properties" || "min"}{" "}
+                    guest
                 </button>
             </div>
-            <div className="mt-3 leading-5 text-base">
+            <div className="mt-2 leading-5 text-base">
                 <h3 className="text-lg font-semibold text-gray-800">
                     {property?.title?.length > 55
                         ? `${property?.title.slice(0, 55)}...`
@@ -43,12 +55,12 @@ const PropertyCard = ({property}) => {
                 </h3>
 
                 <p className="pt-2">
-                    <b>${property?.price}</b>
+                    <b>${property?.price} </b>
                     per person/night
                 </p>
             </div>
             <Link href={`/properties/${property?.slug}`}>
-                <button className="btn-secondary mt-3 w-full rounded-lg group">
+                <button className="btn-secondary mt-2 w-full rounded-lg group">
                     More details{" "}
                     <FaArrowRight className="ml-2 group-hover:ml-4 duration-300 " />
                 </button>
