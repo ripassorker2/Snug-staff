@@ -4,19 +4,13 @@ import {FaArrowRight, FaUser} from "react-icons/fa";
 import {MdOutlineBathroom, MdOutlineBedroomParent} from "react-icons/md";
 import Link from "next/link";
 
-const PropertyCard = ({property, path = ""}) => {
+const PropertyCard = ({property}) => {
     const cardImage = property?.property_images?.find(
         (pr) => pr.is_featured == true
     );
     return (
-        <div
-            className={`border rounded-xl border-gray-300 shadow-lg ${
-                path == "/properties" ? "p-4" : "p-6"
-            } `}>
-            <figure
-                className={` overflow-hidden ${
-                    path == "/properties" ? "h-[160px]" : "h-[240px]"
-                }`}>
+        <div className={`border rounded-xl border-[#CEDFEB] shadow-lg p-6`}>
+            <figure className={` overflow-hidden h-[240px] `}>
                 <Image
                     src={cardImage?.image}
                     width={200}
@@ -27,11 +21,7 @@ const PropertyCard = ({property, path = ""}) => {
             </figure>
 
             <div
-                className={`flex  flex-wrap items-center my-2 text-sm ${
-                    path == "/properties"
-                        ? "space-x-3 -ml-1"
-                        : "space-x-3 -ml-2.5"
-                }`}>
+                className={`flex  flex-wrap items-center my-2 text-sm space-x-3 -ml-2.5 `}>
                 <button className="hidden "></button>
                 <button className=" inline-flex items-center border-[2px]  shadow-md  rounded-lg px-2 py-1">
                     <MdOutlineBedroomParent size={14} className="mr-1" />{" "}
@@ -43,8 +33,7 @@ const PropertyCard = ({property, path = ""}) => {
                 </button>
                 <button className=" inline-flex items-center border-[2px]  shadow-md  rounded-lg px-2 py-1">
                     <FaUser size={14} className=" mr-1" />
-                    {property.minimum_guest} {path == "/properties" || "min"}{" "}
-                    guest
+                    {property.minimum_guest} min guest
                 </button>
             </div>
             <div className="mt-2 leading-5 text-base">

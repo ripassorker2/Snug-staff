@@ -9,10 +9,12 @@ const HomeProperty = () => {
 
     if (isLoading) {
         return (
-            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-12 md:gap-10 gap-8 container mt-10">
-                <Skalaton />
-                <Skalaton />
-                <Skalaton />
+            <div className="mt-28">
+                <div className="grid lg:grid-cols-3 md:grid-cols-2  lg:gap-12 md:gap-10 gap-8 container ">
+                    <Skalaton />
+                    <Skalaton />
+                    <Skalaton />
+                </div>
             </div>
         );
     }

@@ -5,7 +5,7 @@ import logo from "../../../assets/logo.png";
 import Image from "next/image";
 const Footer = () => {
     return (
-        <footer className="pt-14 pb-4 bg-gray-900 mt-20 text-gray-300">
+        <footer className="pt-14 pb-4 bg-gray-900 mt-20 text-gray-300 ">
             <div className="container relative isolate overflow-hidden">
                 <div className="flex flex-wrap text-left md:text-left">
                     <div className="w-full md:w-6/12 ">

@@ -1,8 +1,6 @@
-import React from "react";
-
 const Skalaton = () => {
     return (
-        <div className="p-4 border rounded-xl border-gray-300 shadow-lg">
+        <div className="p-7 border rounded-xl border-[#CEDFEB] shadow-lg">
             <div className="h-[250px] bg-gray-300 animate-pulse rounded-xl"></div>
 
             <div className="flex space-x-3 space-y-3 -ml-3 flex-wrap items-center my-2 text-sm">
