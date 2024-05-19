@@ -29,7 +29,7 @@ const Pricing = () => {
                                 </span>
                             </p>
 
-                            <ul className="mt-5 space-y-2 text-base font-medium">
+                            <ul className="mt-5 space-y-2 text-base   ">
                                 <li className="flex">
                                     <FaCheck
                                         size={20}
@@ -96,7 +96,7 @@ const Pricing = () => {
                                 </span>
                             </p>
 
-                            <ul className="mt-5 space-y-2 text-base font-medium">
+                            <ul className="mt-5 space-y-2 text-base   ">
                                 <li className="flex">
                                     <FaCheck
                                         size={20}
@@ -221,7 +221,7 @@ const Pricing = () => {
                                 </span>
                             </p>
 
-                            <ul className="mt-5 space-y-2 text-base font-medium">
+                            <ul className="mt-5 space-y-2 text-base   ">
                                 <li className="flex">
                                     <FaCheck
                                         size={20}

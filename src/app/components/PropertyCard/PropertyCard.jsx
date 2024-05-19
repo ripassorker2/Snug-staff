@@ -21,7 +21,7 @@ const PropertyCard = ({property}) => {
             </figure>
 
             <div
-                className={`flex  flex-wrap items-center my-2 text-sm space-x-3 -ml-2.5 `}>
+                className={`flex  flex-wrap items-center my-3 text-sm space-x-3 -ml-2.5 `}>
                 <button className="hidden "></button>
                 <button className=" inline-flex items-center border-[2px]  shadow-md  rounded-lg px-2 py-1">
                     <MdOutlineBedroomParent size={14} className="mr-1" />{" "}
@@ -36,7 +36,7 @@ const PropertyCard = ({property}) => {
                     {property.minimum_guest} min guest
                 </button>
             </div>
-            <div className="mt-2 leading-5 text-base">
+            <div className="mt-3 leading-5 text-base">
                 <h3 className="text-lg font-semibold text-gray-800">
                     {property?.title?.length > 55
                         ? `${property?.title.slice(0, 55)}...`
@@ -49,7 +49,7 @@ const PropertyCard = ({property}) => {
                 </p>
             </div>
             <Link href={`/properties/${property?.slug}`}>
-                <button className="btn-secondary mt-2 w-full rounded-lg group">
+                <button className="btn-secondary mt-3 w-full rounded-lg group">
                     More details{" "}
                     <FaArrowRight className="ml-2 group-hover:ml-4 duration-300 " />
                 </button>

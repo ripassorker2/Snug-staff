@@ -1,9 +1,8 @@
 const Subscribe = () => {
     return (
-        <div className=" mt-24 mb-8 bg-primary  ">
+        <div className=" mt-24 mb-8 bg-gradient-to-tl from-primary to-blue-700  ">
             <div className="relative container isolate overflow-hidden">
                 <div className=" md:py-20 py-16">
-                    z
                     <div className=" md:flex md:items-center">
                         <div className="xl:w-0 md:flex-1">
                             <h2 className="text-2xl leading-8 font-semibold tracking-tight text-white sm:text-3xl sm:leading-9">

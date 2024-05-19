@@ -11,7 +11,7 @@ const Guest = ({path}) => {
     const [buttonData, setButtonData] = useState({
         bed_room: 2,
         bath_room: 2,
-        guest: 1,
+        guest: 2,
     });
 
     const [parking, setParking] = useState(true);

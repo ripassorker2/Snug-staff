@@ -35,9 +35,7 @@ const MyLists = () => {
                                             <th
                                                 key={index}
                                                 className="border-b  border-blue-gray-100 bg-blue-gray-50 p-4">
-                                                <p className="font-medium ">
-                                                    {head}
-                                                </p>
+                                                <p className="   ">{head}</p>
                                             </th>
                                         ))}
                                     </tr>

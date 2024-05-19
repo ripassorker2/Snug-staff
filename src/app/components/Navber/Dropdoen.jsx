@@ -8,7 +8,7 @@ const Dropdown = ({openLocation, setOpenLocation}) => {
         <div className="w-full py-6 pb-8">
             <div className="relative inline-block">
                 <div className="border border-gray-300 rounded-full shadow-md ">
-                    <div className="flex justify-center items-center px-6 py-3 font-medium">
+                    <div className="flex justify-center items-center px-6 py-3   ">
                         <button
                             className="border-r px-8 border-gray-300"
                             onClick={() => setOpenLocation(!openLocation)}>

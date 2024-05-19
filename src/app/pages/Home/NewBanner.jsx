@@ -16,7 +16,7 @@ const NewBanner = () => {
             <div className="bg-black bg-opacity-75 h-[650px] ">
                 <div className="container ">
                     <div className="text-center   rounded-lg mt-32 ">
-                        <h3 className="text-4xl font-medium text-white pb-1 inline-flex">
+                        <h3 className="text-4xl    text-white pb-1 inline-flex">
                             Welcome to
                             <Typewriter
                                 options={{

@@ -41,9 +41,7 @@ const CategoryFilter = () => {
                                     {({selected}) => (
                                         <p
                                             className={`block truncate ${
-                                                selected
-                                                    ? "font-medium"
-                                                    : "font-normal"
+                                                selected ? "  " : "font-normal"
                                             }`}>
                                             All categories
                                         </p>
@@ -65,7 +63,7 @@ const CategoryFilter = () => {
                                             <p
                                                 className={`block truncate ${
                                                     selected
-                                                        ? "font-medium"
+                                                        ? "  "
                                                         : "font-normal"
                                                 }`}>
                                                 {person.name}

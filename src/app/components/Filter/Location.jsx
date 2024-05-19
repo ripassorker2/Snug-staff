@@ -8,9 +8,9 @@ import {
 } from "@headlessui/react";
 
 import {useState} from "react";
-import {BiCheck, BiChevronDown} from "react-icons/bi";
+import {BiChevronDown} from "react-icons/bi";
 
-const people = [
+const countries = [
     {id: 1, name: "Anywhere"},
     {id: 2, name: "India"},
     {id: 3, name: "USA"},
@@ -22,16 +22,15 @@ const people = [
     {id: 52, name: "Dubai"},
 ];
 
-const Location = ({path}) => {
+const Location = ({path, location, setLocation}) => {
     const [query, setQuery] = useState("");
-    const [selected, setSelected] = useState("");
 
-    const filteredPeople = people?.filter((person) => {
+    const filteredCountry = countries?.filter((person) => {
         return person.name.toLowerCase().includes(query.toLowerCase());
     });
 
     return (
-        <Combobox value={selected} onChange={(value) => setSelected(value)}>
+        <Combobox value={location} onChange={(value) => setLocation(value)}>
             <div className="relative">
                 <ComboboxInput
                     className={`rounded-md min-w-[260px] focus:ring-0 font-normal text-sm focus:outline-none ${
@@ -54,20 +53,22 @@ const Location = ({path}) => {
                 afterLeave={() => setQuery("")}>
                 <ComboboxOptions
                     anchor="bottom"
-                    className={` w-[220px] h-60 mt-5 rounded-lg py-2 ${
-                        path == "/"
-                            ? "bg-gray-900 text-white"
-                            : " bg-white shadow-md text-gray-800"
-                    }`}>
-                    {filteredPeople.map((person) => (
-                        <ComboboxOption
-                            key={person.id}
-                            value={person}
-                            className="group flex cursor-pointer items-center gap-2 rounded-lg py-1.5 px-3 select-none data-[focus]:bg-white/10">
-                            <BiCheck className="invisible size-4 fill-white group-data-[selected]:visible" />
-                            <div className="text-sm ">{person.name}</div>
-                        </ComboboxOption>
-                    ))}
+                    className={` w-[220px] h-60 mt-5 rounded-lg p-3 bg-white shadow-md text-gray-800 `}>
+                    {filteredCountry.length > 0 ? (
+                        <>
+                            {" "}
+                            {filteredCountry?.map((person) => (
+                                <ComboboxOption
+                                    key={person.id}
+                                    value={person}
+                                    className="group hover:bg-primary flex cursor-pointer  rounded-lg py-1.5 px-3 text-sm">
+                                    {person.name}
+                                </ComboboxOption>
+                            ))}
+                        </>
+                    ) : (
+                        <p className="text-sm text-red-500">Not found...</p>
+                    )}
                 </ComboboxOptions>
             </Transition>
         </Combobox>

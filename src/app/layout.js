@@ -8,7 +8,11 @@ import {ReduxProvider} from "@/provider/ReduxProvider";
 import {GoogleOAuthProvider} from "@react-oauth/google";
 import {config} from "@/envConfig/envConfig";
 
-const inter = Montserrat({subsets: ["latin"], weight: "500"});
+const inter = Montserrat({
+    subsets: ["latin"],
+    weight: "500",
+    variable: "--montserrat",
+});
 
 export const metadata = {
     title: "Snugstaff",

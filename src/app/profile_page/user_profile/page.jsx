@@ -31,7 +31,7 @@ const UserProfilePage = () => {
                         />
                     )}
 
-                    <h2 className="text-lg font-medium"> {user?.username}</h2>
+                    <h2 className="text-lg   "> {user?.username}</h2>
                     <p> {user?.email}</p>
                 </div>
                 <div className="mt-6">

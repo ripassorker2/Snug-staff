@@ -1,15 +1,19 @@
+import {usePathname} from "next/navigation";
 import React from "react";
 
 function FilterSelector({roomType, options, selectedOption, onSelect}) {
+    const path = usePathname();
     return (
-        <div className="mt-3">
-            <h2>{roomType}</h2>
+        <div className="mb-2">
+            <h2 className="  ">{roomType}</h2>
             <div className="flex flex-wrap space-x-2 space-y-2 -ml-3">
                 <button className="hidden "></button>
                 <button
                     type="button"
                     id="any"
-                    className={`px-2 py-1 border  border-gray-600 rounded-full min-w-10 text-[13px] ${
+                    className={` border  border-gray-600 rounded-full min-w-10 text-[13px] ${
+                        path == "/" ? "px-1.5 py-0.5" : "px-3 py-1"
+                    } ${
                         selectedOption === "any" ? "bg-gray-600 text-white" : ""
                     }`}
                     onClick={() => onSelect("any")}>
@@ -20,13 +24,15 @@ function FilterSelector({roomType, options, selectedOption, onSelect}) {
                         key={option}
                         type="button"
                         id={`${roomType}-${option}`}
-                        className={`px-2 py-1 border border-gray-600  rounded-full min-w-10 text-xs ${
+                        className={` border border-gray-600  rounded-full min-w-10 text-xs ${
+                            path == "/" ? "px-1.5 py-0.5" : "px-3 py-1"
+                        } ${
                             selectedOption === `${option}`
                                 ? "bg-gray-600 text-white"
                                 : ""
                         }`}
                         onClick={() => onSelect(`${option}`)}>
-                        {option === 8 ? `${option}+` : option}
+                        {option === 6 ? `${option}+` : option}
                     </button>
                 ))}
             </div>

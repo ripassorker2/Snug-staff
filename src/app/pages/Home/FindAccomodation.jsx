@@ -24,27 +24,27 @@ const FindAccomodation = () => {
                         </Link>
                     </div>
                 </div>
-                <div className="grid md:grid-cols-2 gap-5 text-center mt-8 md:mt-0">
-                    <div className="shadow-md flex flex-col justify-center items-center rounded-xl px-4 py-8 shadow-gray-300">
-                        <IoLocation size={33} className="text-primary" />
+                <div className="grid md:grid-cols-2 gap-5 text-center mt-8 md:mt-0 text-white">
+                    <div className="bg-gradient-to-r  to-primary from-blue-800  flex flex-col justify-center items-center rounded-xl px-4 py-8 ">
+                        <IoLocation size={38} />
                         <h2 className="md:text-xl text-lg mt-2">
                             Search by location
                         </h2>
                     </div>
-                    <div className="shadow-md flex flex-col justify-center items-center rounded-xl px-4 py-8 shadow-gray-300">
-                        <CgCalendarDates size={33} className="text-primary" />
+                    <div className="bg-gradient-to-r  to-primary from-blue-800  flex flex-col justify-center items-center rounded-xl px-4 py-8">
+                        <CgCalendarDates size={38} />
                         <h2 className="md:text-xl text-lg mt-2">
                             Filter by dates
                         </h2>
                     </div>
-                    <div className="shadow-md flex flex-col justify-center items-center rounded-xl px-4 py-8 shadow-gray-300">
-                        <LuTableProperties size={33} className="text-primary" />
+                    <div className="bg-gradient-to-r  to-primary from-blue-800  flex flex-col justify-center items-center rounded-xl px-4 py-8">
+                        <LuTableProperties size={38} />
                         <h2 className="md:text-xl text-lg mt-2">
                             Find properties
                         </h2>
                     </div>
-                    <div className="shadow-md flex flex-col justify-center items-center rounded-xl px-4 py-8 shadow-gray-300">
-                        <MdQueryStats size={33} className="text-primary" />
+                    <div className="bg-gradient-to-r  to-primary from-blue-800  flex flex-col justify-center items-center rounded-xl px-4 py-8">
+                        <MdQueryStats size={38} />
                         <h2 className="md:text-xl text-lg mt-2">
                             Send enquiry
                         </h2>

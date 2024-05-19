@@ -19,7 +19,7 @@ const Accomodation = () => {
                             <h2 className="heading">
                                 <span>Staff Accommodation</span>
                             </h2>
-                            <h3 className="md:text-4xl text-xl md:my-4 my-2">
+                            <h3 className="sub-head md:my-4 my-2">
                                 Making it easier for all.
                             </h3>
                             <p className="desc">
@@ -50,7 +50,7 @@ const Accomodation = () => {
                             <h2 className="heading">
                                 <span>Company Accommodation</span>
                             </h2>
-                            <h3 className="md:text-4xl text-xl md:my-4 my-2">
+                            <h3 className="sub-head md:my-4 my-2">
                                 Long-term bookings.
                             </h3>
                             <p className="desc">

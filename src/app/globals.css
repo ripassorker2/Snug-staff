@@ -20,19 +20,19 @@ span {
 }
 @layer base {
     .desc {
-        @apply text-gray-800 text-base;
+        @apply text-gray-700 text-lg;
     }
     .btn-primary {
-        @apply bg-secondary  duration-500 md:px-8 px-6  py-3  text-gray-100 text-base font-medium md:w-auto w-full text-center inline-flex justify-center items-center rounded-md;
+        @apply bg-secondary  duration-500 md:px-8 px-6  py-3  text-white text-base  md:w-auto w-full text-center inline-flex justify-center items-center rounded-md;
     }
     .btn-secondary {
-        @apply bg-primary duration-500 md:px-8 px-6  py-3  text-gray-100 text-base font-medium md:w-auto w-full text-center inline-flex justify-center items-center rounded-md;
+        @apply bg-primary duration-500 md:px-8 px-6  py-3  text-white text-base  md:w-auto w-full text-center inline-flex justify-center items-center rounded-md;
     }
     .heading {
         @apply md:text-[40px] text-3xl font-semibold text-gray-900;
     }
     .sub-head {
-        @apply md:text-3xl text-xl font-semibold text-gray-900;
+        @apply md:text-3xl text-xl font-semibold text-gray-800;
     }
 }
 

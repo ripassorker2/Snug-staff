@@ -1,58 +1,53 @@
 import {MdFacebook} from "react-icons/md";
-import {FaInstagram, FaLinkedin, FaTwitter} from "react-icons/fa";
+import {FaInstagram, FaLinkedin} from "react-icons/fa";
 import Link from "next/link";
 import logo from "../../../assets/logo.png";
 import Image from "next/image";
+import {BiX} from "react-icons/bi";
 const Footer = () => {
     return (
-        <footer className="pt-14 pb-4 bg-gray-900 mt-20 text-gray-300 ">
+        <footer className="pt-14 pb-4 bg-gray-900 mt-20 text-white ">
             <div className="container relative isolate overflow-hidden">
                 <div className="flex flex-wrap text-left md:text-left">
-                    <div className="w-full md:w-6/12 ">
+                    <div className="w-full md:w-[34%] ">
                         <div>
                             <Image height={66} src={logo} alt="logo" />
                         </div>
-                        <h5 className="text-lg mt-0 mb-2 ">
-                            Connect with us on these platforms, and expect a
-                            response within 1-2 days.
-                        </h5>
                         <div className="mt-3 md:mb-2 mb-6">
                             <button
-                                className=" inline-flex bg-blue-500  h-8 w-8 items-center justify-center  rounded-full mr-1"
+                                className=" inline-flex bg-blue-500  h-8 w-8 items-center justify-center  rounded-full mr-2"
                                 type="button">
                                 <MdFacebook size={20} />
                             </button>
 
                             <button
-                                className=" inline-flex bg-pink-600  h-8 w-8 items-center justify-center  rounded-full mr-1"
+                                className=" inline-flex bg-pink-600  h-8 w-8 items-center justify-center  rounded-full mr-2"
                                 type="button">
                                 <FaInstagram size={20} />
                             </button>
 
                             <button
-                                className=" inline-flex bg-black  h-8 w-8 items-center justify-center  rounded-full mr-1"
+                                className=" inline-flex bg-black  h-8 w-8 items-center justify-center  rounded-full mr-2"
                                 type="button">
-                                <FaTwitter size={20} />
+                                <BiX size={20} />
                             </button>
 
                             <button
-                                className="inline-flex bg-purple-600  h-8 w-8 items-center justify-center  rounded-full mr-1"
+                                className="inline-flex bg-purple-600  h-8 w-8 items-center justify-center  rounded-full mr-2"
                                 type="button">
                                 <FaLinkedin size={20} />
                             </button>
                         </div>
                     </div>
-                    <div className="w-full md:w-6/12 ">
+                    <div className="w-full md:w-[66%] ">
                         <div className="flex flex-wrap items-top mb-6">
-                            <div className="w-full md:w-4/12 md:px-4 ml-auto">
-                                <p className=" font-semibold mb-2">
-                                    Useful Links
-                                </p>
-                                <ul className="list-unstyled ">
+                            <div className="w-full md:w-[33%] md:px-4 ml-auto">
+                                <p className="mb-4 uppercase">Snugstaff</p>
+                                <ul>
                                     <li>
                                         <Link
                                             href={"/"}
-                                            className=" hover:text-gray-500 duration-300 f pb-2 ">
+                                            className=" hover:text-primary duration-300  mb-1.5 block ">
                                             About us
                                         </Link>
                                     </li>
@@ -60,28 +55,46 @@ const Footer = () => {
                                     <li>
                                         <Link
                                             href={"/"}
-                                            className=" hover:text-gray-500 duration-300 f pb-2 ">
+                                            className=" hover:text-primary duration-300  mb-1.5 block ">
                                             Contact us
                                         </Link>
                                     </li>
                                 </ul>
                             </div>
-                            <div className="w-full md:w-4/12 md:px-4 md:mt-0 mt-4">
-                                <p className=" font-semibold mb-2">
-                                    Other Resources
-                                </p>
-                                <ul className="list-unstyled ">
+                            <div className="w-full md:w-[33%] md:px-4 ml-auto">
+                                <p className="mb-4 uppercase">Hosting</p>
+                                <ul>
                                     <li>
                                         <Link
-                                            href={"/"}
-                                            className=" hover:text-gray-500 duration-300 f pb-2 ">
-                                            Privacy Policy
+                                            href={"/auth/become-a-host"}
+                                            className=" hover:text-primary duration-300  mb-1.5 block ">
+                                            Become a host
+                                        </Link>
+                                    </li>
+
+                                    <li>
+                                        <Link
+                                            href={"/policies/subscriptions"}
+                                            className=" hover:text-primary duration-300  mb-1.5 block ">
+                                            Subscription & Commission Policy
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div className="w-full md:w-[33%] md:px-4 md:mt-0 mt-4">
+                                <p className="mb-4 uppercase">Policies</p>
+                                <ul>
+                                    <li>
+                                        <Link
+                                            href={"/policies/privacy"}
+                                            className=" hover:text-primary duration-300  mb-1.5 block ">
+                                            Privacy
                                         </Link>
                                     </li>
                                     <li>
                                         <Link
-                                            href={"/"}
-                                            className=" hover:text-gray-500 duration-300 f pb-2 ">
+                                            href={"/policies/terms-condition"}
+                                            className=" hover:text-primary duration-300  mb-1.5 block ">
                                             Terms &amp; Conditions
                                         </Link>
                                     </li>
@@ -92,7 +105,7 @@ const Footer = () => {
                 </div>
                 <div className="border-t mb-3 border-gray-700 "></div>
                 <div className="flex flex-wrap -mb-3 items-center md:justify-end justify-center">
-                    <div className="text-sm  font-medium ">
+                    <div className="text-sm   ">
                         Copyright © 2024 SnugStaff Ltd.
                     </div>
                 </div>

@@ -36,15 +36,15 @@ const DatePicker = ({date, handleDateChange}) => {
                 maxDate={new Date(afterThirtyDaysDate)}
                 toggleClassName="absolute bg-primary rounded-r-lg text-white right-0 h-full px-3 text-gray-400 focus:outline-none disabled:opacity-40 disabled:cursor-not-allowed"
             />
-            <div className="flex justify-between items-center space-x-2 p-1 font-medium mt-2">
+            <div className="flex justify-between items-center space-x-2 p-1    mt-2">
                 <p>$104 x 17 nights price</p>
                 <p>$594</p>
             </div>
-            <div className="flex justify-between items-center space-x-2 p-1 font-medium mt-2">
+            <div className="flex justify-between items-center space-x-2 p-1    mt-2">
                 <p>Cleaning fee </p>
                 <p>$194</p>
             </div>
-            <div className="flex justify-between items-center space-x-2 p-1 font-medium mt-2 border-b-2">
+            <div className="flex justify-between items-center space-x-2 p-1    mt-2 border-b-2">
                 <p>Service fee </p>
                 <p>$134</p>
             </div>

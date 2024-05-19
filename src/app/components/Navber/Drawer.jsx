@@ -69,7 +69,7 @@ const NavDrawer = ({
                                             />
                                         </div>
                                     </MenuHandler>
-                                    <MenuList className="w-[230px] text-gray-900 font-medium  text-base">
+                                    <MenuList className="w-[230px] text-gray-900   text-base">
                                         <MenuItem className="mt-1">
                                             <Link
                                                 className="block  w-full text-center"
