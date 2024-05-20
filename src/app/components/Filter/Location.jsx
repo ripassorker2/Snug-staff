@@ -24,6 +24,8 @@ const countries = [
 
 const Location = ({path, location, setLocation}) => {
     const [query, setQuery] = useState("");
+    // const {data: locations} = useGetLocationsQuery();
+    // console.log(locations);
 
     const filteredCountry = countries?.filter((person) => {
         return person.name.toLowerCase().includes(query.toLowerCase());
@@ -33,7 +35,7 @@ const Location = ({path, location, setLocation}) => {
         <Combobox value={location} onChange={(value) => setLocation(value)}>
             <div className="relative">
                 <ComboboxInput
-                    className={`rounded-md min-w-[260px] focus:ring-0 font-normal text-sm focus:outline-none ${
+                    className={`rounded-md min-w-[200px] focus:ring-0 font-normal text-sm focus:outline-none ${
                         path == "/"
                             ? "bg-gray-900 placeholder:text-gray-500 text-gray-500"
                             : "placeholder:text-gray-700 text-gray-700"
@@ -53,7 +55,7 @@ const Location = ({path, location, setLocation}) => {
                 afterLeave={() => setQuery("")}>
                 <ComboboxOptions
                     anchor="bottom"
-                    className={` w-[220px] h-60 mt-5 rounded-lg p-3 bg-white shadow-md text-gray-800 `}>
+                    className={` w-[220px] h-60 mt-5 rounded-lg p-3 bg-white shadow-lg text-gray-800 `}>
                     {filteredCountry.length > 0 ? (
                         <>
                             {" "}

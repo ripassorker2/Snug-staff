@@ -14,12 +14,12 @@ const utilsApiSlices = api.injectEndpoints({
                 },
             }),
         }),
-        // getUser: builder.query({
-        //     query: (emial) => ({
-        //         url: `user/${emial}`,
-        //     }),
-        // }),
+        getLocations: builder.query({
+            query: () => ({
+                url: `location/`,
+            }),
+        }),
     }),
 });
 
-export const {useGetUserQuery, useUpdateProfileMutation} = utilsApiSlices;
+export const {useGetLocationsQuery, useUpdateProfileMutation} = utilsApiSlices;

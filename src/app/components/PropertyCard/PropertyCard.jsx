@@ -44,7 +44,7 @@ const PropertyCard = ({property}) => {
                 </h3>
 
                 <p className="pt-2">
-                    <b>${property?.price} </b>
+                    <b>£{property?.price} </b>
                     per person/night
                 </p>
             </div>

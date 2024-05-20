@@ -12,6 +12,8 @@ import {Menu, MenuButton, MenuItem, MenuItems} from "@headlessui/react";
 const Navbar = () => {
     const {user, setUser, setToken} = useUserContext();
 
+    console.log(user);
+
     return (
         <div className="border-b-2 py-0.5 sticky top-0 right-0 z-50 bg-white text-gray-800">
             <div className="container !font-montserrat">
@@ -122,16 +124,6 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
-            {/* <>
-                {showDrawer && (
-                    <NavDrawer
-                        openLocation={openLocation}
-                        setOpenLocation={setOpenLocation}
-                        showDrawer={showDrawer}
-                        setShowDrawer={setShowDrawer}
-                    />
-                )}
-            </> */}
         </div>
     );
 };

@@ -15,7 +15,7 @@ export const AuthProvider = ({children}) => {
         setLoading(true);
         setToken(localStorage.getItem("snugstuff_access_token") || "");
         if (token) {
-            fetch(`${config.base_url}/user-profile`, {
+            fetch(`${config.base_url}/user-profile/`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

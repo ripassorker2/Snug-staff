@@ -11,7 +11,7 @@ module.exports = withMT({
     theme: {
         extend: {
             fontFamily: {
-                montserrat: ["var--montserrat)"],
+                montserrat: ["var--(montserrat)"],
             },
             colors: {
                 primary: "#439ad4",

@@ -29,9 +29,36 @@ const Bedroom = ({path, selectedOptions, handleRoomSelect}) => {
                 leaveTo="opacity-0">
                 <ListboxOptions
                     anchor="bottom end"
-                    className={`max-w-[440px] mt-5 rounded-lg text-gray-700 p-6 bg-white shadow-md `}>
+                    className={`max-w-[440px] mt-5 rounded-lg text-gray-700 p-6 bg-white shadow-lg `}>
                     <>
                         <div className="mt-4">
+                            <div className="mb-2">
+                                <h2>Parking area</h2>
+                                <div className="flex space-x-6">
+                                    <label className="flex items-center space-x-2 text-gray-600">
+                                        <input
+                                            type="radio"
+                                            name="parking"
+                                            className="text-sm"
+                                            value={true}
+                                            // checked={parking === true}
+                                            // onChange={handleParkingChange}
+                                        />
+                                        <p>Yes</p>
+                                    </label>
+                                    <label className="flex items-center space-x-2 text-gray-600">
+                                        <input
+                                            type="radio"
+                                            name="parking"
+                                            className="text-sm"
+                                            value={false}
+                                            // checked={parking === false}
+                                            // onChange={handleParkingChange}
+                                        />
+                                        <p>No</p>
+                                    </label>
+                                </div>
+                            </div>
                             <FilterSelector
                                 roomType="Bedroom"
                                 options={[1, 2, 3, 4, 5, 6]}

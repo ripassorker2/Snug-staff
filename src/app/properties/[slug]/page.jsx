@@ -6,7 +6,6 @@ import {useGetPropertyDetailsQuery} from "@/redux/api/propertyApi";
 import Loading from "@/app/profile_page/loading";
 import PropertyImages from "@/app/pages/Properties/PropertyImages";
 import BasicInfo from "@/app/pages/Properties/BasicInfo";
-import GoogleMap from "@/app/components/Map/GoogleMap";
 
 const PropertyDetails = ({params}) => {
     const [showModal, setShowModal] = useState(false);
@@ -18,8 +17,6 @@ const PropertyDetails = ({params}) => {
     const {data: property, isLoading} = useGetPropertyDetailsQuery({
         slug: params.slug,
     });
-
-    console.log(property);
 
     if (isLoading) return <Loading />;
 
@@ -44,13 +41,13 @@ const PropertyDetails = ({params}) => {
                         />
                     </div>
                 </div>
-                <div className="mt-12 ">
+                {/* <div className="mt-12 ">
                     <GoogleMap
                         lat={property?.latitude}
                         long={property?.longtitude}
                         location={property?.location}
                     />
-                </div>
+                </div> */}
             </div>
             {showModal && (
                 <GalleryModal

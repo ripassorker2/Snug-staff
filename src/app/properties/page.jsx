@@ -1,40 +1,43 @@
-"use client";
-import React from "react";
-import Loading from "../profile_page/loading";
-import {useGetAllPropertiesQuery} from "@/redux/api/propertyApi";
-import PropertyCard from "../components/PropertyCard/PropertyCard";
 import Filter from "../components/Filter/Filter";
 import Category from "../components/Filter/Category";
-import Skalaton from "../components/Skalation/Skalaton";
+import AllProperties from "./AllProperties";
 
-const PropertyPage = () => {
-    const {data: properties, isLoading} = useGetAllPropertiesQuery();
+const PropertyPage = ({
+    searchParams: {
+        destination,
+        bed_room,
+        bath_room,
+        maximum_guest,
+        min_price,
+        max_price,
+        start_day,
+        end_day,
+    },
+}) => {
+    // const {data: properties, isLoading} = useGetAllPropertiesQuery();
 
-    if (isLoading) return <Loading />;
+    // if (isLoading) return <Loading />;
 
     return (
         <div className="container">
             <Category />
 
             <div>
-                <Filter />
+                <Filter
+                    destination={destination}
+                    bed_room={bed_room}
+                    bath_room={bath_room}
+                    maximum_guest={maximum_guest}
+                    min_price={min_price}
+                    max_price={max_price}
+                    start_day={start_day}
+                    end_day={end_day}
+                />
             </div>
             <div>
-                <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 mt-12">
-                    {!isLoading ? (
-                        <>
-                            {properties?.map((dt, i) => (
-                                <PropertyCard key={i} property={dt} />
-                            ))}
-                        </>
-                    ) : (
-                        <>
-                            <Skalaton />
-                            <Skalaton />
-                            <Skalaton />
-                        </>
-                    )}
-                </div>
+                <>
+                    <AllProperties />
+                </>
             </div>
         </div>
     );

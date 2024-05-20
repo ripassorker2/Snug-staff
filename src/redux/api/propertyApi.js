@@ -104,6 +104,12 @@ const propertiesApiSlices = api.injectEndpoints({
             }),
             providesTags: ["properties", "subscriptions"],
         }),
+        filterProperty: builder.query({
+            query: (queries) => ({
+                url: `/property/filter`,
+                body: queries,
+            }),
+        }),
     }),
 });
 
@@ -120,4 +126,5 @@ export const {
     useDeleteImageMutation,
     useUploadNewImageMutation,
     useUpdatePropertyMutation,
+    useFilterPropertyQuery,
 } = propertiesApiSlices;
