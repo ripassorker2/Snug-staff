@@ -6,16 +6,16 @@ import Filter from "@/app/components/Filter/Filter";
 const NewBanner = () => {
     return (
         <div
-            className="h-[650px] "
+            className="md:h-[650px] h-[800px] "
             style={{
                 backgroundImage: `url(${img.src})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
             }}>
-            <div className="bg-black bg-opacity-75 h-[650px] ">
+            <div className="bg-black bg-opacity-75 md:h-[650px] h-[800px] ">
                 <div className="container ">
-                    <div className="text-center   rounded-lg mt-32 ">
+                    <div className="text-center   rounded-lg md:mt-32 mt-16 ">
                         <h3 className="text-4xl    text-white pb-1 inline-flex">
                             Welcome to
                             <Typewriter

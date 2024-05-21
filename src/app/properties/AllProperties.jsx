@@ -5,10 +5,26 @@ import PropertyCard from "../components/PropertyCard/PropertyCard";
 
 import Skalaton from "../components/Skalation/Skalaton";
 
-const AllProperties = () => {
-    const {data: properties, isLoading} = useGetAllPropertiesQuery();
+const AllProperties = ({
+    destination,
+    total_days,
+    bed_room,
+    bath_room,
+    maximum_guest,
+    min_price,
+    max_price,
+}) => {
+    let queries = "";
 
-    console.log(properties);
+    if (destination) queries += `location=${destination}&`;
+    if (total_days) queries += `total_days=${total_days}&`;
+    if (bed_room) queries += `bed_room=${bed_room}&`;
+    if (bath_room) queries += `bath_room=${bath_room}&`;
+    if (maximum_guest) queries += `guest=${maximum_guest}&`;
+    if (min_price) queries += `min_price=${min_price}&`;
+    if (max_price) queries += `max_price=${max_price}`;
+
+    const {data: properties, isLoading} = useGetAllPropertiesQuery(queries);
 
     if (isLoading)
         return (

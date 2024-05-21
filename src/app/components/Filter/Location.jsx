@@ -58,7 +58,6 @@ const Location = ({path, location, setLocation}) => {
                     className={` w-[220px] h-60 mt-5 rounded-lg p-3 bg-white shadow-lg text-gray-800 `}>
                     {filteredCountry.length > 0 ? (
                         <>
-                            {" "}
                             {filteredCountry?.map((person) => (
                                 <ComboboxOption
                                     key={person.id}

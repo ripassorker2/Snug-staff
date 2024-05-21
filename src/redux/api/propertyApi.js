@@ -76,8 +76,8 @@ const propertiesApiSlices = api.injectEndpoints({
             invalidatesTags: ["properties"],
         }),
         getAllProperties: builder.query({
-            query: () => ({
-                url: `property`,
+            query: (queries) => ({
+                url: `property?${queries}`,
             }),
         }),
         getPropertyDetails: builder.query({
