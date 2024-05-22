@@ -19,7 +19,7 @@ const PropertyPage = ({
         end_day,
     },
 }) => {
-    const [selectedCategory, setSelectedCategory] = useState("all");
+    const [selectedCategory, setSelectedCategory] = useState("any");
     let queries = "";
 
     if (selectedCategory) queries += `category=${selectedCategory}&`;

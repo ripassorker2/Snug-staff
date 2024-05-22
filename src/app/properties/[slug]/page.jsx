@@ -6,6 +6,7 @@ import {useGetPropertyDetailsQuery} from "@/redux/api/propertyApi";
 import Loading from "@/app/profile_page/loading";
 import PropertyImages from "@/app/pages/Properties/PropertyImages";
 import BasicInfo from "@/app/pages/Properties/BasicInfo";
+import GoogleMap from "@/app/components/Map/GoogleMap";
 
 const PropertyDetails = ({params}) => {
     const [showModal, setShowModal] = useState(false);
@@ -19,6 +20,8 @@ const PropertyDetails = ({params}) => {
     });
 
     if (isLoading) return <Loading />;
+
+    console.log(property);
 
     return (
         <div className="container">
@@ -36,18 +39,19 @@ const PropertyDetails = ({params}) => {
 
                     <div className="md:col-span-2 md:w-[80%] mx-auto md:mb-0 mb-10 md:mt-32 mt-14 text-gray-800">
                         <DatePicker
+                            property={property}
                             date={date}
                             handleDateChange={handleDateChange}
                         />
                     </div>
                 </div>
-                {/* <div className="mt-12 ">
+                <div className="mt-12 ">
                     <GoogleMap
                         lat={property?.latitude}
                         long={property?.longtitude}
                         location={property?.location}
                     />
-                </div> */}
+                </div>
             </div>
             {showModal && (
                 <GalleryModal

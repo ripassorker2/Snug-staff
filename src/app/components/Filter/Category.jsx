@@ -8,7 +8,7 @@ import {
 
 const Category = ({selectedCategory, setSelectedCategory}) => {
     const categories = [
-        {name: "All Category", value: "all", icon: MdOutlineMapsHomeWork},
+        {name: "Any Category", value: "any", icon: MdOutlineMapsHomeWork},
         {name: "Hotel", value: "hotel", icon: LiaHotelSolid},
         {name: "Guest House", value: "guest", icon: BiHome},
         {name: "House", value: "house", icon: MdHouseSiding},
