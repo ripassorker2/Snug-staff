@@ -2,9 +2,9 @@
 import Filter from "../components/Filter/Filter";
 import Category from "../components/Filter/Category";
 import PropertyCard from "../components/PropertyCard/PropertyCard";
-import {useEffect, useState} from "react";
 import Loader from "../loading";
-import {config} from "@/envConfig/envConfig";
+import {useGetAllPropertiesQuery} from "@/redux/api/propertyApi";
+import {useState} from "react";
 
 const PropertyPage = ({
     searchParams: {
@@ -20,10 +20,9 @@ const PropertyPage = ({
     },
 }) => {
     const [selectedCategory, setSelectedCategory] = useState("all");
-    const [properties, setproperties] = useState([]);
-    const [loading, setloading] = useState(false);
     let queries = "";
 
+    if (selectedCategory) queries += `category=${selectedCategory}&`;
     if (destination) queries += `location=${destination}&`;
     if (total_days) queries += `total_days=${total_days}&`;
     if (bed_room) queries += `bed_room=${bed_room}&`;
@@ -32,15 +31,11 @@ const PropertyPage = ({
     if (min_price) queries += `min_price=${min_price}&`;
     if (max_price) queries += `max_price=${max_price}`;
 
-    useEffect(() => {
-        setloading(true);
-        fetch(`${config.base_url}/property?${queries}`)
-            .then((res) => res.json())
-            .then((data) => {
-                setproperties(data);
-                setloading(false);
-            });
-    }, [queries]);
+    const {
+        data: properties,
+        isFetching,
+        isLoading,
+    } = useGetAllPropertiesQuery(queries);
 
     return (
         <div className="container">
@@ -61,7 +56,8 @@ const PropertyPage = ({
             />
 
             <>
-                {loading && <Loader />}
+                {(isLoading || isFetching) && <Loader />}
+
                 <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-12 md:gap-10 gap-8 mt-12">
                     {properties?.length > 0 ? (
                         <>
