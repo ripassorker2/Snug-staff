@@ -21,8 +21,6 @@ const PropertyDetails = ({params}) => {
 
     if (isLoading) return <Loading />;
 
-    console.log(property);
-
     return (
         <div className="container">
             <div className="md:mt-20 mt-12">

@@ -1,10 +1,28 @@
+import SmallLoader from "@/app/components/SmallLoader/SmallLoader";
+import {useUserContext} from "@/context/AuthProvider/AuthProvider";
+import {useCreateBookingMutation} from "@/redux/api/bookingApi";
 import {totalDays} from "@/utils/totalDays";
 import React, {useEffect, useState} from "react";
+import toast from "react-hot-toast";
 import Datepicker from "react-tailwindcss-datepicker";
 
-const DatePicker = ({property, date, handleDateChange}) => {
+const DatePicker = ({property}) => {
+    const {user} = useUserContext();
+    const [date, setDate] = useState(null);
     const [guest, setGuest] = useState(property?.minimum_guest);
     const [totalPrice, setTotalPrice] = useState(0);
+
+    const [createBooking, {isLoading, isSuccess, isError}] =
+        useCreateBookingMutation();
+
+    useEffect(() => {
+        if (isSuccess)
+            return toast.success(
+                "Booking created successfully. Please wait for admin approval."
+            );
+
+        if (isError) return toast.error("Something went wrong");
+    }, [isSuccess, isError]);
 
     useEffect(() => {
         const totalDay = totalDays(date);
@@ -18,14 +36,14 @@ const DatePicker = ({property, date, handleDateChange}) => {
                     (1 - property?.discount_parcentage / 100) *
                     nights +
                 guest * property?.per_guest_price +
-                nights * property?.cleaning_fee;
+                property?.cleaning_fee;
         } else {
             const nights =
                 totalDay == "any" ? property?.minimum_stay : totalDay;
             calculatedPrice =
                 property?.per_day_price * nights +
                 guest * property?.per_guest_price +
-                nights * property?.cleaning_fee;
+                property?.cleaning_fee;
         }
 
         setTotalPrice(calculatedPrice);
@@ -46,14 +64,38 @@ const DatePicker = ({property, date, handleDateChange}) => {
     const todayDate = formatDate(today);
     const afterThreeDaysDate = formatDate(afterThreeDays);
     const afterThirtyDaysDate = formatDate(afterThirtyDays);
+
+    const handleBooking = async () => {
+        if (!user) return toast.error("Please login first to make a booking");
+
+        const totalDay = totalDays(date);
+
+        if (property?.minimum_stay > totalDay) {
+            return toast.error(
+                "Booking minimum stay is " + property.minimum_stay + " days "
+            );
+        }
+
+        const bookingData = {
+            guest,
+            property: property?.id,
+            check_in: date?.startDate,
+            check_out: date?.endDate,
+        };
+
+        await createBooking(bookingData);
+    };
+
     return (
         <div className="shadow-lg p-6 border rounded-xl border-gray-300">
             {property?.discount_parcentage ? (
                 <>
                     <h2 className="font-semibold text-gray-800 ">
-                        £{" "}
-                        {property?.per_day_price *
-                            (1 - property?.discount_parcentage / 100)}
+                        £ {}
+                        {(
+                            property?.per_day_price *
+                            (1 - property?.discount_parcentage / 100)
+                        ).toFixed(2)}
                         /night
                     </h2>
                     <p>
@@ -79,7 +121,7 @@ const DatePicker = ({property, date, handleDateChange}) => {
                 startFrom={new Date(todayDate)}
                 endDate={new Date() + 30}
                 separator="-"
-                onChange={handleDateChange}
+                onChange={(date) => setDate(date)}
                 displayFormat={"DD/MM/YYYY"}
                 minDate={new Date(afterThreeDaysDate)}
                 maxDate={new Date(afterThirtyDaysDate)}
@@ -146,12 +188,13 @@ const DatePicker = ({property, date, handleDateChange}) => {
             </div>
             <div className="mt-2">
                 <button
-                    disabled={date?.startDate == null}
+                    disabled={date?.startDate == null || isLoading}
+                    onClick={handleBooking}
                     className={`btn-secondary w-full ${
                         date?.startDate ||
                         "bg-gray-800 text-white cursor-not-allowed"
                     }`}>
-                    Book Now
+                    {isLoading ? <SmallLoader /> : "Book Now"}
                 </button>
             </div>
         </div>
