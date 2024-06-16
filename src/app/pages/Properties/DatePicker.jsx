@@ -67,6 +67,8 @@ const DatePicker = ({property}) => {
 
     const handleBooking = async () => {
         if (!user) return toast.error("Please login first to make a booking");
+        if (user?.role == "host")
+            return toast.error("Please login as a user to make a booking");
 
         const totalDay = totalDays(date);
 
@@ -87,7 +89,7 @@ const DatePicker = ({property}) => {
     };
 
     return (
-        <div className="shadow-lg p-6 border rounded-xl border-gray-300">
+        <div className="shadow-lg p-6 border rounded-xl border-gray-300 capitalize">
             {property?.discount_parcentage ? (
                 <>
                     <h2 className="font-semibold text-gray-800 ">
@@ -128,7 +130,12 @@ const DatePicker = ({property}) => {
                 toggleClassName="absolute bg-primary rounded-r-lg text-white right-0 h-full px-3 text-gray-400 focus:outline-none disabled:opacity-40 disabled:cursor-not-allowed"
             />
 
-            <div className="mt-2 flex justify-between p-1">
+            <div className="flex justify-between items-center space-x-2 p-1 mt-2">
+                <p>Per guest fee</p>
+                <p>£ {property?.per_guest_price}</p>
+            </div>
+
+            <div className="flex justify-between p-1">
                 <p>Guest </p>
                 <div>
                     <button
@@ -174,12 +181,7 @@ const DatePicker = ({property}) => {
             </div>
 
             <div className="flex justify-between items-center space-x-2 p-1 mt-1">
-                <p>Per guest fee</p>
-                <p>£ {property?.per_guest_price}</p>
-            </div>
-
-            <div className="flex justify-between items-center space-x-2 p-1 mt-1">
-                <p>Cleaning fee per night </p>
+                <p>Cleaning fee </p>
                 <p>£ {property?.cleaning_fee}</p>
             </div>
             <div className="flex justify-between items-center space-x-2 p-1 mt-1 font-semibold">
@@ -192,7 +194,7 @@ const DatePicker = ({property}) => {
                     onClick={handleBooking}
                     className={`btn-secondary w-full ${
                         date?.startDate ||
-                        "bg-gray-800 text-white cursor-not-allowed"
+                        "bg-gray-500 text-white cursor-not-allowed"
                     }`}>
                     {isLoading ? <SmallLoader /> : "Book Now"}
                 </button>

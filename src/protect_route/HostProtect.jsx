@@ -11,9 +11,7 @@ const HostProtected = ({children}) => {
                 <h2 className=" ">You are not authorized.</h2>
                 <p>
                     This page is for host. Please{" "}
-                    <Link
-                        href={"/authtentication/login"}
-                        className="hover:underline">
+                    <Link href={"/autht/login"} className="hover:underline">
                         <span> Sign In</span>
                     </Link>{" "}
                     as a host.

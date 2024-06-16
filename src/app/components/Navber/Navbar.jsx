@@ -12,8 +12,6 @@ import {Menu, MenuButton, MenuItem, MenuItems} from "@headlessui/react";
 const Navbar = () => {
     const {user, setUser, setToken} = useUserContext();
 
-
-
     return (
         <div className="border-b-2 py-0.5 sticky top-0 right-0 z-50 bg-white text-gray-800">
             <div className="container !font-montserrat">
@@ -113,7 +111,7 @@ const Navbar = () => {
                                                 onClick={() =>
                                                     logOut(setToken, setUser)
                                                 }
-                                                className="block hover:bg-primary px-2 py-1 rounded hover:text-white text-[17px] w-full  ">
+                                                className="block cursor-pointer hover:bg-primary px-2 py-1 rounded hover:text-white text-[17px] w-full  ">
                                                 Logout
                                             </div>
                                         </MenuItem>

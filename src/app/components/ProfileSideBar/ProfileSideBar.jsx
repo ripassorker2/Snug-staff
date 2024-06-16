@@ -33,6 +33,16 @@ const ProfileSideBar = ({childrens}) => {
                                         <CgProfile size={20} className="mr-2" />{" "}
                                         Profile
                                     </Link>
+                                    {/* <Link
+                                        href={`/profile_page/user_profile/my_booking`}
+                                        className={`text-center w-full mt-3 inline-flex items-center px-3 py-2 hover:bg-gray-400 rounded ${
+                                            path ==
+                                                `/profile_page/user_profile/my_booking` &&
+                                            "bg-gray-400"
+                                        }`}>
+                                        <CgProfile size={20} className="mr-2" />{" "}
+                                        My booking
+                                    </Link> */}
                                     {user?.role == "host" && (
                                         <>
                                             <Link
@@ -64,6 +74,21 @@ const ProfileSideBar = ({childrens}) => {
                                                     className="mr-2"
                                                 />{" "}
                                                 Add property
+                                            </Link>
+                                            <Link
+                                                href={
+                                                    "/profile_page/host_profile/bookings"
+                                                }
+                                                className={`text-center w-full mt-3 inline-flex items-center px-3 py-2 hover:bg-gray-400 rounded ${
+                                                    path ==
+                                                        "/profile_page/host_profile/bookings" &&
+                                                    "bg-gray-400"
+                                                }`}>
+                                                <RiMoneyDollarCircleLine
+                                                    size={20}
+                                                    className="mr-2"
+                                                />
+                                                Bookings
                                             </Link>
                                             <Link
                                                 href={
@@ -108,9 +133,7 @@ const ProfileSideBar = ({childrens}) => {
             ) : (
                 <div className="text-center mt-32 h-[50vh] text-lg ">
                     For access this page? You have to{" "}
-                    <Link
-                        href={"/authtentication/login"}
-                        className="hover:underline">
+                    <Link href={"/auth/login"} className="hover:underline">
                         <span> Sign In</span>
                     </Link>{" "}
                     frist.

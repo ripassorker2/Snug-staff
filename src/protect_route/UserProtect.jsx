@@ -12,7 +12,7 @@ const UserProtected = ({children}) => {
                 <p>
                     This page is for user. Please{" "}
                     <Link
-                        href={"/authtentication/login"}
+                        href={"/auth/login"}
                         className="hover:underline">
                         <span> Sign In</span>
                     </Link>{" "}
