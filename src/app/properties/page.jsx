@@ -1,10 +1,10 @@
 "use client";
+import {useState} from "react";
 import Filter from "../components/Filter/Filter";
 import Category from "../components/Filter/Category";
 import PropertyCard from "../components/PropertyCard/PropertyCard";
 import Loader from "../loading";
 import {useGetAllPropertiesQuery} from "@/redux/api/propertyApi";
-import {useState} from "react";
 
 const PropertyPage = ({
     searchParams: {

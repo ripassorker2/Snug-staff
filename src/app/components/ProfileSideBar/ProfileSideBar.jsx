@@ -4,7 +4,7 @@ import {CgAdd, CgProfile} from "react-icons/cg";
 import {usePathname} from "next/navigation";
 import {useUserContext} from "@/context/AuthProvider/AuthProvider";
 import Loader from "@/app/loading";
-import {RiMoneyDollarCircleLine} from "react-icons/ri";
+import {RiCalendarCheckLine, RiMoneyDollarCircleLine} from "react-icons/ri";
 import {LuBadgeDollarSign, LuTableProperties} from "react-icons/lu";
 
 const ProfileSideBar = ({childrens}) => {
@@ -33,16 +33,6 @@ const ProfileSideBar = ({childrens}) => {
                                         <CgProfile size={20} className="mr-2" />{" "}
                                         Profile
                                     </Link>
-                                    {/* <Link
-                                        href={`/profile_page/user_profile/my_booking`}
-                                        className={`text-center w-full mt-3 inline-flex items-center px-3 py-2 hover:bg-gray-400 rounded ${
-                                            path ==
-                                                `/profile_page/user_profile/my_booking` &&
-                                            "bg-gray-400"
-                                        }`}>
-                                        <CgProfile size={20} className="mr-2" />{" "}
-                                        My booking
-                                    </Link> */}
                                     {user?.role == "host" && (
                                         <>
                                             <Link
@@ -92,6 +82,21 @@ const ProfileSideBar = ({childrens}) => {
                                             </Link>
                                             <Link
                                                 href={
+                                                    "/profile_page/host_profile/approved-booking"
+                                                }
+                                                className={`text-center w-full mt-3 inline-flex items-center px-3 py-2 hover:bg-gray-400 rounded ${
+                                                    path ==
+                                                        "/profile_page/host_profile/approved-booking" &&
+                                                    "bg-gray-400"
+                                                }`}>
+                                                <RiCalendarCheckLine
+                                                    size={20}
+                                                    className="mr-2"
+                                                />
+                                                Approved Booking
+                                            </Link>
+                                            <Link
+                                                href={
                                                     "/profile_page/host_profile/my-subscription"
                                                 }
                                                 className={`text-center w-full mt-3 inline-flex items-center px-3 py-2 hover:bg-gray-400 rounded ${
@@ -126,7 +131,7 @@ const ProfileSideBar = ({childrens}) => {
                             </div>
                         </div>
                     </div>
-                    <div className=" md:flex-1 md:h-[86vh] md:p-4 md:mr-0 overflow-x-hidden overscroll-y-auto">
+                    <div className="md:flex-1 md:h-[86vh] md:p-4 md:mr-0 overflow-x-hidden overscroll-y-auto">
                         <div>{childrens}</div>
                     </div>
                 </div>
